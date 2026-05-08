@@ -1,56 +1,53 @@
-# 更多实用设备
+# Extra Utilities 私人维护分支
 
-![logo](https://user-images.githubusercontent.com/77377005/230295079-496e1c3b-052c-4320-b1f4-3de6d7c4692c.png)
+这是 guiYMOUR 的 Extra Utilities 模组的私人维护分支。这里不是官方发布渠道，也不提供预编译 jar。使用前请自行从源码编译。
 
-<img width="240" alt="image" src="https://github.com/guiYMOUR/mindustry-Extra-Utilities-mod/assets/77377005/0fe411f3-9879-4485-b48f-023292c8c434"><img width="240" alt="image" src="https://user-images.githubusercontent.com/77377005/231817466-63545b19-6286-4ab4-b151-8bc95ce501f0.gif"><img width="240" alt="image" src="https://github.com/user-attachments/assets/941fc344-5e44-4139-93c9-2ba28dccab7d">
-<br></br>
-<img width="240" alt="image" src="https://github.com/user-attachments/assets/d497c42b-9f33-49fa-8982-df5e5f7c2eed"><img width="240" alt="image" src="https://github.com/user-attachments/assets/0aa7a521-0b89-4d2d-9911-1376d6906d99"><img width="240" alt="image" src="https://github.com/user-attachments/assets/004cd172-253f-44c2-badb-28fefc7ed6b3">
-<br></br>
-<img width="240" alt="image" src="https://github.com/user-attachments/assets/faaf3a0e-fa5f-4270-9aab-40d0c4f63966">
+[English](README.md)
 
-[English](README.md) | 中文
+## 兼容性
 
-- 本模组本意是不想太大程度影响游戏平衡，同时丰富游戏内容，使原版游戏更简单，但是方便的东西必然会影响游戏平衡，我们只能在一种动态的状态下维持平衡...
+- Mindustry V8，build 157.1 或更新版本。
+- `minGameVersion` 设置为 `157`。
+- Java 模组，通过 Gradle 打包。
 
-- QQ ①群：613420467，密码在模组简介里，需要装载模组启动后查看
-- Github : https://github.com/guiYMOUR/mindustry-Extra-Utilities-mod
-- 创意工坊：[https://steamcommunity.com/sharedfiles/filedetails/?id=2520602720](https://steamcommunity.com/sharedfiles/filedetails/?id=2850241527)
+## 编译
 
-- EU mod 服务器 : `cn.mindustry.ink`
-- EU & NH 服务器 : `EH.mindustry.ink`
-- 获取NH（新视界）模组 : https://github.com/Yuria-Shikibe/NewHorizonMod
+```sh
+./gradlew jar
+```
 
-### 如何下载？[点这里](https://github.com/guiYMOUR/mindustry-Extra-Utilities-mod/releases)，然后点最上面的EU.版本号.jar就行了
-<img width="1439" alt="image" src="https://user-images.githubusercontent.com/77377005/230292712-f9921489-8b6c-4386-a545-b3f9080e1843.png">
+桌面版 jar 会输出到 `build/libs/extra-utilities-desktop.jar`。
 
+Android 打包仍然依赖本地 Android SDK。只有在本机已经配置好 Android 构建工具时再使用。
 
-## mod扩展方向
+## 分支变更
 
-### 原版方向扩展
-- 在原版游戏基础上添加更高级的工厂，炮塔等
+### 修复
 
-### 原版之外的扩展
-- 在原版游戏之外添加一些非常实用的设备
+- 修复已研究的原版和模组方块不出现在建造菜单的问题。
+- 加固科技树注册逻辑，缺失父节点或已移除内容不会影响其他解锁。
+- 修复原版 Serpulo T2 方块在科技树中无法正常解锁的问题。
+- 增加更稳妥的弹丸贴图查找，避免有资源时仍显示缺失贴图。
+- 增加音效和光标资源的回退逻辑，缺失可选资源时不再崩溃。
+- 加固部分单位、武器和炮塔的射击路径，减少 Mindustry V8 下的崩溃。
+- 移除旧版 `BulletType.backMove` 路径，避免在 build 153+ 和更新 V8 版本中崩溃。
+- 清理开发机文件、本地构建垃圾和不会进入发布包的旧内容。
 
-## 添加的扩展
+### 移除
 
-### 炮塔
+- EUI 和 rogue-like 相关 UI/玩法钩子。
+- Tower Defense 星球和区块预设。
+- Tower Defense 地图、脚本、区块图片和相关战役接入。
+- 愚人节内容篡改逻辑。
+- 旧 bundle 快照和本地构建产物。
 
-### 工厂
+### 调整
 
-### 电力
+- 将 Arc 和 Mindustry 依赖更新到 `v157.1`。
+- 统一模组显示名和简介，明确这是私人维护分支。
+- 默认关闭旧版 V7 星球规则重置。
+- 保留原作者署名，同时与原公开发布和创意工坊渠道区分。
 
-### 运输
+## 鸣谢
 
-### 钻头
-
-### 墙
-
-### 其他
-
-### 单位
-
-### 能力
-
-### 效果
-
+原模组由 guiYMOUR 及贡献者制作。此分支仅维护一个需要自行编译的私人版本，重点是兼容性修复和内容删减。

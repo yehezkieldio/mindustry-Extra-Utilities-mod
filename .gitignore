@@ -2,18 +2,26 @@
 build/
 out/
 target/
+bin/
 
 *.class
 *.jar
 *.war
 *.ear
 *.log
+*.hprof
+*.jfr
 hs_err_pid*
 replay_pid*
 
 .idea/
 *.iml
 .vscode/
+.settings/
+.classpath
+.project
+
+local.properties
 
 .DS_Store
 Thumbs.db

@@ -1,58 +1,63 @@
-# Extra Utilities
+# Extra Utilities: Private Fork
 
-![logo](https://user-images.githubusercontent.com/77377005/230295079-496e1c3b-052c-4320-b1f4-3de6d7c4692c.png)
+This is a private maintenance fork of guiYMOUR's Extra Utilities mod for Mindustry.
+It is not an official release channel and does not ship prebuilt jars here. Build it
+from source before installing it.
 
-<img width="240" alt="image" src="https://github.com/guiYMOUR/mindustry-Extra-Utilities-mod/assets/77377005/0fe411f3-9879-4485-b48f-023292c8c434"><img width="240" alt="image" src="https://user-images.githubusercontent.com/77377005/231817466-63545b19-6286-4ab4-b151-8bc95ce501f0.gif"><img width="240" alt="image" src="https://github.com/user-attachments/assets/941fc344-5e44-4139-93c9-2ba28dccab7d">
-<br></br>
-<img width="240" alt="image" src="https://github.com/user-attachments/assets/d497c42b-9f33-49fa-8982-df5e5f7c2eed"><img width="240" alt="image" src="https://github.com/user-attachments/assets/0aa7a521-0b89-4d2d-9911-1376d6906d99"><img width="240" alt="image" src="https://github.com/user-attachments/assets/004cd172-253f-44c2-badb-28fefc7ed6b3">
-<br></br>
-<img width="240" alt="image" src="https://github.com/user-attachments/assets/faaf3a0e-fa5f-4270-9aab-40d0c4f63966">
+[中文](README_cn.md)
 
-- English | [中文](README_cn.md)
+## Compatibility
 
-- The original intention of this mod was to avoid disrupting the game balance. However, since useful buildings inevitably disrupt the balance, we can only maintain a dynamic game balance...
+- Mindustry V8, build 157.1 or newer.
+- `minGameVersion` is set to `157`.
+- Java mod build, packaged with Gradle.
 
+## Build
 
-- QQ Group①：613420467, the password is included in the mod description
-- Github : https://github.com/guiYMOUR/mindustry-Extra-Utilities-mod
-- Steam Workshop : https://steamcommunity.com/sharedfiles/filedetails/?id=2850241527
-- Due to my limited English level, If there are any grammar problems in the mod, please feedback to my mailbox:gyrweng@foxmail.com, I will treat every suggestion sincerely.
+```sh
+./gradlew jar
+```
 
-- EU mod server : `cn.mindustry.ink`
-- EU & NH sever : `EH.mindustry.ink`
-- To get NH mod : https://github.com/Yuria-Shikibe/NewHorizonMod
+The desktop jar is written to `build/libs/extra-utilities-desktop.jar`.
 
-### How do I download it? [Click here](https://github.com/guiYMOUR/mindustry-Extra-Utilities-mod/releases), then click on the top EU.xxx.jar file
-<img width="1439" alt="image" src="https://user-images.githubusercontent.com/77377005/230292602-417acb68-843c-4ab5-b718-ea7cc89468d9.png">
+Android packaging still depends on a local Android SDK setup. Use it only if your
+environment already has the required Android build tools configured.
 
-## The direction of mod development
+## Fork Changes
 
-### An extension of the original game
-- Add more advanced factories, turrets, etc. on the basis of the original game
+### Fixes
 
-### Expansion beyond the original game
-- Add some very practical equipment outside the original game
+- Restored build-menu visibility for researched vanilla and modded blocks.
+- Hardened tech-tree registration so missing parents or removed content do not
+  break unrelated unlocks.
+- Fixed vanilla Serpulo tier-2 block progression so those blocks can be
+  researched normally.
+- Added safer projectile region lookup so bullets do not fall back to missing
+  sprites when a valid asset exists.
+- Added sound and cursor fallbacks so missing optional assets do not crash load.
+- Guarded fragile unit, weapon, and turret shooting paths that could crash on
+  Mindustry V8.
+- Removed the obsolete `BulletType.backMove` code path that crashes on build
+  153+ and newer V8 builds.
+- Cleaned up dev-only junk and stale local files from the packaged mod.
 
-## Added extensions
+### Removed
 
-- Turrets
+- EUI and rogue-like UI/gameplay hooks.
+- Tower Defense planet and sector presets.
+- Tower Defense maps, scripts, sector art, and related campaign wiring.
+- April Fools content mutation.
+- Old unused bundle snapshots and local build artifacts.
 
-- Crafting
+### Adjusted
 
-- Power
+- Updated Arc and Mindustry dependencies to `v157.1`.
+- Changed visible mod metadata to make this private fork explicit.
+- Disabled the legacy V7 planet-rule reset by default.
+- Kept upstream content attribution while separating this fork from the original
+  public release and workshop channels.
 
-- Distribution
+## Attribution
 
-- Drills
-
-- Walls
-
-- Effects
-
-- Units 
-
-- Abilities
-
-- Status Effects
-
-
+Original mod by guiYMOUR and contributors. This fork only maintains a private,
+source-built variant with compatibility fixes and content removals.

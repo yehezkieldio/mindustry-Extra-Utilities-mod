@@ -141,9 +141,9 @@ public class ExtraUtilitiesMod extends Mod{
                     top.add("ExtraUtilities").row();
                     top.add(toText("eu-log-attention")).row();
                     top.add(toText("eu-log-open")).row();
-                    top.add("朋友朋友，[red]看这里[]").row();
-                    top.add("Extra Utilities，更多实用设备，作者：guiY，[red]中国人[]我的朋友").row();
-                    top.add("bilibili找guiY归某人，QQ群：613420467").row();
+                    top.add("Extra Utilities: Private Fork").row();
+                    top.add("Original mod by guiY. This fork is maintained privately and built from source.").row();
+                    top.add("Targets Mindustry V8 build 157.1+ with compatibility fixes and removed legacy modes.").row();
                     top.add("[blue]第一次模组英文？看下面操作").row();
                     top.add("[green]打开设置>找到语言>设置成English>退出重进>打开Settings>设置成简体中文>退出重进[]").row();
                     top.image(Core.atlas.find(name("LOGO"))).pad(3f).height(70).width(460).row();
