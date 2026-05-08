@@ -70,23 +70,6 @@ const { lighthouse } = require('block/effect/lighthouse');*/
 //const { clWall, clWallL, aws, awl, rws, rwl } = require('block/defence/wall');
 const { clWall, clWallL, rws, rwl } = require('block/defence/wall');
 
-/*const { unitF } = require('unit/UF');
-const { suzerain } = require('unit/suzerain');
-const { asphyxia } = require('unit/asphyxia');
-const { apocalypse } = require('unit/apocalypse');
-const { tera } = require('unit/tera');
-const { nebula } = require('unit/nebula');
-const { nihilo } = require('unit/nihilo');
-const { narwhal } = require('unit/narwhal');
-
-const { winglet } = require('unit/AirSapper/winglet');
-const { moth } = require('unit/AirSapper/moth');
-const { vb } = require('unit/AirSapper/VenomBee');
-const { phantom } = require('unit/AirSapper/phantom');
-const { skyline } = require('unit/AirSapper/skyline');*/
-
-
-//const { start, sporeArea, rail, RadiationIslands, Colosseum, Darkness, GlacialValley } = require('game/challengeMap/cmain');
 /*-----------------------------------------------------------------------*/
 lib.addToResearch(T2duo, { parent: 'duo', });
 lib.addToResearch(T3duo, { parent: T2duo.name, });
@@ -231,25 +214,6 @@ lib.addToResearch(clWallL, { parent: clWall.name, });
 // lib.addToResearch(rws, { parent: aws.name, });
 //lib.addToResearch(rws, { parent: 'surge-wall-large', });
 //lib.addToResearch(rwl, { parent: rws.name, });
-
-/*lib.addToResearch(unitF, { parent: 'tetrative-reconstructor',
-    objectives: Seq.with(
-        new Objectives.SectorComplete(SectorPresets.planetaryTerminal),
-    )
-});
-lib.addToResearch(suzerain, { parent: 'reign',objectives: Seq.with( new Objectives.Research(unitF) ) });
-lib.addToResearch(asphyxia, { parent: 'toxopid',objectives: Seq.with( new Objectives.Research(unitF) ) });
-lib.addToResearch(apocalypse, { parent: 'eclipse',objectives: Seq.with( new Objectives.Research(unitF) ) });
-lib.addToResearch(tera, { parent: 'oct',objectives: Seq.with( new Objectives.Research(unitF) ) });
-lib.addToResearch(nebula, { parent: 'corvus',objectives: Seq.with( new Objectives.Research(unitF) ) });
-lib.addToResearch(nihilo, { parent: 'omura',objectives: Seq.with( new Objectives.Research(unitF) ) });
-lib.addToResearch(narwhal, { parent: 'navanax',objectives: Seq.with( new Objectives.Research(unitF) ) });
-
-lib.addToResearch(winglet, { parent: 'flare', });
-lib.addToResearch(moth, { parent: winglet.name,objectives: Seq.with( new Objectives.Research(Blocks.additiveReconstructor) ) });
-lib.addToResearch(vb, { parent: moth.name,objectives: Seq.with( new Objectives.Research(Blocks.multiplicativeReconstructor) ) });
-lib.addToResearch(phantom, { parent: vb.name,objectives: Seq.with( new Objectives.Research(Blocks.exponentialReconstructor) ) });
-lib.addToResearch(skyline, { parent: phantom.name,objectives: Seq.with( new Objectives.Research(Blocks.tetrativeReconstructor) ) });
 
 lib.addToResearch(items.crispSteel, { parent: 'titanium', });
 lib.addToResearch(items.lightninAlloy, { parent: 'surge-alloy', });

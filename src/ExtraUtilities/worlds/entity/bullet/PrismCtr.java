@@ -54,6 +54,13 @@ public class PrismCtr extends BulletType {
         collides = collidesTiles = absorbable = hittable = keepVelocity = false;
     }
 
+    private float aimAngle(Bullet bullet, Unit unit){
+        if(unit.mounts != null && unit.mounts.length > 0 && unit.mounts[0] != null){
+            return bullet.angleTo(unit.mounts[0].aimX, unit.mounts[0].aimY);
+        }
+        return bullet.rotation();
+    }
+
     @Override
     public void init() {
         super.init();
@@ -65,7 +72,7 @@ public class PrismCtr extends BulletType {
         super.init(b);
         Teamc tc = Units.closestTarget(b.team, b.x, b.y, checkRange, u -> u.checkTarget(collidesAir, collidesGround) && u.targetable(b.team));
         if(b.owner instanceof Unit u){
-            b.rotation(tc != null ? b.angleTo(tc) : b.angleTo(u.mounts[0].aimX, u.mounts[0].aimY));
+            b.rotation(tc != null ? b.angleTo(tc) : aimAngle(b, u));
         }
 
         if(b instanceof ctr c){
@@ -84,7 +91,7 @@ public class PrismCtr extends BulletType {
         if(tgAuto){
             Teamc tc = Units.closestTarget(b.team, b.x, b.y, checkRange, u -> u.checkTarget(collidesAir, collidesGround) && u.targetable(b.team));
             if(b.owner instanceof Unit u){
-                float acg = tc != null ? b.angleTo(tc) : b.angleTo(u.mounts[0].aimX, u.mounts[0].aimY);
+                float acg = tc != null ? b.angleTo(tc) : aimAngle(b, u);
                 b.rotation(Angles.moveToward(b.rotation(), acg, 0.8f * Time.delta));
             }
         }

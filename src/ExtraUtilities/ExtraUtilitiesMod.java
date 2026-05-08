@@ -9,6 +9,7 @@ import ExtraUtilities.ui.DDItemsList;
 import ExtraUtilities.worlds.meta.EUStatValues;
 import arc.*;
 import arc.Graphics;
+import arc.files.Fi;
 import arc.graphics.Color;
 import arc.graphics.Pixmap;
 import arc.graphics.Pixmaps;
@@ -52,11 +53,6 @@ import mindustry.world.meta.Stat;
 import mindustry.world.meta.StatCat;
 import mindustry.world.meta.StatValue;
 import mindustry.world.meta.Stats;
-
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 import static ExtraUtilities.input.EUAtLoad.hasOtherContentMod;
 import static arc.Core.app;
@@ -288,16 +284,38 @@ public class ExtraUtilitiesMod extends Mod{
     }
 
     public Graphics.Cursor newCursor(String filename){
-        Pixmap p = new Pixmap(EU.root.child("cursor").child(filename));
-        return Core.graphics.newCursor(p, p.width /2, p.height /2);
+        Fi file = EU.root.child("cursor").child(filename);
+        if(!file.exists()){
+            Log.warn("Extra Utilities: missing cursor '@'.", file.path());
+            return Graphics.Cursor.SystemCursor.arrow;
+        }
+
+        try{
+            Pixmap p = new Pixmap(file);
+            return Core.graphics.newCursor(p, p.width /2, p.height /2);
+        }catch(Throwable t){
+            Log.warn("Extra Utilities: failed to load cursor '@': @", file.path(), t.toString());
+            return Graphics.Cursor.SystemCursor.arrow;
+        }
     }
 
     public Graphics.Cursor newCursor(String filename, int scale){
         if(scale == 1 || OS.isAndroid || OS.isIos) return newCursor(filename);
-        Pixmap base = new Pixmap(EU.root.child("cursor").child(filename));
-        Pixmap result = Pixmaps.scale(base, base.width * scale, base.height * scale);
-        base.dispose();
-        return Core.graphics.newCursor(result, result.width /2, result.height /2);
+        Fi file = EU.root.child("cursor").child(filename);
+        if(!file.exists()){
+            Log.warn("Extra Utilities: missing cursor '@'.", file.path());
+            return Graphics.Cursor.SystemCursor.arrow;
+        }
+
+        try{
+            Pixmap base = new Pixmap(file);
+            Pixmap result = Pixmaps.scale(base, base.width * scale, base.height * scale);
+            base.dispose();
+            return Core.graphics.newCursor(result, result.width /2, result.height /2);
+        }catch(Throwable t){
+            Log.warn("Extra Utilities: failed to load cursor '@': @", file.path(), t.toString());
+            return Graphics.Cursor.SystemCursor.arrow;
+        }
     }
 
     private void overrideUI(){
@@ -312,12 +330,7 @@ public class ExtraUtilitiesMod extends Mod{
     }
 
     public static boolean isAps(){
-        var date = LocalDate.now();
-        var sdf = DateTimeFormatter.ofPattern("MMdd");
-        var fd = sdf.format(date);
-        return fd.equals("0401");
-        //test
-        //return true;
+        return false;
     }
 
     private boolean EUVerUnChange(String ver){
@@ -490,7 +503,7 @@ public class ExtraUtilitiesMod extends Mod{
                     });
 
                     if(!onlyPlugIn) {
-                        settingsTable.checkPref("eu-reset-core-to-V7", true);
+                        settingsTable.checkPref("eu-reset-core-to-V7", false);
                         settingsTable.checkPref("eu-reset-core-to-all", false);
                         settingsTable.checkPref("eu-show-miner-point", true);
                         settingsTable.checkPref("eu-show-hole-acc-disk", true);
@@ -571,8 +584,12 @@ public class ExtraUtilitiesMod extends Mod{
             settings.defaults("use-eu-cursor", true);
             settings.defaults("eu-show-version", true);
             settings.defaults("eu-override-unit-missile", true);
-            settings.defaults("eu-reset-core-to-V7", true);
+            settings.defaults("eu-reset-core-to-V7", false);
             settings.defaults("eu-reset-core-to-all", false);
+            if(!settings.getBool("eu-reset-core-to-V7-migrated", false)){
+                settings.put("eu-reset-core-to-V7", false);
+                settings.put("eu-reset-core-to-V7-migrated", true);
+            }
 
             hardMod = Core.settings.getBool("eu-hard-mode");
             onlyPlugIn = Core.settings.getBool("eu-plug-in-mode");

@@ -114,6 +114,14 @@ public class EUUnitTypes {
         //BOSS
         regency;
 
+    private static float aimAngle(Bullet bullet, Unit unit, int mountIndex){
+        if(unit != null && unit.mounts != null && unit.mounts.length > mountIndex){
+            WeaponMount mount = unit.mounts[mountIndex];
+            if(mount != null) return bullet.angleTo(mount.aimX, mount.aimY);
+        }
+        return bullet.rotation();
+    }
+
     public static void loadBoss(){
         regency = new bossType("regency"){{
             speed = 0.35f;
@@ -541,7 +549,7 @@ public class EUUnitTypes {
                                             b.vel.setAngle(Angles.moveToward(b.rotation(), b.angleTo(target), homingPower * Time.delta * 50f));
                                         } else {
                                             if(!(b.owner instanceof Unit u)) return;
-                                            b.vel.setAngle(Angles.moveToward(b.rotation(), b.data instanceof Teamc tc ? b.angleTo(tc) : b.angleTo(u.mounts[4].aimX, u.mounts[4].aimY), homingPower * Time.delta * 50f));
+                                            b.vel.setAngle(Angles.moveToward(b.rotation(), b.data instanceof Teamc tc ? b.angleTo(tc) : aimAngle(b, u, 4), homingPower * Time.delta * 50f));
                                         }
                                     }
                                 }
@@ -567,7 +575,7 @@ public class EUUnitTypes {
                                 if(intervalBullet != null && b.time >= intervalDelay && b.timer.get(2, bulletInterval)){
                                     float ang;
                                     Teamc tc = Units.closestTarget(b.team, b.x, b.y, rangeOverride, ut -> ut.checkTarget(collidesAir, collidesGround) && ut.targetable(b.team));
-                                    ang = tc != null ? b.angleTo(tc) : b.owner instanceof Unit u ? b.angleTo(u.mounts[4].aimX, u.mounts[4].aimY) : b.rotation();
+                                    ang = tc != null ? b.angleTo(tc) : b.owner instanceof Unit u ? aimAngle(b, u, 4) : b.rotation();
                                     for(int i = 0; i < intervalBullets; i++){
                                         intervalBullet.create(b, b.x, b.y, ang + Mathf.range(intervalRandomSpread) + intervalAngle + ((i - (intervalBullets - 1f)/2f) * intervalSpread));
                                     }
@@ -3384,8 +3392,10 @@ public class EUUnitTypes {
                                 if(!(b.owner instanceof Unit owner)) return;
                                 if(!b.absorbed) {
                                     Bullet m = ms.create(owner, owner.team, b.x, b.y, owner.rotation(), 1, 1);
-                                    m.aimX = owner.mounts[0].aimX;
-                                    m.aimY = owner.mounts[0].aimY;
+                                    if(owner.mounts != null && owner.mounts.length > 0 && owner.mounts[0] != null){
+                                        m.aimX = owner.mounts[0].aimX;
+                                        m.aimY = owner.mounts[0].aimY;
+                                    }
                                 }
                                 despawnEffect.at(b.x, b.y, b.rotation(), hitColor);
                                 despawnSound.at(b, 1f + Mathf.range(hitSoundPitchRange));

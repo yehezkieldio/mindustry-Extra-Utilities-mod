@@ -43,6 +43,7 @@ import mindustry.world.blocks.units.Reconstructor;
 import mindustry.world.blocks.units.UnitAssembler;
 import mindustry.world.blocks.units.UnitFactory;
 import mindustry.world.meta.Stat;
+import arc.util.Log;
 
 import static ExtraUtilities.ExtraUtilitiesMod.*;
 import static arc.graphics.g2d.Draw.color;
@@ -380,18 +381,22 @@ public class EUOverride {
         }});
         ((ItemTurret)Blocks.swarmer).limitRange(5f);
 
-        ItemTurret miniSw = (ItemTurret) Vars.content.block(name("mini-swarmer"));
-        ItemTurret T2Sw = (ItemTurret) Vars.content.block(name("T2-swarmer"));
+        ItemTurret miniSw = itemTurret(name("mini-swarmer"));
+        ItemTurret T2Sw = itemTurret(name("T2-swarmer"));
 
         var ammo = ((ItemTurret)Blocks.swarmer).ammoTypes;
         var is = ammo.keys().toSeq();
-        for(Item i : is){
-            miniSw.ammoTypes.put(i, ammo.get(i).copy());
-            T2Sw.ammoTypes.put(i, ammo.get(i).copy());
-        }
+        if(miniSw != null && T2Sw != null){
+            for(Item i : is){
+                miniSw.ammoTypes.put(i, ammo.get(i).copy());
+                T2Sw.ammoTypes.put(i, ammo.get(i).copy());
+            }
 
-        miniSw.limitRange(5f);
-        T2Sw.limitRange(5f);
+            miniSw.limitRange(5f);
+            T2Sw.limitRange(5f);
+        }else{
+            Log.warn("Extra Utilities: skipped swarmer ammo override; tiered swarmer blocks are missing.");
+        }
 
         ShrapnelBulletType sp = new ShrapnelBulletType(){{
             length = 100;
@@ -434,16 +439,20 @@ public class EUOverride {
             toColor = Color.blue.cpy().mul(EUItems.crispSteel.color);
         }});
         ((ItemTurret)Blocks.fuse).ammoTypes.put(EUItems.lightninAlloy, sp);
-        ItemTurret T2fuse = (ItemTurret) Vars.content.block(name("T2-fuse"));
-        ItemTurret T3fuse = (ItemTurret) Vars.content.block(name("T3-fuse"));
+        ItemTurret T2fuse = itemTurret(name("T2-fuse"));
+        ItemTurret T3fuse = itemTurret(name("T3-fuse"));
         var ammo2 = ((ItemTurret)Blocks.fuse).ammoTypes;
         var is2 = ammo2.keys().toSeq();
+        if(T2fuse == null || T3fuse == null){
+            Log.warn("Extra Utilities: skipped fuse ammo override; tiered fuse blocks are missing.");
+            return;
+        }
 
         for(Item i : is2){
             BulletType bsp = ammo2.get(i);
             BulletType bt = bsp.copy();
             bt.damage += 1;
-            ShrapnelBulletType b1 = (ShrapnelBulletType) bt;
+            if(!(bt instanceof ShrapnelBulletType b1)) continue;
             b1.length = T2fuse.range + bt.rangeChange + 12;
             if(bsp == sp){
                 bt.fragBullet = sp.fragBullet.copy();
@@ -454,7 +463,7 @@ public class EUOverride {
 
             BulletType bt2 = bsp.copy();
             bt2.damage += 3;
-            ShrapnelBulletType b2 = (ShrapnelBulletType) bt2;
+            if(!(bt2 instanceof ShrapnelBulletType b2)) continue;
             b2.length = T3fuse.range + bt2.rangeChange + 16;
             if(bsp == sp){
                 bt2.fragBullet = sp.fragBullet.copy();
@@ -463,6 +472,13 @@ public class EUOverride {
             }
             T3fuse.ammoTypes.put(i, bt2);
         }
+    }
+
+    private static ItemTurret itemTurret(String name){
+        Block block = Vars.content.block(name);
+        if(block instanceof ItemTurret turret) return turret;
+        if(block != null) Log.warn("Extra Utilities: expected '@' to be an ItemTurret, found '@'.", name, block.getClass().getSimpleName());
+        return null;
     }
 
     public static void overrideItem(){
@@ -490,6 +506,7 @@ public class EUOverride {
     }
 
     private static void changeInHard(Block block){
+        if(block == null) return;
         String nam = Core.bundle.getOrNull("block." + block.name + "-hard.name");
         String des = Core.bundle.getOrNull("block." + block.name + "-hard.description");
         String dtl = Core.bundle.getOrNull("block." + block.name + "-hard.details");

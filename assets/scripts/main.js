@@ -69,27 +69,6 @@ if(!onlyPlugIn) {
     require("block/effect/lighthouse");*/
     require("block/defence/wall");
 
-    /*require("unit/UF");
-    require("unit/suzerain");
-    require("unit/nebula");
-    require("unit/asphyxia");
-    require("unit/apocalypse");
-    require("unit/tera");
-    require("unit/nihilo");
-    require("unit/narwhal");
-    //air sapper
-    require("unit/AirSapper/winglet");
-    require("unit/AirSapper/moth");
-    require("unit/AirSapper/VenomBee");
-    require("unit/AirSapper/phantom");
-    require("unit/AirSapper/skyline");
-
-    require("game/items");
-    require("other/status");
-
-    //re-coming soon...
-    require("game/challengeMap/cmain");*/
-
     require("tree");
 }
 //根据游戏设置的语言改模组介绍和名字

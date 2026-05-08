@@ -147,10 +147,12 @@ exports.int = (v) => new java.lang.Integer(v);
 ///科技树部分
 exports.addToResearch = (content, research) => {
     if (!content) {
-        throw new Error('content is null!');
+        Log.warn("Extra Utilities: skipped tech-tree node; content is null.");
+        return;
     }
     if (!research.parent) {
-        throw new Error('research.parent is empty!');
+        Log.warn("Extra Utilities: skipped tech-tree node '@'; parent is empty.", content.name);
+        return;
     }
     var researchName = research.parent;
     var customRequirements = research.requirements;
