@@ -79,6 +79,11 @@ const sectorPreset = function(){
     return null;
 };
 
+const sectorComplete = function(){
+    var preset = sectorPreset.apply(null, arguments);
+    return preset == null ? new Seq() : Seq.with(new Objectives.SectorComplete(preset));
+};
+
 /*-----------------------------------------------------------------------*/
 lib.addToResearch(T2duo, { parent: 'duo', });
 lib.addToResearch(T3duo, { parent: T2duo.name, });
@@ -86,9 +91,7 @@ lib.addToResearch(T2scatter, { parent: 'scatter', });
 lib.addToResearch(T2scorch, { parent: 'scorch', });
 lib.addToResearch(IM, { parent: 'hail', });
 lib.addToResearch(shotgun, { parent: 'duo',
-    objectives: Seq.with(
-        new Objectives.SectorComplete(sectorPreset("craters", "cratered-battleground")),
-    )
+    objectives: sectorComplete("craters", "cratered-battleground")
 });
 lib.addToResearch(sakura, { parent: shotgun.name, });
 lib.addToResearch(rainbow, { parent: shotgun.name, });
@@ -144,29 +147,21 @@ lib.addToResearch(th2, { parent: 'thorium-reactor', });
 // lib.addToResearch(LB, { parent: 'phase-conduit', });
 lib.addToResearch(driver, { parent: 'phase-conduit', });
 lib.addToResearch(T2IB, { parent: 'bridge-conveyor',
-    objectives: Seq.with(
-        new Objectives.SectorComplete(sectorPreset("craters", "cratered-battleground")),
-    )
+    objectives: sectorComplete("craters", "cratered-battleground")
 });
 lib.addToResearch(alloyDuct, { parent: 'armored-conveyor', });
 //lib.addToResearch(stackBridge, { parent: 'plastanium-conveyor', });
 lib.addToResearch(ppc, { parent: 'plastanium-conveyor', });
 lib.addToResearch(invertedJunction, { parent: 'junction', });
 lib.addToResearch(TJ, { parent: 'junction',
-    objectives: Seq.with(
-        new Objectives.SectorComplete(sectorPreset("craters", "cratered-battleground")),
-    )
+    objectives: sectorComplete("craters", "cratered-battleground")
 });
 lib.addToResearch(TIJ, { parent: TJ.name, });
 lib.addToResearch(TR, { parent: 'router',
-    objectives: Seq.with(
-        new Objectives.SectorComplete(sectorPreset("craters", "cratered-battleground")),
-    )
+    objectives: sectorComplete("craters", "cratered-battleground")
 });
 lib.addToResearch(T2LB, { parent: 'bridge-conduit',
-    objectives: Seq.with(
-        new Objectives.SectorComplete(sectorPreset("craters", "cratered-battleground")),
-    )
+    objectives: sectorComplete("craters", "cratered-battleground")
 });
 lib.addToResearch(conduit, { parent: 'pulse-conduit', });
 /*lib.addToResearch(TLR, { parent: 'liquid-router',

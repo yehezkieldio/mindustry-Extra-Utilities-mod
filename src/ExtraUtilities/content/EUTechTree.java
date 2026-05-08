@@ -37,6 +37,7 @@ public class EUTechTree {
             node(apocalypse, Seq.with(new Research(UnitTypes.eclipse)), () -> {});
             node(nihilo, Seq.with(new Research(UnitTypes.omura)), () -> {});
             node(narwhal, Seq.with(new Research(UnitTypes.navanax)), () -> {});
+            node(finalF);
         }));
         addToNode(airFactory, () -> node(winglet));
         addToNode(segment, () -> node(dissipation));
@@ -52,9 +53,14 @@ public class EUTechTree {
         });
         addToNode(swarmer, () -> node(blackhole));
         addToNode(foreshadow, () -> node(sancta));
-        addToNode(parallax, () -> node(cobweb));
+        addToNode(parallax, () -> node(cobweb, () -> node(rust)));
 
-        addToNode(mendProjector, () -> node(mendTurret));
+        addToNode(mendProjector, () -> {
+            node(mendTurret);
+            node(coreKeeper);
+        });
+        addToNode(forceProjector, () -> node(quantumDomain));
+        addToNode(surgeWall, () -> node(breaker));
 
         addToNode(memoryCell, () -> node(buffrerdMemoryBank));
         addToNode(message, () -> node(clock));
@@ -112,7 +118,11 @@ public class EUTechTree {
         addToNode(slagIncinerator, () -> node(liquidIncinerator));
         addToNode(slagIncinerator, () -> node(ekSeparator));
 
-        addToNode(blastDrill, () -> node(phasicDrill));
+        addToNode(mechanicalDrill, () -> node(adaptiveMiner, () -> node(adaptiveMinerII)));
+        addToNode(pneumaticDrill, () -> node(stoneExtractor));
+        addToNode(pulverizer, () -> node(stoneCrusher));
+        addToNode(slagHeater, () -> node(stoneMelting));
+        addToNode(blastDrill, () -> node(phasicDrill, () -> node(quantumExplosion)));
 
     }
 

@@ -213,8 +213,6 @@ public class EUBlocks {
             circleRange = 5;
             drawRim = true;
 
-
-            alwaysUnlocked = true;
         }};
         minerPoint = new MinerPoint("miner-point"){{
             requirements(Category.production, with(Items.beryllium, 120, Items.graphite, 120, Items.silicon, 85, Items.tungsten, 50));
@@ -554,8 +552,6 @@ public class EUBlocks {
                     Items.graphite, 1,
                     Items.beryllium, 5
             );
-
-            alwaysUnlocked = true;
         }};
 
         adaptiveMinerII = new AdaptiveMining("adaptive-mining-II"){{
@@ -618,7 +614,6 @@ public class EUBlocks {
             baseEfficiency = 0.8f;
             maxBoost = 1.5f;
             //minEfficiency = 0.001f;
-            alwaysUnlocked = true;
 
             drawer = new DrawMulti(
                     new DrawRegion("-bottom"),
@@ -664,8 +659,6 @@ public class EUBlocks {
             }).layer(Layer.debris);
 
             drawer = new DrawMulti(new DrawRegion("-bottom"), new DrawFrames(){{frames = 5;}}, new DrawDefault(), new DrawRegion("-top"));
-
-            alwaysUnlocked = true;
             squareSprite = false;
         }};
         stoneMelting = new HeatCrafter("stoneMelting"){{
@@ -679,8 +672,6 @@ public class EUBlocks {
             craftTime = 30f;
             liquidCapacity = 120;
             drawer = new DrawMulti(new DrawRegion("-bottom"), new DrawLiquidRegion(), new DrawDefault(), new DrawHeatInput());
-
-            alwaysUnlocked = true;
             squareSprite = false;
         }};
 
@@ -1320,7 +1311,6 @@ public class EUBlocks {
             loadSpeed = 0.7f;
 
             targetGround = false;
-            alwaysUnlocked = true;
 
             consumePower(9);
 
@@ -3270,7 +3260,6 @@ public class EUBlocks {
         rust = new WitchService("rust"){{
             requirements(Category.turret, with(Items.thorium, 400, Items.silicon, 550, EUItems.lightninAlloy, 350));
             size = 2;
-            alwaysUnlocked = true;
 
             health = 6000;
 
@@ -3372,7 +3361,6 @@ public class EUBlocks {
             size = 5;
             consumePower(40);
             consume(new BetterConsumeLiquidsDynamic((e) -> ((UnitFactoryBuild)e).currentPlan != -1 ? ((LiquidUnitPlan)plans.get(Math.min(((UnitFactoryBuild)e).currentPlan, plans.size - 1))).liquid : LiquidStack.empty, new Liquid[]{Liquids.cryofluid, Liquids.slag, Liquids.water, Liquids.cyanogen}));
-            alwaysUnlocked = true;
             config(Integer.class, (UnitFactoryBuild tile, Integer i) -> {
                 tile.currentPlan = i < 0 || i >= plans.size ? -1 : i;
                 tile.progress = 0;
@@ -3619,8 +3607,6 @@ public class EUBlocks {
             range = 40 + (hardMod ? 16 : 0);
             consumePower(6);
 
-            alwaysUnlocked = true;
-
             drawer = new DrawBlock() {
                 @Override
                 public void draw(Building build) {
@@ -3669,16 +3655,13 @@ public class EUBlocks {
             placeableLiquid = true;
             upSpeed = 2f;
             upSpeedAfter = 2.75f;
-
             consumePower(10);
-            alwaysUnlocked = true;
         }};
 
         breaker = new Breaker("breaker"){{
             requirements(Category.effect, with(EUItems.lightninAlloy, 10 + (hardMod ? 5 : 0)));
             placeableLiquid = true;
             floating = true;
-            alwaysUnlocked = true;
         }};
         waterBomb = new WaterBomb("water-bomb"){{
             requirements(Category.effect, with(EUItems.lightninAlloy, 20, Items.thorium, 30, Items.surgeAlloy, 20));
