@@ -6,7 +6,6 @@ import ExtraUtilities.worlds.blocks.distribution.PhaseNode;
 import ExtraUtilities.worlds.blocks.distribution.PowerUnloader;
 import ExtraUtilities.worlds.blocks.distribution.StackHelper;
 import ExtraUtilities.worlds.blocks.effect.Breaker;
-import ExtraUtilities.worlds.blocks.effect.ChiSa;
 import ExtraUtilities.worlds.blocks.effect.CoreKeeper;
 import ExtraUtilities.worlds.blocks.effect.WaterBomb;
 import ExtraUtilities.worlds.blocks.fireWork;
@@ -120,7 +119,7 @@ public class EUBlocks {
             aparajito, aparajitoLarge,
             buffrerdMemoryBank, clock, tableClock,
             turretSpeeder, mendTurret, coreKeeper, quantumDomain, breaker, waterBomb,
-            randomer, blockFiller, fireWork, minichisa, allNode, ADC, guiYsDomain;
+            randomer, blockFiller, fireWork, allNode, ADC, guiYsDomain;
     public static class LiquidUnitPlan extends UnitFactory.UnitPlan{
         public LiquidStack[] liquid;
 
@@ -1326,7 +1325,7 @@ public class EUBlocks {
             consumePower(9);
 
             coolant = consume(new ConsumeLiquid(Liquids.water, 24f / 60f));
-            drawer = new DrawTurret("reinforced-");
+            drawer = new DrawTurret();
             squareSprite = false;
         }};
 
@@ -1483,7 +1482,7 @@ public class EUBlocks {
 
             shootEffect = EUFx.ellipse(30, 30, 15, bcr);
 
-            drawer = new DrawTurret("reinforced-"){{
+            drawer = new DrawTurret(){{
                 parts.add(
                         new JavelinWing(){{
                             x = 0;
@@ -3224,7 +3223,7 @@ public class EUBlocks {
             moveWhileCharging = false;
             accurateDelay = false;
 
-            drawer = new DrawMulti(new DrawTurret("reinforced-")
+            drawer = new DrawMulti(new DrawTurret()
 //                    new DrawTrail(2f, EUItems.lightninAlloy.color, 16){{
 //                y = - 10;
 //            }}
@@ -3809,28 +3808,6 @@ public class EUBlocks {
             buildVisibility = BuildVisibility.editorOnly;
         }};
 
-        minichisa = new ChiSa("minichisa"){{
-            requirements(Category.effect, with(EUItems.lightninAlloy, 521, Items.phaseFabric, 999));
-            size = 4;
-            LEFT = 10.8f;
-            UP = 6.1f;
-            scl = 3.4f;
-            ry = -10;
-            ryt = 1f;
-            s = EUSounds.ciallo;
-
-            //我千咲的面板
-            health = 15335;
-            //buildVisibility = BuildVisibility.sandboxOnly;
-            alwaysUnlocked = true;
-        }
-            @Override
-            public void setStats() {
-                super.setStats();
-                stats.add(Stat.abilities, EUStatValues.ability(name, 3));
-            }
-        };
-
         EUGet.donorItems.addAll(T2sporePress, phasicDrill, penitent, javelin, shootingStar, waterBomb, buffrerdMemoryBank);
         EUGet.donorMap.get(0).addAll(T2sporePress, phasicDrill);
         EUGet.donorMap.get(1).addAll(waterBomb);
@@ -3839,8 +3816,8 @@ public class EUBlocks {
         EUGet.donorMap.get(5).addAll(shootingStar);
         EUGet.donorMap.get(7).addAll(penitent);
 
-        EUGet.developerItems.addAll(siliconFurnace, guiY, rust, onyxBlaster, fiammetta, guiYsDomain, allNode, ADC, randomer, blockFiller, fireWork, minichisa);
-        EUGet.developerMap.get(0).addAll(guiY, fiammetta, rust, guiYsDomain, allNode, ADC, randomer, blockFiller, fireWork, minichisa);
+        EUGet.developerItems.addAll(siliconFurnace, guiY, rust, onyxBlaster, fiammetta, guiYsDomain, allNode, ADC, randomer, blockFiller, fireWork);
+        EUGet.developerMap.get(0).addAll(guiY, fiammetta, rust, guiYsDomain, allNode, ADC, randomer, blockFiller, fireWork);
         EUGet.developerMap.get(1).addAll(siliconFurnace, onyxBlaster);
     }
 

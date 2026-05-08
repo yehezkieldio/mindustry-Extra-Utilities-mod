@@ -197,7 +197,6 @@ public class ExtraUtilitiesMod extends Mod{
                     addToTable(EUBlocks.randomer, t);
                     addToTable(EUBlocks.miniItemNode, t);
                     addToTable(EUBlocks.miniLiquidNode, t);
-                    addToTable(EUBlocks.minichisa, t);
                     addToTable(EUStatusEffects.ullification, t);
                     addToTable(EUBlocks.blockFiller, t);
                     addToTable(EUBlocks.penitent, t);
@@ -221,12 +220,6 @@ public class ExtraUtilitiesMod extends Mod{
         if(Core.settings.getBool("eu-first-load")){
             toShow();
         }
-        settings.getBoolOnce("eu-open-hard", () -> {
-            BaseDialog dialog = new BaseDialog("Hard Mode!");
-            dialog.cont.add(toText("eu-hard-mode-open"));
-            dialog.buttons.button("OK", dialog::hide).size(140, 50).center();
-            dialog.show();
-        });
     }
 
     public static void log2(){
@@ -526,26 +519,6 @@ public class ExtraUtilitiesMod extends Mod{
 
                         settingsTable.checkPref("eu-override-unit-missile", true);
 
-                        settingsTable.pref(new SettingsMenuDialog.SettingsTable.CheckSetting("eu-hard-mode", false, null) {
-                            @Override
-                            public void add(SettingsMenuDialog.SettingsTable table) {
-                                CheckBox box = new CheckBox(title);
-
-                                box.update(() -> box.setChecked(settings.getBool(name)));
-
-                                box.changed(() -> {
-                                    if (!onlyPlugIn) {
-                                        settings.put(name, box.isChecked());
-                                        settings.put("eu-open-hard", hardMod);
-                                        dialog.show();
-                                    }
-                                });
-                                box.left();
-                                addDesc(table.add(box).left().padTop(3f).get());
-                                table.row();
-                            }
-                        });
-
                         settingsTable.pref(new SettingsMenuDialog.SettingsTable.Setting(Core.bundle.get("eu-show-donor-and-develop")) {
                             @Override
                             public void add(SettingsMenuDialog.SettingsTable table) {
@@ -591,7 +564,7 @@ public class ExtraUtilitiesMod extends Mod{
                 settings.put("eu-reset-core-to-V7-migrated", true);
             }
 
-            hardMod = Core.settings.getBool("eu-hard-mode");
+            hardMod = false;
             onlyPlugIn = Core.settings.getBool("eu-plug-in-mode");
             coreResetV7 = Core.settings.getBool("eu-reset-core-to-V7");
             coreReset = Core.settings.getBool("eu-reset-core-to-all");
@@ -604,8 +577,6 @@ public class ExtraUtilitiesMod extends Mod{
         if(!headless){
             EUSounds.load();
         }
-
-        if(isAps()) hardMod = true;
 
         EUOverride.overrideItem();
         EUStatusEffects.load();
