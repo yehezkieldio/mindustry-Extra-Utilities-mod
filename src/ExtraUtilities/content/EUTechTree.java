@@ -12,7 +12,6 @@ import static mindustry.content.Blocks.*;
 import static mindustry.content.TechTree.*;
 import static ExtraUtilities.content.EUBlocks.*;
 import static ExtraUtilities.content.EUUnitTypes.*;
-import static ExtraUtilities.content.TDSectorPresets.*;
 
 
 public class EUTechTree {
@@ -60,7 +59,6 @@ public class EUTechTree {
         addToNode(memoryCell, () -> node(buffrerdMemoryBank));
         addToNode(message, () -> node(clock));
 
-        //addToNode(SectorPresets.cruxscape, () -> node(TDPlanet.supEX));
         //E
         addToNode(turbineCondenser, () -> {
             node(nitrogenWell);
@@ -116,33 +114,6 @@ public class EUTechTree {
 
         addToNode(blastDrill, () -> node(phasicDrill));
 
-        //TD
-        TDPlanet.TD.techTree = nodeRoot("TD", pd, () -> addToNode(pd, () -> {
-            node(TD1, () ->{
-                node(TD2, Seq.with(new SectorComplete(TD1)), () -> {});
-                node(guiYTD1, () -> node(BossTD, Seq.with(new SectorComplete(TD1)), () -> node(regency, ItemStack.with(EUItems.lightninAlloy, 15000), () -> {})));
-                node(guiYCL1, Seq.with(new SectorComplete(TD1)), () -> {});
-            });
-
-            node(st1, () -> {
-                node(EUItems.stone, () -> node(stoneExtractor, () -> {
-                    node(adaptiveMiner, () -> {
-                        node(adaptiveMinerII);
-                    });
-                    node(stoneCrusher);
-                    node(stoneMelting);
-                }));
-            });
-            node(breaker);
-            node(waterBomb);
-            node(coreKeeper);
-            node(mineCellT1, () -> node(mineCellT2));
-        }));
-        //ex
-        TDPlanet.supEX.techTree = nodeRoot(TDPlanet.supEX.localizedName, TDPlanet.supEX, () ->
-                addToNode(TDPlanet.supEX, () ->
-                        node(groundZEx, Seq.with(new SectorComplete(SectorPresets.planetaryTerminal)), () ->
-                                node(relicValley, Seq.with(new SectorComplete(groundZEx)), () -> {}))));
     }
 
     public static void addToNode(UnlockableContent p, Runnable c) {

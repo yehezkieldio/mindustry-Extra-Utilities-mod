@@ -87,7 +87,6 @@ const { skyline } = require('unit/AirSapper/skyline');*/
 
 
 //const { start, sporeArea, rail, RadiationIslands, Colosseum, Darkness, GlacialValley } = require('game/challengeMap/cmain');
-//const { pd, TD1, TD2, TD3, TD4, TD5, TD6, TD7, TD8, TD9, TD10, TD11, TD12, TD13 } = require('game/TD/tmain');
 /*-----------------------------------------------------------------------*/
 lib.addToResearch(T2duo, { parent: 'duo', });
 lib.addToResearch(T3duo, { parent: T2duo.name, });
@@ -295,87 +294,5 @@ lib.addToResearch(GlacialValley, {
     parent: sporeArea.name,
     objectives: Seq.with(
         new Objectives.SectorComplete(sporeArea)
-    )
-});*/
-
-/*lib.addToResearch(pd, {
-    parent: 'core-shard', 
-});
-lib.addToResearch(TD1, { 
-    parent: pd.name, 
-    objectives: Seq.with(
-        new Objectives.SectorComplete(pd)
-    )
-});
-lib.addToResearch(TD2, {
-    parent: TD1.name,
-    objectives: Seq.with(
-        new Objectives.SectorComplete(TD1)
-    )
-});
-lib.addToResearch(TD3, {
-    parent: TD1.name,
-    objectives: Seq.with(
-        new Objectives.SectorComplete(TD2)
-    )
-});
-lib.addToResearch(TD4, {
-    parent: TD2.name,
-    objectives: Seq.with(
-        new Objectives.SectorComplete(TD2)
-    )
-});
-lib.addToResearch(TD5, {
-    parent: TD4.name,
-    objectives: Seq.with(
-        new Objectives.SectorComplete(TD4)
-    )
-});
-lib.addToResearch(TD6, {
-    parent: TD5.name,
-    objectives: Seq.with(
-        new Objectives.SectorComplete(TD5)
-    )
-});
-lib.addToResearch(TD7, {
-    parent: TD6.name,
-    objectives: Seq.with(
-        new Objectives.SectorComplete(TD6)
-    )
-});
-lib.addToResearch(TD8, {
-    parent: TD6.name,
-    objectives: Seq.with(
-        new Objectives.SectorComplete(TD3)
-    )
-});
-lib.addToResearch(TD9, {
-    parent: TD8.name,
-    objectives: Seq.with(
-        new Objectives.SectorComplete(TD8)
-    )
-});
-lib.addToResearch(TD10, {
-    parent: TD7.name,
-    objectives: Seq.with(
-        new Objectives.SectorComplete(TD7)
-    )
-});
-lib.addToResearch(TD11, {
-    parent: TD9.name,
-    objectives: Seq.with(
-        new Objectives.SectorComplete(TD9)
-    )
-});
-lib.addToResearch(TD12, {
-    parent: TD1.name,
-    objectives: Seq.with(
-        new Objectives.SectorComplete(TD1)
-    )
-});
-lib.addToResearch(TD13, {
-    parent: TD12.name,
-    objectives: Seq.with(
-        new Objectives.SectorComplete(TD12)
     )
 });*/

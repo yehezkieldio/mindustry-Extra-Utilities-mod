@@ -5,7 +5,7 @@ import ExtraUtilities.content.*;
 import ExtraUtilities.graphics.MainRenderer;
 import ExtraUtilities.input.EUAtLoad;
 import ExtraUtilities.net.EUCall;
-import ExtraUtilities.ui.EUI;
+import ExtraUtilities.ui.DDItemsList;
 import ExtraUtilities.worlds.meta.EUStatValues;
 import arc.*;
 import arc.Graphics;
@@ -37,7 +37,6 @@ import mindustry.content.Blocks;
 import mindustry.content.StatusEffects;
 import mindustry.ctype.UnlockableContent;
 import mindustry.game.EventType.*;
-import mindustry.gen.Icon;
 import mindustry.gen.Iconc;
 import mindustry.gen.Tex;
 import mindustry.graphics.Pal;
@@ -112,7 +111,7 @@ public class ExtraUtilitiesMod extends Mod{
 
     public static Mods.LoadedMod EU;
 
-    public static EUI eui;
+    public static DDItemsList ddItemsList;
 
     public static void setColorName(){
         Mods.LoadedMod mod = mods.locateMod(ModName);
@@ -271,9 +270,7 @@ public class ExtraUtilitiesMod extends Mod{
         EUUnitTypes.regency.immunities.addAll(Vars.content.statusEffects().copy().removeAll(s -> s == StatusEffects.none || s == EUStatusEffects.EUUnmoving || s == EUStatusEffects.EUDisarmed || s.healthMultiplier > 1 || s.damage < 0 || s.reloadMultiplier > 1 || s.damageMultiplier > 1 || s.speedMultiplier > 1));
 
         if(ui != null){
-            eui = new EUI();
-            eui.init();
-            ui.menufrag.addButton(toText("eu-rogue-like-start"), Icon.defense, () -> eui.roguelike.toShow());
+            ddItemsList = new DDItemsList();
         }
     }
 
@@ -343,7 +340,6 @@ public class ExtraUtilitiesMod extends Mod{
             MainRenderer.init();
             EUCall.registerPackets();
             EUOverride.overrideUnitForAll(overrideUnitArm, coreReset);
-            EUOverride.overrideTDRules(coreReset);
             EUOverride.overrideBlockAll(hardMod, coreResetV7, coreReset);
             getJsNameBlock("minisp").stats.add(Stat.ammo, EUStatValues.ammoString(EUItems.lightninAlloy, "sp"));
             Blocks.spectre.stats.add(Stat.ammo, EUStatValues.ammoString(EUItems.lightninAlloy, "sp"));
@@ -540,7 +536,7 @@ public class ExtraUtilitiesMod extends Mod{
                         settingsTable.pref(new SettingsMenuDialog.SettingsTable.Setting(Core.bundle.get("eu-show-donor-and-develop")) {
                             @Override
                             public void add(SettingsMenuDialog.SettingsTable table) {
-                                table.button(name, eui.ddItemsList::toShow).margin(14).width(200f).pad(6);
+                                table.button(name, ddItemsList::toShow).margin(14).width(200f).pad(6);
                                 table.row();
                             }
                         });
@@ -553,11 +549,6 @@ public class ExtraUtilitiesMod extends Mod{
                 EUUnitTypes.narwhal.commands.add(c);
                 EUUnitTypes.narwhal.defaultCommand = c;
 
-                if(Core.atlas != null){
-                    TextureRegionDrawable ex = new TextureRegionDrawable(Core.atlas.find("extra-utilities-serpuloEX"));
-                    Icon.icons.put("ex", ex);
-                    TDPlanet.supEX.icon = "ex";
-                }
             }
         }
 
@@ -610,9 +601,6 @@ public class ExtraUtilitiesMod extends Mod{
 
         EUOverride.overrideBlock1();
         EUBlocks.load();
-
-        TDPlanet.load();
-        TDSectorPresets.load();
 
         EUTechTree.load();
 

@@ -1,6 +1,5 @@
 package ExtraUtilities.content;
 
-import ExtraUtilities.ui.EUI;
 import ExtraUtilities.worlds.entity.bullet.*;
 import arc.graphics.Color;
 import arc.graphics.g2d.Draw;

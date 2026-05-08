@@ -21,8 +21,6 @@ import ExtraUtilities.worlds.blocks.power.SpaceGenerator;
 import ExtraUtilities.worlds.blocks.power.ThermalReactor;
 import ExtraUtilities.worlds.blocks.production.*;
 import ExtraUtilities.worlds.blocks.turret.*;
-import ExtraUtilities.worlds.blocks.turret.TowerDefence.CrystalTower;
-import ExtraUtilities.worlds.blocks.turret.TowerDefence.MineCell;
 import ExtraUtilities.worlds.blocks.turret.wall.Aparajito;
 import ExtraUtilities.worlds.blocks.turret.wall.Domain;
 import ExtraUtilities.worlds.blocks.unit.ADCPayloadSource;
@@ -114,7 +112,7 @@ public class EUBlocks {
         //power
             liquidConsumeGenerator, thermalReactor, LG, heatPower, windPower, waterPower,
         //turret
-            blackhole, dissipation, anti_Missile, penitent, sandGo, guiY, javelin, shootingStar, antiaircraft, onyxBlaster, celebration, celebrationMk2, sancta, arbiter, RG, fiammetta, turretResupplyPoint, mineCellT1, mineCellT2,
+            blackhole, dissipation, anti_Missile, penitent, sandGo, guiY, javelin, shootingStar, antiaircraft, onyxBlaster, celebration, celebrationMk2, sancta, arbiter, RG, fiammetta, turretResupplyPoint,
             cobweb, rust, quantumGravity,
         //unit
             imaginaryReconstructor, unitBooster, advAssemblerModule, finalF,
@@ -122,7 +120,7 @@ public class EUBlocks {
             aparajito, aparajitoLarge,
             buffrerdMemoryBank, clock, tableClock,
             turretSpeeder, mendTurret, coreKeeper, quantumDomain, breaker, waterBomb,
-            randomer, blockFiller, fireWork, minichisa, allNode, ADC, guiYsDomain, crystalTower;
+            randomer, blockFiller, fireWork, minichisa, allNode, ADC, guiYsDomain;
     public static class LiquidUnitPlan extends UnitFactory.UnitPlan{
         public LiquidStack[] liquid;
 
@@ -3248,145 +3246,6 @@ public class EUBlocks {
             consumePower(280/60f);
         }};
 
-
-        Seq<String> floor = Seq.with(
-                name("walkFloor"),
-                name("walkfloor-water"),
-                name("land-water-cross")
-        );
-        mineCellT1 = new MineCell("mine-cell-t1"){{
-            requirements(Category.turret, with(Items.silicon, 500, Items.thorium, 180, EUItems.crispSteel, 200, Items.graphite, 250, Items.titanium, 200));
-            size = 2;
-            range = 72;
-            mineInter = 150;
-            floors = floor;
-            mineConsumes = with(Items.titanium, 1);
-            consumePower(1.5f);
-
-            mine = new BulletType(){{
-                lifetime = 30 * 60f;
-                damage = 60;
-                pierceArmor = true;
-                collidesTiles = collidesAir = false;
-                hitEffect = despawnEffect = none;
-                ammoMultiplier = mines;
-                hitSize = 6;
-            }
-                @Override
-                public void draw(Bullet b) {
-                    super.draw(b);
-                    if(!(b.data instanceof Float f)) return;
-                    float z = Draw.z();
-                    Draw.z(Layer.blockOver + 1);
-
-                    for(int i = 0; i < 3; i ++){
-                        Draw.color(Pal.gray);
-                        Drawf.tri(b.x, b.y, 1.6f, 4f, f + 120 * i);
-                        Draw.color(b.team.color);
-                        Drawf.tri(b.x, b.y, 1.2f, 3f, f + 120 * i);
-                    }
-                    Draw.reset();
-                    Draw.z(z);
-                }
-            };
-        }};
-
-        mineCellT2 = new MineCell("mine-cell-t2"){{
-            requirements(Category.turret, with(Items.silicon, 600, Items.thorium, 200, EUItems.lightninAlloy, 100, Items.phaseFabric, 150));
-            size = 4;
-            range = 88;
-            floors = floor;
-            mines = 1;
-            mineSpread = 3;
-            mineInter = 180;
-            mineConsumes = with(Items.thorium, 1, Items.graphite, 2);
-
-            fms = 6;
-
-            consumePower(2);
-
-            int cap = 5;
-
-            mine = new BulletType(){{
-                lifetime = 45 * 60f;
-                damage = 120;
-                pierceArmor = true;
-                collides = collidesAir = collidesGround = collidesTiles = false;
-                hitEffect = despawnEffect = none;
-                ammoMultiplier = mines;
-                hitSize = 6;
-                fragOnAbsorb = true;
-                pierce = true;
-
-                fragBullets = 1;
-                despawnHit = true;
-                fragBullet = new BulletType(){{
-                    lifetime = 0;
-                    speed = 0;
-                    damage = 0;
-                    splashDamage = 1200;
-                    splashDamageRadius = 10f * 8;
-                    hitEffect = despawnEffect = new ExplosionEffect(){{
-                        waveRad = smokeRad = sparkRad = splashDamageRadius;
-                        waveLife = 12;
-                        waveStroke = 3;
-                        smokes = 8;
-                        smokeSize = 9;
-                        smokeSizeBase = 2;
-                        sparkLen = 5;
-                        sparks = 5;
-                        sparkStroke = 2f;
-                        smokeColor = Pal.gray;
-                        sparkColor = Pal.darkFlame;
-                    }};
-                    pierceArmor = true;
-                    absorbable = keepVelocity = hittable = false;
-                    hitSound = despawnSound = Sounds.explosion;
-                    status = EUStatusEffects.awsl;
-                    statusDuration = 60f;
-                }};
-            }
-
-                @Override
-                public void update(Bullet b) {
-                    Units.nearbyEnemies(b.team, b.x, b.y, 1.2f * 8, u -> {
-                        if(u != null && !u.isFlying()) {
-                            while (!u.dead && b.collided.size < cap) {
-                                u.damagePierce(damage);
-                                b.collided.add(u.id);
-                            }
-                        }
-                    });
-
-                    if(b.collided.size >= cap) b.remove();
-                }
-
-                @Override
-                public void draw(Bullet b) {
-                    super.draw(b);
-                    if(!(b.data instanceof Float f)) return;
-                    float z = Draw.z();
-                    Draw.z(Layer.blockOver + 1);
-                    for(int i = 0; i < cap - b.collided.size; i ++){
-                        Draw.color(Pal.gray);
-                        Drawf.tri(b.x, b.y, 5.5f, 7f, f + 360f/cap * i);
-                        Draw.color(b.team.color);
-                        Drawf.tri(b.x, b.y, 5f, 6f, f + 360f/cap * i);
-                    }
-
-                    for(int i : Mathf.signs){
-                        Lines.stroke(2f, Pal.gray);
-                        Lines.square(b.x, b.y, 3, b.time * 1.5f * i);
-                        Lines.stroke(1.5f, b.team.color);
-                        Lines.square(b.x, b.y, 3, b.time * 1.5f * i);
-                    }
-
-                    Draw.reset();
-                    Draw.z(z);
-                }
-            };
-        }};
-
         cobweb = new Cobweb("cobweb"){{
             requirements(Category.turret, with(Items.silicon, 200, Items.graphite, 200, EUItems.lightninAlloy, 50));
 
@@ -3943,12 +3802,6 @@ public class EUBlocks {
             hasPower = false;
         }};
 
-        crystalTower = new CrystalTower("crystal-tower"){{
-            requirements(Category.effect, with());
-            buildVisibility = BuildVisibility.editorOnly;
-            size = 3;
-        }};
-
         fireWork = new fireWork("fireWork"){{
             requirements(Category.effect, with(Items.silicon, 10));
             size = 2;
@@ -3986,9 +3839,9 @@ public class EUBlocks {
         EUGet.donorMap.get(5).addAll(shootingStar);
         EUGet.donorMap.get(7).addAll(penitent);
 
-        EUGet.developerItems.addAll(siliconFurnace, guiY, rust, onyxBlaster, fiammetta, guiYsDomain, allNode, ADC, randomer, blockFiller, fireWork, crystalTower, minichisa);
+        EUGet.developerItems.addAll(siliconFurnace, guiY, rust, onyxBlaster, fiammetta, guiYsDomain, allNode, ADC, randomer, blockFiller, fireWork, minichisa);
         EUGet.developerMap.get(0).addAll(guiY, fiammetta, rust, guiYsDomain, allNode, ADC, randomer, blockFiller, fireWork, minichisa);
-        EUGet.developerMap.get(1).addAll(siliconFurnace, onyxBlaster, crystalTower);
+        EUGet.developerMap.get(1).addAll(siliconFurnace, onyxBlaster);
     }
 
     //by guiY for Twilight Fall

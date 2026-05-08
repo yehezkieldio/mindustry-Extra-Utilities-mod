@@ -1,7 +1,6 @@
 package ExtraUtilities.content;
 
 import ExtraUtilities.ExtraUtilitiesMod;
-import ExtraUtilities.ui.EUI;
 import ExtraUtilities.worlds.entity.bullet.ChainLightningFade;
 import ExtraUtilities.worlds.entity.bullet.CtrlMissile;
 import ExtraUtilities.worlds.entity.bullet.liLaserBullet;
@@ -80,60 +79,6 @@ public class EUOverride {
                     copy[block.requirements.length] = new ItemStack(EUItems.lightninAlloy, 50 * (block.size - 4));
                     block.requirements = copy;
                 }
-            }
-        }
-    }
-
-    public static void overrideTDRules(boolean coreReset){
-        if(coreReset){
-            for(Item i : Vars.content.items()){
-                if(i != null){
-                    //if(i.shownPlanets.isEmpty()) continue;
-                    i.shownPlanets.clear();
-                    i.shownPlanets.addAll(Vars.content.planets().copy().removeAll(p -> p == Planets.sun));
-                    i.postInit();
-                }
-            }
-            for(Liquid l : Vars.content.liquids()){
-                if(l != null){
-                    //if(l.shownPlanets.isEmpty()) continue;
-                    l.shownPlanets.clear();
-                    l.shownPlanets.addAll(Vars.content.planets().copy().removeAll(p -> p == Planets.sun));
-                    l.postInit();
-                }
-            }
-        } else {
-            for (Item i : Vars.content.items()) {
-                if (i != null) {
-                    if (i.shownPlanets.isEmpty()) continue;
-                    i.shownPlanets.add(TDPlanet.TD);
-                    if(i.shownPlanets.contains(Planets.serpulo)) i.shownPlanets.add(TDPlanet.supEX);
-                    i.postInit();
-                }
-            }
-            for (Liquid l : Vars.content.liquids()) {
-                if (l != null) {
-                    if (l.shownPlanets.isEmpty()) continue;
-                    l.shownPlanets.add(TDPlanet.TD);
-                    if(l.shownPlanets.contains(Planets.serpulo)) l.shownPlanets.add(TDPlanet.supEX);
-                    l.postInit();
-                }
-            }
-            EUItems.lightninAlloy.shownPlanets.clear();
-            EUItems.crispSteel.shownPlanets.clear();
-            EUBlocks.LA.shownPlanets.clear();
-            EUBlocks.LA.postInit();
-            EUBlocks.ELA.shownPlanets.clear();
-            EUBlocks.ELA.postInit();
-            EUItems.lightninAlloy.shownPlanets.addAll(EUBlocks.LA.shownPlanets);
-            EUItems.lightninAlloy.shownPlanets.addAll(EUBlocks.ELA.shownPlanets);
-            EUItems.lightninAlloy.postInit();
-            Block crispSteelCrafter = Vars.content.block(name("crisp-steel-smelter"));
-            if (crispSteelCrafter != null) {
-                crispSteelCrafter.shownPlanets.clear();
-                crispSteelCrafter.postInit();
-                EUItems.crispSteel.shownPlanets.addAll(crispSteelCrafter.shownPlanets);
-                EUItems.crispSteel.postInit();
             }
         }
     }
@@ -329,11 +274,6 @@ public class EUOverride {
                 if(coreReset) {
                     if (u.shownPlanets.isEmpty()) continue;
                     u.shownPlanets.addAll(Vars.content.planets().copy().removeAll(p -> p == Planets.sun));
-                    u.postInit();
-                } else {
-                    if (u.shownPlanets.isEmpty()) continue;
-                    u.shownPlanets.add(TDPlanet.TD);
-                    if(u.shownPlanets.contains(Planets.serpulo)) u.shownPlanets.add(TDPlanet.supEX);
                     u.postInit();
                 }
             }
