@@ -486,7 +486,6 @@ public class ExtraUtilitiesMod extends Mod{
 
                             box.changed(() -> {
                                 settings.put(name, box.isChecked());
-                                settings.remove("eu-hard-mode");
                                 dialog.show();
                             });
                             box.left();
@@ -553,7 +552,8 @@ public class ExtraUtilitiesMod extends Mod{
         if(settings != null){
             settings.defaults("eu-override-unit", false);
             settings.defaults("eu-plug-in-mode", false);
-            settings.defaults("eu-hard-mode", false);
+            settings.remove("eu-hard-mode");
+            settings.remove("eu-open-hard");
             settings.defaults("use-eu-cursor", true);
             settings.defaults("eu-show-version", true);
             settings.defaults("eu-override-unit-missile", true);
