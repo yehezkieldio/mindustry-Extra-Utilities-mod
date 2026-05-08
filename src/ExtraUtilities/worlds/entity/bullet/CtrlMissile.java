@@ -111,8 +111,11 @@ public class CtrlMissile extends BasicBulletType {
     public void draw(Bullet b) {
         super.draw(b);
         Draw.z(low ? Layer.flyingUnitLow : Layer.flyingUnit);
-        if (width > 0 && height > 0) Draw.rect(Core.atlas.find(sprite), b.x, b.y, width, height, b.rotation() - 90);
-        else Draw.rect(frontRegion, b.x, b.y, b.rotation() - 90);
+        if(width > 0 && height > 0){
+            Draw.rect(Core.atlas.find(sprite), b.x, b.y, width, height, b.rotation() - 90);
+        }else if(frontRegion != null){
+            Draw.rect(frontRegion, b.x, b.y, b.rotation() - 90);
+        }
         Draw.reset();
     }
 

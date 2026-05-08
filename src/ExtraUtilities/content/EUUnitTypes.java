@@ -252,6 +252,7 @@ public class EUUnitTypes {
 
                 @Override
                 public void draw(Bullet b) {
+                    if(frontRegion == null) return;
                     float z = Draw.z();
                     Draw.z(Layer.max - 0.1f);
                     float in = (b.time - 12)/(b.lifetime - 12);
@@ -1229,6 +1230,7 @@ public class EUUnitTypes {
                             public void draw(Bullet b) {
                                 drawTrail(b);
                                 drawParts(b);
+                                if(frontRegion == null) return;
                                 float z = Draw.z();
                                 Draw.z(Layer.effect);
                                 Draw.color(b.team.color);
@@ -2729,6 +2731,7 @@ public class EUUnitTypes {
                             public void draw(Bullet b) {
                                 drawTrail(b);
                                 drawParts(b);
+                                if(frontRegion == null) return;
                                 float z = Draw.z();
                                 Draw.z(Layer.effect);
                                 Draw.color(b.team.color);

@@ -66,6 +66,15 @@ exports.Coolant = function(block, v, coolantMultiplier){
 //加载声音
 //js用法：lib.loadSound("名字", (s) => {你的方块.声音接口 = s});
 exports.loadSound = function (name, setter) {
+    setter = setter || (() => {});
+    const soundPath = "sounds/" + name;
+    const modSound = exports.mod && exports.mod.root ? exports.mod.root.child(soundPath) : null;
+    if(modSound == null || !modSound.exists()){
+        Log.warn("Extra Utilities: missing sound '@'.", soundPath);
+        setter(Sounds.none);
+        return Sounds.none;
+    }
+
     const params = new Packages.arc.assets.loaders.SoundLoader.SoundParameter();
     params.loadedCallback = new Packages.arc.assets.AssetLoaderParameters.LoadedCallback({
         finishedLoading(asset, str, cls) {
@@ -80,6 +89,8 @@ exports.loadSound = function (name, setter) {
             setter(a);
         }
     });
+
+    return Sounds.none;
 }
 
 
@@ -164,7 +175,8 @@ exports.addToResearch = (content, research) => {
     var parent = TechTree.all.find(boolf(t => t.content.name.equals(researchName) || t.content.name.equals(currentMod.name + "-" + researchName)));
 
     if (parent == null) {
-        throw new Error("Content '" + researchName + "' isn't in the tech tree, but '" + content.name + "' requires it to be researched.");
+        Log.warn("Extra Utilities: skipped tech-tree node '@'; parent '@' is missing.", content.name, researchName);
+        return;
     }
 
     // add this node to the parent

@@ -56,10 +56,10 @@ public class EUOverride {
             Block block = Vars.content.blocks().get(i);
             if (block != null) {
                 if(coreResetV7 || coreReset) {
-                    if(block.requirements.length == 0) block.shownPlanets.addAll(Vars.content.planets().copy().removeAll(p -> p == Planets.sun));
-                    else block.shownPlanets.clear();
-
-                    block.postInit();
+                    if(block.requirements.length == 0 && block.shownPlanets.isEmpty()){
+                        block.shownPlanets.addAll(Vars.content.planets().copy().removeAll(p -> p == Planets.sun));
+                        block.postInit();
+                    }
                 }
             }
             if (hard) {

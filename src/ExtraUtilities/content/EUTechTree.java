@@ -118,6 +118,7 @@ public class EUTechTree {
 
     public static void addToNode(UnlockableContent p, Runnable c) {
         context = TechTree.all.find(t -> t.content == p);
+        if(context == null) return;
         c.run();
     }
     //本来想偷懒直接写个用的，结果发现还是这样来的好，哎)(嘿
@@ -131,6 +132,7 @@ public class EUTechTree {
     }
 
     public static void node(UnlockableContent content, ItemStack[] requirements, Seq<Objective> objectives, Runnable children){
+        if(context == null || content == null) return;
         TechNode node = new TechNode(context, content, requirements);
         if(objectives != null){
             node.objectives.addAll(objectives);

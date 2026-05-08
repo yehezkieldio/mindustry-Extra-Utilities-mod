@@ -1,15 +1,11 @@
 package ExtraUtilities.content;
 
 import ExtraUtilities.ExtraUtilitiesMod;
-import arc.Core;
-import arc.assets.AssetDescriptor;
-import arc.assets.AssetLoaderParameters;
-import arc.assets.loaders.SoundLoader;
 import arc.audio.Sound;
 import arc.files.Fi;
-import arc.func.Cons;
-import arc.util.Threads;
+import arc.util.Log;
 import mindustry.Vars;
+import mindustry.gen.Sounds;
 import mindustry.mod.Mods;
 
 public class EUSounds {
@@ -25,6 +21,22 @@ public class EUSounds {
     //public static Sound prismLoop = new Sound(getInternalFile("sounds").child("prism-beam.ogg"));
 
     public static Sound loadSound(String name){
-        return new Sound(EU.root.child("sounds").child(name));
+        if(EU == null || EU.root == null){
+            Log.warn("Extra Utilities: cannot load sound '@'; mod root is unavailable.", name);
+            return Sounds.none;
+        }
+
+        Fi file = EU.root.child("sounds").child(name);
+        if(!file.exists()){
+            Log.warn("Extra Utilities: missing sound '@'.", file.path());
+            return Sounds.none;
+        }
+
+        try{
+            return new Sound(file);
+        }catch(Throwable t){
+            Log.warn("Extra Utilities: failed to load sound '@': @", file.path(), t.toString());
+            return Sounds.none;
+        }
     }
 }
