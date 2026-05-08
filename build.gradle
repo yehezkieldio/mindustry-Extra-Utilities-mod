@@ -24,8 +24,8 @@ repositories {
 }
 
 ext {
-    mindustryVersion = 'v155.4'
-    arcVersion = 'v149'
+    mindustryVersion = 'v157.1'
+    arcVersion = 'v157.1'
     jabelVersion = "93fde537c7"
 }
 
