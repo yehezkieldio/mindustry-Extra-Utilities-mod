@@ -3416,7 +3416,7 @@ public class EUUnitTypes {
                                 if(!(b.owner instanceof Unit owner)) return;
                                 float n = Math.max(b.foutpow(), 0.4f);
                                 Draw.z(Layer.flyingUnitLow);
-                                Draw.rect(Core.atlas.find(name("havoc-missile")), b.x, b.y, 35 * n, 50 * n, owner.rotation - 90);
+                                Draw.rect(EUGet.projectileRegion("havoc-missile"), b.x, b.y, 35 * n, 50 * n, owner.rotation - 90);
                                 Tmp.v1.set(0, -8).rotate(owner.rotation - 90);
                                 Draw.color(Pal.suppress);
                                 Draw.z(Layer.bullet);

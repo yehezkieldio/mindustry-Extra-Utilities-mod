@@ -2605,7 +2605,7 @@ public class EUBlocks {
                     Drawf.tri(b.x, b.y, 20, 20, b.rotation());
                     Drawf.tri(b.x, b.y, 10, 8, b.rotation()-180);
                     Draw.z(Layer.flyingUnit);
-                    Draw.rect(Core.atlas.find(name("sancta-bt")), b.x, b.y, 32, 50, b.rotation() - 90);
+                    Draw.rect(EUGet.projectileRegion("sancta-bt"), b.x, b.y, 32, 50, b.rotation() - 90);
                 }
 
                 @Override
@@ -2705,7 +2705,7 @@ public class EUBlocks {
                     Drawf.tri(b.x, b.y, 20, 20, b.rotation());
                     Drawf.tri(b.x, b.y, 10, 8, b.rotation()-180);
                     Draw.z(Layer.flyingUnit);
-                    Draw.rect(Core.atlas.find(name("sancta-bt")), b.x, b.y, 32, 50, b.rotation() - 90);
+                    Draw.rect(EUGet.projectileRegion("sancta-bt"), b.x, b.y, 32, 50, b.rotation() - 90);
                 }
                 @Override
                 public void update(Bullet b) {
@@ -3053,7 +3053,7 @@ public class EUBlocks {
 
                 @Override
                 public void draw(Bullet b) {
-                    TextureRegion region = Core.atlas.find(name("mb-mk2"));
+                    TextureRegion region = EUGet.projectileRegion("mb-mk2");
                     if(b.time < 10){
                         float fin = b.time/10, fout = 1 - fin;
                         float ww = 15 * 8, hh = 15 * 8 * fout;
@@ -3098,7 +3098,7 @@ public class EUBlocks {
                                 Fill.circle(e.x, e.y, r);
                                 float ww = r * 2f, hh = r * 2f;
                                 Draw.color(Tmp.c2.set(EUItems.lightninAlloy.color).a(e.fout()));
-                                Draw.rect(Core.atlas.find(name("firebird-light")), e.x, e.y, ww, hh);
+                                Draw.rect(EUGet.projectileRegion("firebird-light"), e.x, e.y, ww, hh);
                             }), EUFx.expFtEffect(5, 12, 6 * 4, 30, 0.2f), EUFx.airAsh(42, splashDamageRadius * .4f, splashDamageRadius * .8f, splashDamageRadius/10f, EUItems.lightninAlloy.color, 1.1f, 30));
                             despawnSound = hitSound = Sounds.explosion;
                             collides = absorbable = hittable = false;
@@ -3123,7 +3123,7 @@ public class EUBlocks {
                             Fill.circle(e.x, e.y, r);
                             float ww = r * 2f, hh = r * 2f;
                             Draw.color(Tmp.c4.set(EUItems.lightninAlloy.color).a(e.fout()));
-                            Draw.rect(Core.atlas.find(name("firebird-light")), e.x, e.y, ww, hh);
+                            Draw.rect(EUGet.projectileRegion("firebird-light"), e.x, e.y, ww, hh);
                         }), EUFx.expFtEffect(6, 15, 10 * 4, 30, 0.2f), EUFx.airAsh(51, splashDamageRadius * .4f, splashDamageRadius * .8f, splashDamageRadius/10f, EUItems.lightninAlloy.color, 2.1f, 30));
                         despawnSound = Sounds.explosion;
                         hitEffect = Fx.none;
@@ -3145,7 +3145,7 @@ public class EUBlocks {
                         public void draw(Bullet b) {
                             super.draw(b);
                             Draw.color(EUItems.lightninAlloy.color);
-                            Draw.rect(Core.atlas.find(name("phx")), b.x, b.y,48, 48,  b.rotation() - 90);
+                            Draw.rect(EUGet.projectileRegion("phx"), b.x, b.y,48, 48,  b.rotation() - 90);
                             //Drawf.tri(b.x + Angles.trnsx(b.rotation(), 10), b.x + Angles.trnsy(b.rotation(), 10), 10, 20, b.rotation());
                         }
                     },
@@ -3187,7 +3187,7 @@ public class EUBlocks {
 
                         @Override
                         public void draw(Bullet b) {
-                            TextureRegion region = Core.atlas.find(name("mb-mk2"));
+                            TextureRegion region = EUGet.projectileRegion("mb-mk2");
                             float ww = 15 * 8 * b.fin(), hh = 15 * 8 * b.fin();
                             Draw.color(EUItems.lightninAlloy.color);
                             //Draw.alpha(b.fout());

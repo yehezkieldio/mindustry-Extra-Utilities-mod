@@ -93,7 +93,7 @@ public class FireWorkBullet extends BulletType {
     public void load() {
         super.load();
 
-        ammo = Core.atlas.find(sprite);
+        ammo = EUGet.projectileRegion(sprite);
     }
 
     @Override
@@ -261,7 +261,7 @@ public class FireWorkBullet extends BulletType {
         public void load() {
             super.load();
 
-            string = Core.atlas.find(sprite);
+            string = EUGet.projectileRegion(sprite);
         }
 
         @Override

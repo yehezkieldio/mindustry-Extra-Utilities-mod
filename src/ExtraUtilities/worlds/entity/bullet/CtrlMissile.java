@@ -5,6 +5,7 @@ import ExtraUtilities.net.EUCall;
 import arc.Core;
 import arc.audio.Sound;
 import arc.graphics.g2d.Draw;
+import arc.graphics.g2d.TextureRegion;
 import arc.math.Angles;
 import arc.math.Scaled;
 import arc.math.geom.Position;
@@ -46,6 +47,16 @@ public class CtrlMissile extends BasicBulletType {
         keepVelocity = false;
         //必要的
         reflectable = false;
+    }
+
+    @Override
+    public void load() {
+        super.load();
+        if(sprite != null && !sprite.isEmpty()){
+            frontRegion = EUGet.projectileRegion(sprite);
+            TextureRegion back = EUGet.projectileRegion(sprite + "-back");
+            if(back.found()) backRegion = back;
+        }
     }
 
     public void lookAt(float angle, Bullet b) {
@@ -111,8 +122,8 @@ public class CtrlMissile extends BasicBulletType {
     public void draw(Bullet b) {
         super.draw(b);
         Draw.z(low ? Layer.flyingUnitLow : Layer.flyingUnit);
-        if(width > 0 && height > 0){
-            Draw.rect(Core.atlas.find(sprite), b.x, b.y, width, height, b.rotation() - 90);
+        if(width > 0 && height > 0 && frontRegion != null && frontRegion.found()){
+            Draw.rect(frontRegion, b.x, b.y, width, height, b.rotation() - 90);
         }else if(frontRegion != null){
             Draw.rect(frontRegion, b.x, b.y, b.rotation() - 90);
         }

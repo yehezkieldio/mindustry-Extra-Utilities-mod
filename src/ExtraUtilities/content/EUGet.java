@@ -107,6 +107,27 @@ public class EUGet {
     public static Color EC20 = new Color();
     public static Color EC21 = new Color();
 
+    public static TextureRegion projectileRegion(String sprite){
+        TextureRegion clear = Core.atlas.find("clear");
+        if(sprite == null || sprite.isEmpty()) return clear;
+
+        TextureRegion region = Core.atlas.find(sprite, clear);
+        if(region.found()) return region;
+
+        if(!sprite.startsWith(ExtraUtilitiesMod.ModName + "-")){
+            region = Core.atlas.find(name(sprite), clear);
+            if(region.found()) return region;
+        }
+
+        int slash = sprite.lastIndexOf('/');
+        if(slash >= 0 && slash < sprite.length() - 1){
+            region = Core.atlas.find(name(sprite.substring(slash + 1)), clear);
+            if(region.found()) return region;
+        }
+
+        return clear;
+    }
+
     //public static Rect r1 = new Rect();
 
     //因为有中文，所以用数字代替了
