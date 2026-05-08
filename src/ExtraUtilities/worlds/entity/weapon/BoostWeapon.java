@@ -133,7 +133,9 @@ public class BoostWeapon extends Weapon {
         //flip weapon shoot side for alternating weapons
         boolean wasFlipped = mount.side;
         if(otherSide != -1 && alternate && mount.side == flipSprite && mount.reload <= reload / 2f && lastReload > reload / 2f){
-            unit.mounts[otherSide].side = !unit.mounts[otherSide].side;
+            if(unit.mounts != null && otherSide >= 0 && otherSide < unit.mounts.length && unit.mounts[otherSide] != null){
+                unit.mounts[otherSide].side = !unit.mounts[otherSide].side;
+            }
             mount.side = !mount.side;
         }
 
