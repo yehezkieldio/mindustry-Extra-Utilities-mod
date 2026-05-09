@@ -2,6 +2,7 @@ const lib = require("blib");
 const vanillaResourceHelperVisibility = Core.settings.getBool("eu-show-vanilla-resource-helpers", false) ? BuildVisibility.shown : BuildVisibility.hidden;
 
 const pu = extend(GenericCrafter, "pu", {});
+var puBottomRegion, puRotor1Region, puRotor2Region, puTopRegion;
 pu.buildType = prov(() => {
     var x = 0, y = 0;
     var totalProgress = 0;
@@ -10,10 +11,16 @@ pu.buildType = prov(() => {
             x = this.x;
             y = this.y;
             totalProgress = this.totalProgress;
-            Draw.rect(Core.atlas.find(lib.aModName + "-pu-b"), x, y);
-            Draw.rect(Core.atlas.find(lib.aModName + "-pu-1"), x, y, 90 + totalProgress * 1.5)
-            Draw.rect(Core.atlas.find(lib.aModName + "-pu-2"), x, y, 90 - totalProgress * 3);
-            Draw.rect(Core.atlas.find(lib.aModName + "-pu-top"),x, y);
+            if(puBottomRegion == null){
+                puBottomRegion = Core.atlas.find(lib.aModName + "-pu-b");
+                puRotor1Region = Core.atlas.find(lib.aModName + "-pu-1");
+                puRotor2Region = Core.atlas.find(lib.aModName + "-pu-2");
+                puTopRegion = Core.atlas.find(lib.aModName + "-pu-top");
+            }
+            Draw.rect(puBottomRegion, x, y);
+            Draw.rect(puRotor1Region, x, y, 90 + totalProgress * 1.5)
+            Draw.rect(puRotor2Region, x, y, 90 - totalProgress * 3);
+            Draw.rect(puTopRegion,x, y);
         },
     }, pu);
 });

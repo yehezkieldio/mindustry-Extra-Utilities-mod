@@ -9,10 +9,12 @@ public class TurretManager {
     private final Seq<Cobweb.CobwebBuild> turrets;
     //所有单位
     private final Seq<Unit> enemies;
+    private final Seq<Unit> lockedEnemies;
 
     public TurretManager() {
         this.turrets = new Seq<>();
         this.enemies = new Seq<>();
+        this.lockedEnemies = new Seq<>();
     }
 
     public void addTurret(Cobweb.CobwebBuild turret) {
@@ -28,13 +30,13 @@ public class TurretManager {
         turrets.sort(t -> -t.efficiency);
 
         enemies.removeAll(u -> u == null || u.dead() || !u.isAdded());
-        enemies.sort(e -> -e.vel.len());
+        enemies.sort(e -> -e.vel.len2());
 
         updateTurrets();
     }
 
     public void updateTurrets() {
-        Seq<Unit> lockedEnemies = new Seq<>();
+        lockedEnemies.clear();
 
         for (Cobweb.CobwebBuild turret : turrets) {
             //更新炮塔目标挪到这里了

@@ -4,6 +4,7 @@ import ExtraUtilities.content.EUFx;
 import arc.Core;
 import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
+import arc.graphics.g2d.TextureRegion;
 import arc.math.Angles;
 import arc.math.Mathf;
 import arc.util.Time;
@@ -23,6 +24,7 @@ public class propeller extends Ability {
     public String sprite;
 
     float rot = 0;
+    private TextureRegion wingRegion, propellerRegion;
 
     public propeller(float px, float py, String sprite, float length, float speed){
         this.px = px;
@@ -58,19 +60,21 @@ public class propeller extends Ability {
 
     @Override
     public void draw(Unit unit) {
+        if(wingRegion == null) wingRegion = Core.atlas.find(name("wing-s"));
+        if(propellerRegion == null) propellerRegion = Core.atlas.find(sprite);
         Draw.mixcol(Color.white, unit.hitTime);
         Draw.z(Math.max(Layer.groundUnit - 1, unit.elevation * Layer.flyingUnitLow));
         float out = unit.elevation * length;
         float x = unit.x + Angles.trnsx(unit.rotation, px, py) + Angles.trnsx(unit.rotation, 0, out);
         float y = unit.y + Angles.trnsy(unit.rotation, px, py) + Angles.trnsy(unit.rotation, 0, out);
-        Draw.rect(Core.atlas.find(name("wing-s")),x, y, unit.rotation + rot * 2);//why not Time.time ? I Don't Know. ha~
-        Draw.rect(Core.atlas.find(sprite),x, y, unit.rotation - 90);
+        Draw.rect(wingRegion,x, y, unit.rotation + rot * 2);//why not Time.time ? I Don't Know. ha~
+        Draw.rect(propellerRegion,x, y, unit.rotation - 90);
         Draw.mixcol();
         Draw.z(Math.min(Layer.darkness, Layer.groundUnit - 1));
         if(unit.isFlying()){
             Draw.color(Pal.shadow);
             float e = Math.max(unit.elevation, unit.type.shadowElevation);
-            Draw.rect(Core.atlas.find(sprite), x + UnitType.shadowTX * e, y + UnitType.shadowTY * e, unit.rotation - 90);
+            Draw.rect(propellerRegion, x + UnitType.shadowTX * e, y + UnitType.shadowTY * e, unit.rotation - 90);
             Draw.color();
         }
     }

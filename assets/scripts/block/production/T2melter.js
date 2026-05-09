@@ -3,12 +3,14 @@ const items = require("game/items");
 const progressionCrafterVisibility = Core.settings.getBool("eu-show-progression-crafters", true) ? BuildVisibility.shown : BuildVisibility.hidden;
 
 const T2melter = extend(AttributeCrafter, "T2melter", {});
+var t2MelterLiquidRegion;
 lib.setBuildingSimple(T2melter, AttributeCrafter.AttributeCrafterBuild, {
     draw(){
+        if(t2MelterLiquidRegion == null) t2MelterLiquidRegion = Core.atlas.find(lib.aModName + "-T2melter-liquid");
         this.super$draw();
         Draw.color(this.liquids.current().color);
         Draw.alpha(this.liquids.get(this.liquids.current()) / T2melter.liquidCapacity);
-        Draw.rect(Core.atlas.find(lib.aModName + "-T2melter-liquid"), this.x, this.y);
+        Draw.rect(t2MelterLiquidRegion, this.x, this.y);
         Draw.color();
     },
 });

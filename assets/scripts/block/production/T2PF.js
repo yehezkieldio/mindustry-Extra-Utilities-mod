@@ -4,15 +4,22 @@ const progressionCrafterVisibility = Core.settings.getBool("eu-show-progression-
 
 const T2PF = extend(AttributeCrafter, "T2-PF", {});
 const block = T2PF;
+var pfBottomRegion, pfSpinnerRegion, pfItemRegion, pfTopRegion;
 lib.setBuildingSimple(T2PF, AttributeCrafter.AttributeCrafterBuild, {
     draw(){
         var x = this.x;
         var y = this.y;
-        Draw.rect(Core.atlas.find(lib.aModName + "-T2-PF-bottom"),x,y);
-        Draw.rect(Core.atlas.find(lib.aModName + "-T2-PF-s"), x, y, 0 + this.totalProgress * 3)
+        if(pfBottomRegion == null){
+            pfBottomRegion = Core.atlas.find(lib.aModName + "-T2-PF-bottom");
+            pfSpinnerRegion = Core.atlas.find(lib.aModName + "-T2-PF-s");
+            pfItemRegion = Core.atlas.find(lib.aModName + "-T2-PF-item");
+            pfTopRegion = Core.atlas.find(lib.aModName + "-T2-PF-a");
+        }
+        Draw.rect(pfBottomRegion,x,y);
+        Draw.rect(pfSpinnerRegion, x, y, 0 + this.totalProgress * 3)
         Draw.color(Color.valueOf("fff3d6"));
         Draw.alpha(this.progress);
-        Draw.rect(Core.atlas.find(lib.aModName + "-T2-PF-item"), x, y);
+        Draw.rect(pfItemRegion, x, y);
         Draw.color();
         Draw.color(cor);
         Draw.alpha(this.warmup);
@@ -29,7 +36,7 @@ lib.setBuildingSimple(T2PF, AttributeCrafter.AttributeCrafterBuild, {
         Lines.lineAngleCenter(x + Mathf.sin(this.totalProgress, 5, 7), y, 90, block.size * 8 - 4);
 
         Draw.reset();
-        Draw.rect(Core.atlas.find(lib.aModName + "-T2-PF-a"),x,y);
+        Draw.rect(pfTopRegion,x,y);
     },
 });
 T2PF.craftEffect = Fx.smeltsmoke;

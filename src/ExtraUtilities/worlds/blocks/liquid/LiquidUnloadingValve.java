@@ -22,6 +22,7 @@ import static mindustry.Vars.*;
 public class LiquidUnloadingValve extends Block {
     public String center;
     public String arrow;
+    public TextureRegion baseRegion, topRegion, centerRegion, arrowRegion;
     public float speed = 10f;
 
     public LiquidUnloadingValve(String name){
@@ -48,6 +49,10 @@ public class LiquidUnloadingValve extends Block {
         super.load();
         center = name + "-center";
         arrow = name + "-arrow";
+        baseRegion = Core.atlas.find(name);
+        topRegion = Core.atlas.find(name + "-top");
+        centerRegion = Core.atlas.find(center);
+        arrowRegion = Core.atlas.find(arrow);
     }
 
     @Override
@@ -82,14 +87,14 @@ public class LiquidUnloadingValve extends Block {
     @Override
     public void drawPlace(int x, int y, int rotation, boolean valid) {
         super.drawPlace(x, y, rotation, valid);
-        Draw.rect(Core.atlas.find(name), x, y, 0);
-        Draw.rect(Core.atlas.find(name + "-top"), x, y, 0);
-        Draw.rect(Core.atlas.find(arrow), x, y, rotation);
+        Draw.rect(baseRegion, x, y, 0);
+        Draw.rect(topRegion, x, y, 0);
+        Draw.rect(arrowRegion, x, y, rotation);
     }
 
     @Override
     protected TextureRegion[] icons() {
-        return new TextureRegion[]{Core.atlas.find(name), Core.atlas.find(name + "-top"), Core.atlas.find(arrow)};
+        return new TextureRegion[]{baseRegion, topRegion, arrowRegion};
     }
 
     public class LiquidUnloadingValveBuild extends Building{
@@ -113,12 +118,12 @@ public class LiquidUnloadingValve extends Block {
         }
         @Override
         public void draw() {
-            Draw.rect(Core.atlas.find(name), x, y);
+            Draw.rect(baseRegion, x, y);
             Draw.color(sortLiquid == null ? Color.clear : sortLiquid.color);
-            Draw.rect(Core.atlas.find(center), x, y);
+            Draw.rect(centerRegion, x, y);
             Draw.color();
-            Draw.rect(Core.atlas.find(name + "-top"), x, y);
-            Draw.rect(Core.atlas.find(arrow), x, y, rotdeg());
+            Draw.rect(topRegion, x, y);
+            Draw.rect(arrowRegion, x, y, rotdeg());
         }
 
         @Override

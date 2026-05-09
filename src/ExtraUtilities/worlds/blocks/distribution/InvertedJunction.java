@@ -38,7 +38,8 @@ public class InvertedJunction extends Block {
 
     public Color[] colors = {Color.valueOf("bf92f9"), Color.valueOf("c0ecff"), Color.valueOf("84f491"), Color.valueOf("fffa763")};
 
-    public TextureRegion arrow1, arrow2, place;
+    public TextureRegion arrow1, arrow2, place, flipIcon;
+    public TextureRegion[] junctionRegions = new TextureRegion[4];
 
     public float speed = 26; //frames taken to go through this junction
     public float displayedSpeed = 11;
@@ -68,6 +69,10 @@ public class InvertedJunction extends Block {
         arrow1 = Core.atlas.find(name("arrow-1"));
         arrow2 = Core.atlas.find(name("arrow-2"));
         place = Core.atlas.find(placeSprite);
+        flipIcon = Core.atlas.find(ModName + "-flip", Core.atlas.find("clear"));
+        for(int i = 0; i < junctionRegions.length; i++){
+            junctionRegions[i] = Core.atlas.find(ModName + "-junction-" + i);
+        }
     }
 
     @Override
@@ -85,7 +90,10 @@ public class InvertedJunction extends Block {
     public void drawPlanConfig(BuildPlan plan, Eachable<BuildPlan> list) {
         if(plan.config == null) return;
         Draw.rect(place, plan.drawx(), plan.drawy());
-        Draw.rect(Core.atlas.find(ModName + "-junction-" + plan.config), plan.drawx(), plan.drawy());
+        int config = (int)plan.config;
+        if(config >= 0 && config < junctionRegions.length){
+            Draw.rect(junctionRegions[config], plan.drawx(), plan.drawy());
+        }
         Draw.color();
     }
 
@@ -183,7 +191,7 @@ public class InvertedJunction extends Block {
 
         @Override
         public void buildConfiguration(Table table) {
-            table.button(new TextureRegionDrawable(Core.atlas.find(ModName + "-flip", Core.atlas.find("clear"))), Styles.cleari, this::switchf).size(36f).tooltip("switch");
+            table.button(new TextureRegionDrawable(flipIcon), Styles.cleari, this::switchf).size(36f).tooltip("switch");
         }
 
 

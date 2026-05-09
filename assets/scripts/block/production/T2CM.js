@@ -4,6 +4,7 @@ const lib = require("blib");
 const progressionCrafterVisibility = Core.settings.getBool("eu-show-progression-crafters", true) ? BuildVisibility.shown : BuildVisibility.hidden;
 //写一个有地板加成的液体工厂
 const T2CM = extend(AttributeCrafter, "T2-CM", {});
+var cmBottomRegion, cmWaterRegion, cmCryofluidRegion, cmSpinnerRegion, cmTopRegion;
 T2CM.buildType = prov(() => {
     
     const block = T2CM;
@@ -12,16 +13,23 @@ T2CM.buildType = prov(() => {
         draw(){
             x = this.x;
             y = this.y;
-            Draw.rect(Core.atlas.find(lib.aModName + "-T2-CM-bottom"),x,y);
+            if(cmBottomRegion == null){
+                cmBottomRegion = Core.atlas.find(lib.aModName + "-T2-CM-bottom");
+                cmWaterRegion = Core.atlas.find(lib.aModName + "-T2-CM-liquid2");
+                cmCryofluidRegion = Core.atlas.find(lib.aModName + "-T2-CM-liquid");
+                cmSpinnerRegion = Core.atlas.find(lib.aModName + "-T2-CM-s");
+                cmTopRegion = Core.atlas.find(lib.aModName + "-T2-CM-a");
+            }
+            Draw.rect(cmBottomRegion,x,y);
             Draw.color(Liquids.water.color);
             Draw.alpha(this.liquids.get(Liquids.water) / block.liquidCapacity);
-            Draw.rect(Core.atlas.find(lib.aModName + "-T2-CM-liquid2"), x, y);
+            Draw.rect(cmWaterRegion, x, y);
             Draw.color(block.outputLiquid.liquid.color);
             Draw.alpha(this.liquids.get(block.outputLiquid.liquid) / block.liquidCapacity);
-            Draw.rect(Core.atlas.find(lib.aModName + "-T2-CM-liquid"), x, y);
+            Draw.rect(cmCryofluidRegion, x, y);
             Draw.color();
-            Draw.rect(Core.atlas.find(lib.aModName + "-T2-CM-s"), x, y, 30 + 90 * Math.sin(this.totalProgress/10));
-            Draw.rect(Core.atlas.find(lib.aModName + "-T2-CM-a"),x,y);
+            Draw.rect(cmSpinnerRegion, x, y, 30 + 90 * Math.sin(this.totalProgress/10));
+            Draw.rect(cmTopRegion,x,y);
         },
     }, T2CM);
 });

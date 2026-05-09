@@ -7,6 +7,7 @@ import arc.Core;
 import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.Fill;
+import arc.graphics.g2d.TextureRegion;
 import arc.math.Mathf;
 import arc.math.geom.Position;
 import arc.math.geom.Vec2;
@@ -37,6 +38,7 @@ public class MagneticStormBulletType extends BasicBulletType {
     public float[] damages = {16, 18, 20, 32};
 
     public int msTl = 15;
+    private final TextureRegion[] plasmaRegions = new TextureRegion[6];
 
     public float dsRange = 20 * 8;
     public ChainLightningFade lightning;
@@ -320,11 +322,11 @@ public class MagneticStormBulletType extends BasicBulletType {
 
     @Override
     public void draw(Bullet b) {
-        int plasmas = 6;
-        for(int i = 0; i < plasmas; i++){
+        for(int i = 0; i < plasmaRegions.length; i++){
+            if(plasmaRegions[i] == null) plasmaRegions[i] = Core.atlas.find(ModName + "-plasma-" + i);
             Draw.color(liC, cor, i / 6f);
             Draw.alpha((0.3f + Mathf.absin(Time.time, 2f + i * 2f, 0.3f + i * 0.05f)));
-            Draw.rect(Core.atlas.find( ModName + "-plasma-" + i), b.x, b.y, width, height, Time.time * (12 + i * 6));
+            Draw.rect(plasmaRegions[i], b.x, b.y, width, height, Time.time * (12 + i * 6));
         }
 
         if(!(b instanceof mgs mgs)) return;

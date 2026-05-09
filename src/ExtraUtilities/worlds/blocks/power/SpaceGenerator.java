@@ -102,6 +102,7 @@ public class SpaceGenerator extends PowerGenerator {
         public int tileNum = 0;
         public transient Interval timer = new Interval(6);
         private float totalProgress;
+        private float powerTileSum;
 
         @Override
         public void updateTile() {
@@ -137,16 +138,13 @@ public class SpaceGenerator extends PowerGenerator {
         @Override
         public float getPowerProduction() {
             if(attribute == null) return productionEfficiency * powerProduction * tileNum;
-            float sum = 0;
-            for(int i = 0; i < tiles.size; i++){
-                Tile t = tiles.get(i);
-                if(t != null) sum += (1 + t.floor().attributes.get(attribute) * efficiencyScale + attribute.env());
-            }
-            return productionEfficiency * powerProduction * sum;
+            return productionEfficiency * powerProduction * powerTileSum;
         }
 
         private int tileEmp(){
+            tiles.clear();
             solids.clear();
+            powerTileSum = 0f;
 
             int tr = space;
 
@@ -155,13 +153,18 @@ public class SpaceGenerator extends PowerGenerator {
                 for(int y = -tr; y <= tr - (size % 2 == 0 ? 1 : 0); y++){
                     Tile other = world.tile(x + tx, y + ty);
                     if(other != null){
-                        tiles.addUnique(other);
-                        if((blockedOnlySolid && other.block().solid) || (!blockedOnlySolid && other.block() != Blocks.air)) solids.addUnique(other);
+                        if((blockedOnlySolid && other.block().solid) || (!blockedOnlySolid && other.block() != Blocks.air)){
+                            solids.add(other);
+                        }else{
+                            float attributeValue = attribute == null ? 0f : other.floor().attributes.get(attribute);
+                            if(haveBasicPowerOutput || attribute == null || attributeValue != 0f){
+                                tiles.add(other);
+                                powerTileSum += attribute == null ? 1f : 1f + attributeValue * efficiencyScale + attribute.env();
+                            }
+                        }
                     }
                 }
             }
-
-            tiles.removeAll(t -> solids.contains(t) || (!haveBasicPowerOutput && attribute != null && t.floor().attributes.get(attribute) == 0));
 
             return tiles.size;
         }
