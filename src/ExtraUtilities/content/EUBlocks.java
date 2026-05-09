@@ -172,7 +172,7 @@ public class EUBlocks {
         }};
         phasicDrill = new PhasicDrill("phasic-drill"){{
             requirements(Category.production, with(Items.titanium, 150, Items.silicon, 180, Items.thorium, 100, Items.phaseFabric, 55));
-            drillTime = 144;
+            drillTime = 120;
             size = 4;
             tier = 6;
             liquidBoostIntensity = 1.7f;
@@ -3791,6 +3791,9 @@ public class EUBlocks {
             buildVisibility = BuildVisibility.editorOnly;
         }};
 
+        applyProgressionCrafterVisibility();
+        applyVanillaResourceHelperVisibility();
+
         EUGet.donorItems.addAll(T2sporePress, phasicDrill, penitent, javelin, shootingStar, waterBomb, buffrerdMemoryBank);
         EUGet.donorMap.get(0).addAll(T2sporePress, phasicDrill);
         EUGet.donorMap.get(1).addAll(waterBomb);
@@ -3884,4 +3887,21 @@ public class EUBlocks {
 //            }
 //        };
 //    }};
+
+    private static void applyProgressionCrafterVisibility(){
+        BuildVisibility visibility = Core.settings.getBool("eu-show-progression-crafters", true) ? BuildVisibility.shown : BuildVisibility.hidden;
+        siliconFurnace.buildVisibility = visibility;
+        T2blast.buildVisibility = visibility;
+        T2sporePress.buildVisibility = visibility;
+        T2oxide.buildVisibility = visibility;
+    }
+
+    private static void applyVanillaResourceHelperVisibility(){
+        BuildVisibility visibility = Core.settings.getBool("eu-show-vanilla-resource-helpers", false) ? BuildVisibility.shown : BuildVisibility.hidden;
+        adaptiveMiner.buildVisibility = visibility;
+        adaptiveMinerII.buildVisibility = visibility;
+        ekSeparator.buildVisibility = visibility;
+        stoneCrusher.buildVisibility = visibility;
+        stoneMelting.buildVisibility = visibility;
+    }
 }

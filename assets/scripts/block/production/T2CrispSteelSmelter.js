@@ -1,5 +1,6 @@
 //引用物品(类似import
 const items = require("game/items");
+const progressionCrafterVisibility = Core.settings.getBool("eu-show-progression-crafters", true) ? BuildVisibility.shown : BuildVisibility.hidden;
 
 //更改原版的塑钢效果颜色变为脆钢色
 const crispSteelSmoke = new Effect(40, cons(e => {
@@ -45,7 +46,7 @@ T2CSm.requirements = ItemStack.with(
     Items.graphite, 60,
     items.crispSteel, 40,
 );
-T2CSm.buildVisibility = BuildVisibility.shown;
+T2CSm.buildVisibility = progressionCrafterVisibility;
 T2CSm.category = Category.crafting;
 
 //导出，为上科技树准备

@@ -1,5 +1,6 @@
 const lib = require("blib");
 const items = require("game/items");
+const progressionCrafterVisibility = Core.settings.getBool("eu-show-progression-crafters", true) ? BuildVisibility.shown : BuildVisibility.hidden;
 
 const T2melter = extend(AttributeCrafter, "T2melter", {});
 lib.setBuildingSimple(T2melter, AttributeCrafter.AttributeCrafterBuild, {
@@ -27,7 +28,7 @@ T2melter.requirements = ItemStack.with(
 );
 T2melter.itemCapacity = 10;
 T2melter.boostScale = 0.55;
-T2melter.buildVisibility = BuildVisibility.shown;
+T2melter.buildVisibility = progressionCrafterVisibility;
 T2melter.category = Category.crafting;
 
 exports.T2melter = T2melter;

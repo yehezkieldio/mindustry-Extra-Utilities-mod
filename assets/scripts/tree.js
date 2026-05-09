@@ -1,6 +1,14 @@
 //The single quotation mark is used because it looks comfortable.
 //科技树部分
 const lib = require('blib');
+const showProgressionCrafters = Core.settings.getBool("eu-show-progression-crafters", true);
+const showVanillaResourceHelpers = Core.settings.getBool("eu-show-vanilla-resource-helpers", false);
+const addProgressionCrafterResearch = (content, config) => {
+    if(showProgressionCrafters) lib.addToResearch(content, config);
+};
+const addVanillaResourceHelperResearch = (content, config) => {
+    if(showVanillaResourceHelpers) lib.addToResearch(content, config);
+};
 const items = require('game/items');
 
 
@@ -170,17 +178,17 @@ lib.addToResearch(conduit, { parent: 'pulse-conduit', });
     )
 });
 lib.addToResearch(IN, { parent: T2IB.name, });*/
-lib.addToResearch(T2kiln, { parent: 'kiln', });
-lib.addToResearch(T2melter, { parent: 'melter', });
-lib.addToResearch(T2PC, { parent: 'plastanium-compressor', });
-lib.addToResearch(T2PF, { parent: 'phase-weaver', });
-lib.addToResearch(T2SA, { parent: 'surge-smelter', });
-lib.addToResearch(T2CM, { parent: 'cryofluid-mixer', });
+addProgressionCrafterResearch(T2kiln, { parent: 'kiln', });
+addProgressionCrafterResearch(T2melter, { parent: 'melter', });
+addProgressionCrafterResearch(T2PC, { parent: 'plastanium-compressor', });
+addProgressionCrafterResearch(T2PF, { parent: 'phase-weaver', });
+addProgressionCrafterResearch(T2SA, { parent: 'surge-smelter', });
+addProgressionCrafterResearch(T2CM, { parent: 'cryofluid-mixer', });
 lib.addToResearch(GC, { parent: 'pyratite-mixer', });
-lib.addToResearch(pu, { parent: 'pulverizer', });
+addVanillaResourceHelperResearch(pu, { parent: 'pulverizer', });
 //lib.addToResearch(crusher, { parent: 'pulverizer', });
 lib.addToResearch(crispSteelSmelter, { parent: 'kiln', });
-lib.addToResearch(T2CSm, { parent: crispSteelSmelter.name, });
+addProgressionCrafterResearch(T2CSm, { parent: crispSteelSmelter.name, });
 //lib.addToResearch(LA, { parent: T2SA.name, });
 lib.addToResearch(ai, { parent: 'incinerator', });
 /*lib.addToResearch(DCF, { parent: 'force-projector',
@@ -192,11 +200,11 @@ lib.addToResearch(tiDrill, { parent: 'pneumatic-drill', });
 //lib.addToResearch(drill, { parent: 'blast-drill', });
 lib.addToResearch(shovel, { parent: 'pneumatic-drill', });
 //lib.addToResearch(testDrill, { parent: 'laser-drill', });
-lib.addToResearch(slagE, { parent: 'water-extractor', });
-lib.addToResearch(T2WE, { parent: 'water-extractor', });
-lib.addToResearch(T2CU, { parent: 'cultivator', });
-lib.addToResearch(blastOilExtractor, { parent: 'oil-extractor', });
-lib.addToResearch(dustExtractor, { parent: 'pneumatic-drill', });
+addVanillaResourceHelperResearch(slagE, { parent: 'water-extractor', });
+addVanillaResourceHelperResearch(T2WE, { parent: 'water-extractor', });
+addVanillaResourceHelperResearch(T2CU, { parent: 'cultivator', });
+addVanillaResourceHelperResearch(blastOilExtractor, { parent: 'oil-extractor', });
+addVanillaResourceHelperResearch(dustExtractor, { parent: 'pneumatic-drill', });
 
 /*lib.addToResearch(core, { parent: 'core-shard',
     objectives: Seq.with(

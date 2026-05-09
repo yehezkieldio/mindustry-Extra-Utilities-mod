@@ -1,5 +1,6 @@
 const lib = require("blib");
 const cor = Pal.accent;
+const progressionCrafterVisibility = Core.settings.getBool("eu-show-progression-crafters", true) ? BuildVisibility.shown : BuildVisibility.hidden;
 
 const T2PF = extend(AttributeCrafter, "T2-PF", {});
 const block = T2PF;
@@ -52,7 +53,7 @@ T2PF.requirements = ItemStack.with(
     Items.thorium, 90,
     Items.phaseFabric, 60
 );
-T2PF.buildVisibility = BuildVisibility.shown;
+T2PF.buildVisibility = progressionCrafterVisibility;
 T2PF.category = Category.crafting;
 
 exports.T2PF = T2PF;

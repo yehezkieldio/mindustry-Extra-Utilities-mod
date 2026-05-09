@@ -476,6 +476,8 @@ public class ExtraUtilitiesMod extends Mod{
                     settingsTable.checkPref("use-eu-cursor", true);
                     settingsTable.checkPref("eu-show-version", true);
                     settingsTable.checkPref("eu-WTMF-open", false);
+                    settingsTable.checkPref("eu-show-progression-crafters", true);
+                    settingsTable.checkPref("eu-show-vanilla-resource-helpers", false);
 
                     settingsTable.pref(new SettingsMenuDialog.SettingsTable.CheckSetting("eu-plug-in-mode", false, null) {
                         @Override
@@ -556,6 +558,8 @@ public class ExtraUtilitiesMod extends Mod{
             settings.remove("eu-open-hard");
             settings.defaults("use-eu-cursor", true);
             settings.defaults("eu-show-version", true);
+            settings.defaults("eu-show-progression-crafters", true);
+            settings.defaults("eu-show-vanilla-resource-helpers", false);
             settings.defaults("eu-override-unit-missile", true);
             settings.defaults("eu-reset-core-to-V7", false);
             settings.defaults("eu-reset-core-to-all", false);

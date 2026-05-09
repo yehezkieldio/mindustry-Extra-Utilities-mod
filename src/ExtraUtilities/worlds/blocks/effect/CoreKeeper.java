@@ -74,16 +74,6 @@ public class CoreKeeper extends StorageBlock {
                 ), x, y, valid);
             }
         }
-        x *= tilesize;
-        y *= tilesize;
-
-        Drawf.square(x, y, range * tilesize * 1.414f, 90, player.team().color);
-    }
-
-    public Rect getRect(Rect rect, float x, float y, float range){
-        rect.setCentered(x, y, range * 2 * tilesize);
-
-        return rect;
     }
 
     @Override
@@ -91,16 +81,7 @@ public class CoreKeeper extends StorageBlock {
         if(state.rules.infiniteResources) return true;
 
         CoreBlock.CoreBuild core = team.core();
-        if(core == null || (!state.rules.infiniteResources && !core.items.has(requirements, state.rules.buildCostMultiplier))) return false;
-
-        Rect rect = getRect(Tmp.r1, tile.worldx() + offset, tile.worldy() + offset, range).grow(0.1f);
-        return !indexer.getFlagged(team, BlockFlag.storage).contains(b -> {
-            if(b instanceof CoreKeeperBuild build) {
-                CoreKeeper block = (CoreKeeper) b.block;
-                return getRect(Tmp.r2, build.x, build.y, block.range).overlaps(rect);
-            }
-            return false;
-        });
+        return core != null && core.items.has(requirements, state.rules.buildCostMultiplier);
     }
 
     @Override

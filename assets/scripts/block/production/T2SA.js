@@ -1,6 +1,7 @@
 const lib = require("blib");
 const items = require("game/items");
 const DrawPowerLight = lib.getClass("ExtraUtilities.worlds.drawer.DrawPowerLight");
+const progressionCrafterVisibility = Core.settings.getBool("eu-show-progression-crafters", true) ? BuildVisibility.shown : BuildVisibility.hidden;
 
 const T2SA = extend(AttributeCrafter, "T2-SA", {});
 T2SA.craftEffect = Fx.smeltsmoke;
@@ -25,7 +26,7 @@ T2SA.requirements = ItemStack.with(
 );
 T2SA.itemCapacity = 20;
 T2SA.boostScale = 0.35;
-T2SA.buildVisibility = BuildVisibility.shown;
+T2SA.buildVisibility = progressionCrafterVisibility;
 T2SA.category = Category.crafting;
 
 exports.T2SA = T2SA;

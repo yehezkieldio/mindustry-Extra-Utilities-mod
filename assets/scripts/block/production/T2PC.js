@@ -1,5 +1,6 @@
 const lib = require("blib");
 const items = require("game/items");
+const progressionCrafterVisibility = Core.settings.getBool("eu-show-progression-crafters", true) ? BuildVisibility.shown : BuildVisibility.hidden;
 const T2PC = extend(GenericCrafter, "T2-PC", {});
 
 T2PC.hasItems = true;
@@ -25,7 +26,7 @@ T2PC.requirements = ItemStack.with(
     items.crispSteel, 95,
     Items.plastanium, 50
 );
-T2PC.buildVisibility = BuildVisibility.shown;
+T2PC.buildVisibility = progressionCrafterVisibility;
 T2PC.category = Category.crafting;
 
 exports.T2PC = T2PC;

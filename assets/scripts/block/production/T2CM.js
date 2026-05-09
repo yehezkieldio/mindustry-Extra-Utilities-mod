@@ -1,6 +1,7 @@
 //引用部分，类似import，对应的是exports导出
 const items = require("game/items");
 const lib = require("blib");
+const progressionCrafterVisibility = Core.settings.getBool("eu-show-progression-crafters", true) ? BuildVisibility.shown : BuildVisibility.hidden;
 //写一个有地板加成的液体工厂
 const T2CM = extend(AttributeCrafter, "T2-CM", {});
 T2CM.buildType = prov(() => {
@@ -46,7 +47,7 @@ T2CM.requirements = ItemStack.with(
     items.crispSteel, 60
 );
 T2CM.itemCapacity = 14;
-T2CM.buildVisibility = BuildVisibility.shown;
+T2CM.buildVisibility = progressionCrafterVisibility;
 T2CM.category = Category.crafting;
 
 exports.T2CM = T2CM;

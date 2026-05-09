@@ -1,6 +1,7 @@
 const lib = require("blib");
 const hardMod = lib.hardMod;
 const items = require("game/items");
+const vanillaResourceHelperVisibility = Core.settings.getBool("eu-show-vanilla-resource-helpers", false) ? BuildVisibility.shown : BuildVisibility.hidden;
 
 const tiDrill = extend(Drill, "tiDrill", {});
 tiDrill.requirements = ItemStack.with(
@@ -106,7 +107,7 @@ T2WE.requirements = ItemStack.with(
     Items.silicon, 75,
     Items.titanium, 70
 );
-T2WE.buildVisibility = BuildVisibility.shown;
+T2WE.buildVisibility = vanillaResourceHelperVisibility;
 T2WE.category = Category.production;
 exports.T2WE = T2WE;
 
@@ -125,7 +126,7 @@ slagE.requirements = ItemStack.with(
     Items.silicon, 25,
     Items.titanium, 25
 );
-slagE.buildVisibility = BuildVisibility.shown;
+slagE.buildVisibility = vanillaResourceHelperVisibility;
 slagE.category = Category.production;
 exports.slagE = slagE;
 
@@ -151,7 +152,7 @@ T2CU.requirements = ItemStack.with(
     Items.silicon, 28,
     Items.titanium, 30
 );
-T2CU.buildVisibility = BuildVisibility.shown;
+T2CU.buildVisibility = vanillaResourceHelperVisibility;
 T2CU.category = Category.production;
 T2CU.envRequired |= Env.spores;
 T2CU.attribute = Attribute.spores;
@@ -201,7 +202,7 @@ blastOilExtractor.requirements = ItemStack.with(
     Items.plastanium, 125,
     Items.surgeAlloy, 55
 );
-blastOilExtractor.buildVisibility = BuildVisibility.shown;
+blastOilExtractor.buildVisibility = vanillaResourceHelperVisibility;
 blastOilExtractor.category = Category.production;
 exports.blastOilExtractor = blastOilExtractor;
 
@@ -262,6 +263,6 @@ dustExtractor.requirements = ItemStack.with(
     Items.graphite, 40
 );
 dustExtractor.consumeLiquid(Liquids.water, 0.04).boost();
-dustExtractor.buildVisibility = BuildVisibility.shown;
+dustExtractor.buildVisibility = vanillaResourceHelperVisibility;
 dustExtractor.category = Category.production;
 exports.dustExtractor = dustExtractor;

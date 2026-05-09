@@ -31,7 +31,7 @@ public class Breaker extends Block {
                 solid = //设置固态，其实没必要
                         destructible = true;
         maxsize = 1;
-        timerBreak = 300;
+        timerBreak = 180;
 
         rebuildable = false;
     }

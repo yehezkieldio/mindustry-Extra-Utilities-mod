@@ -1,4 +1,5 @@
 const lib = require("blib");
+const vanillaResourceHelperVisibility = Core.settings.getBool("eu-show-vanilla-resource-helpers", false) ? BuildVisibility.shown : BuildVisibility.hidden;
 
 const pu = extend(GenericCrafter, "pu", {});
 pu.buildType = prov(() => {
@@ -23,7 +24,7 @@ pu.requirements = ItemStack.with(
     Items.silicon, 15,
     Items.titanium, 20,
 );
-pu.buildVisibility = BuildVisibility.shown;
+pu.buildVisibility = vanillaResourceHelperVisibility;
 pu.category = Category.crafting;
 pu.outputItem = new ItemStack(Items.sand, 3);
 pu.craftEffect = Fx.pulverize;

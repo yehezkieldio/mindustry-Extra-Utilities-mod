@@ -1,6 +1,7 @@
 package ExtraUtilities.content;
 
 import arc.struct.*;
+import arc.Core;
 import mindustry.Vars;
 import mindustry.content.*;
 import mindustry.ctype.*;
@@ -18,15 +19,19 @@ public class EUTechTree {
     public static TechNode context = null;
 
     public static void load() {
+        boolean showProgressionCrafters = Vars.headless || Vars.ui == null || Core.settings.getBool("eu-show-progression-crafters", true);
+        boolean showVanillaResourceHelpers = Vars.headless || Vars.ui == null || Core.settings.getBool("eu-show-vanilla-resource-helpers", false);
         //S
         addToNode(plastaniumConveyor, () -> node(stackHelper));
         addToNode(phaseConveyor, () -> node(miniItemNode, () -> node(itemNode)));
         addToNode(phaseConduit, () -> node(miniLiquidNode, () -> node(liquidNode)));
         addToNode(thermalGenerator, () -> node(heatPower, () -> node(windPower, () -> node(waterPower))));
-        addToNode(sporePress, () -> node(T2sporePress));
-        addToNode(blastMixer, () -> node(T2blast));
+        if(showProgressionCrafters){
+            addToNode(sporePress, () -> node(T2sporePress));
+            addToNode(blastMixer, () -> node(T2blast));
+        }
         addToNode(surgeSmelter, ()-> node(LA, () -> node(LG)));
-        addToNode(siliconSmelter, () -> node(siliconFurnace));
+        if(showProgressionCrafters) addToNode(siliconSmelter, () -> node(siliconFurnace));
         addToNode(pyrolysisGenerator, () -> node(liquidConsumeGenerator));
         addToNode(thermalGenerator, () -> node(thermalReactor));
         addToNode(tetrativeReconstructor, () -> node(imaginaryReconstructor, () -> {
@@ -82,7 +87,7 @@ public class EUTechTree {
         addToNode(heatRouter, () -> node(heatDistributor));
         addToNode(slagHeater, () -> node(slagReheater));
         addToNode(electricHeater, () -> node(thermalHeater));
-        addToNode(oxidationChamber, () -> node(T2oxide));
+        if(showProgressionCrafters) addToNode(oxidationChamber, () -> node(T2oxide));
         addToNode(plasmaBore, () -> node(minerPoint, () -> node(minerCenter)));
         addToNode(reinforcedPump, () -> node(arkyciteExtractor, () -> node(cyanogenPyrolysis)));
         addToNode(reinforcedLiquidRouter, () -> {
@@ -116,12 +121,14 @@ public class EUTechTree {
         );
         addToNode(surgeCrucible, () -> node(ELA));
         addToNode(slagIncinerator, () -> node(liquidIncinerator));
-        addToNode(slagIncinerator, () -> node(ekSeparator));
+        if(showVanillaResourceHelpers) addToNode(slagIncinerator, () -> node(ekSeparator));
 
-        addToNode(mechanicalDrill, () -> node(adaptiveMiner, () -> node(adaptiveMinerII)));
+        if(showVanillaResourceHelpers) addToNode(mechanicalDrill, () -> node(adaptiveMiner, () -> node(adaptiveMinerII)));
         addToNode(pneumaticDrill, () -> node(stoneExtractor));
-        addToNode(pulverizer, () -> node(stoneCrusher));
-        addToNode(slagHeater, () -> node(stoneMelting));
+        if(showVanillaResourceHelpers){
+            addToNode(pulverizer, () -> node(stoneCrusher));
+            addToNode(slagHeater, () -> node(stoneMelting));
+        }
         addToNode(blastDrill, () -> node(phasicDrill, () -> node(quantumExplosion)));
 
     }
