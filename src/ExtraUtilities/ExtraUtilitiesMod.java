@@ -86,11 +86,13 @@ public class ExtraUtilitiesMod extends Mod{
     }
 
     private static void settingsSection(SettingsMenuDialog.SettingsTable table, String key){
-        table.table(Styles.grayPanel, t -> {
-            t.left();
-            t.add(Core.bundle.get(key)).color(Pal.accent).pad(6f, 10f, 6f, 10f).left().growX();
-        }).growX().padTop(8f).padBottom(3f);
-        table.row();
+        table.pref(new SettingsMenuDialog.SettingsTable.Setting(Core.bundle.get(key)) {
+            @Override
+            public void add(SettingsMenuDialog.SettingsTable table) {
+                table.add(name, Styles.outlineLabel).color(Pal.accent).pad(8f, 10f, 4f, 10f).left().growX();
+                table.row();
+            }
+        });
     }
 
     private static void settingsButton(SettingsMenuDialog.SettingsTable table, String key, Runnable clicked){
