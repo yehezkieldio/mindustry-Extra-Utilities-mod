@@ -126,6 +126,7 @@ public class ExtraUtilitiesMod extends Mod{
     public static DDItemsList ddItemsList;
 
     public static void setColorName(){
+        if(settings == null || !settings.getBool("eu-private-fork-title")) return;
         Mods.LoadedMod mod = mods.locateMod(ModName);
         String st = isAps() ? Core.bundle.get("mod.extra-utilities.displayNameAp") : Core.bundle.get("mod.extra-utilities.displayName");
         StringBuilder fin = new StringBuilder();
@@ -138,8 +139,8 @@ public class ExtraUtilitiesMod extends Mod{
             String fct = "[" + "#" + ct + "]";
             fin.append(fct).append(s);
         }
-        mod.meta.displayName = fin + ("[gray] - " + massageRand);
-        if(ui != null) rebuildRandSubTitle(massageRand);
+        mod.meta.displayName = fin.toString();
+        if(settings.getBool("eu-random-menu-subtitle") && ui != null) rebuildRandSubTitle(massageRand);
     }
 
     public static void toShow(){
@@ -157,8 +158,8 @@ public class ExtraUtilitiesMod extends Mod{
                     top.add("ExtraUtilities").row();
                     top.add(toText("eu-log-attention")).row();
                     top.add(toText("eu-log-open")).row();
-                    top.add("Extra Utilities: Private Fork").row();
-                    top.add("Original mod by guiY. This fork is maintained privately and built from source.").row();
+                    top.add("Extra Utilities").row();
+                    top.add("Original mod by guiY. This private-use fork is built from source.").row();
                     top.add("Targets Mindustry V8 build 157.1+ with compatibility fixes and removed legacy modes.").row();
                     top.add("[blue]第一次模组英文？看下面操作").row();
                     top.add("[green]打开设置>找到语言>设置成English>退出重进>打开Settings>设置成简体中文>退出重进[]").row();
@@ -379,26 +380,26 @@ public class ExtraUtilitiesMod extends Mod{
         Vars.mods.locateMod(ModName).meta.hidden = onlyPlugIn;
         if(onlyPlugIn){
             Mods.LoadedMod mod = Vars.mods.locateMod(ModName);
-            mod.meta.displayName = mod.meta.displayName + "-Plug-In";
+            if(settings.getBool("eu-private-fork-title")) mod.meta.displayName = mod.meta.displayName + "-Plug-In";
             mod.meta.version = Vars.mods.locateMod(ModName).meta.version + "-plug-in";
         }
 
         if(hardMod){
             EUOverride.overrideHard();
             Mods.LoadedMod mod = Vars.mods.locateMod(ModName);
-            mod.meta.displayName = mod.meta.displayName + " Hard!";
+            if(settings.getBool("eu-private-fork-title")) mod.meta.displayName = mod.meta.displayName + " Hard!";
             mod.meta.version = Vars.mods.locateMod(ModName).meta.version + "-hard";
         }
 
         if(!onlyPlugIn){
             if(!coreResetV7 && !coreReset){
                 Mods.LoadedMod mod = Vars.mods.locateMod(ModName);
-                mod.meta.displayName = mod.meta.displayName + "-V8";
+                if(settings.getBool("eu-private-fork-title")) mod.meta.displayName = mod.meta.displayName + "-V8";
                 mod.meta.version = Vars.mods.locateMod(ModName).meta.version + "-V8";
             }
             if(coreReset){
                 Mods.LoadedMod mod = Vars.mods.locateMod(ModName);
-                mod.meta.displayName = mod.meta.displayName + "-all";
+                if(settings.getBool("eu-private-fork-title")) mod.meta.displayName = mod.meta.displayName + "-all";
                 mod.meta.version = Vars.mods.locateMod(ModName).meta.version + "-all";
             }
         }
@@ -482,6 +483,8 @@ public class ExtraUtilitiesMod extends Mod{
                     settingsSection(settingsTable, "setting.eu-section-interface");
                     settingsTable.checkPref("use-eu-cursor", true);
                     settingsTable.checkPref("eu-show-version", true);
+                    settingsTable.checkPref("eu-private-fork-title", false);
+                    settingsTable.checkPref("eu-random-menu-subtitle", false);
                     if(!onlyPlugIn) {
                         settingsTable.checkPref("eu-show-miner-point", true);
                         settingsTable.checkPref("eu-show-rust-range", true);
@@ -569,6 +572,8 @@ public class ExtraUtilitiesMod extends Mod{
             settings.remove("eu-open-hard");
             settings.defaults("use-eu-cursor", true);
             settings.defaults("eu-show-version", true);
+            settings.defaults("eu-private-fork-title", false);
+            settings.defaults("eu-random-menu-subtitle", false);
             settings.defaults("eu-show-progression-crafters", true);
             settings.defaults("eu-show-vanilla-resource-helpers", false);
             settings.defaults("eu-show-legacy-content", false);

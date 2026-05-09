@@ -1,16 +1,33 @@
-# Extra Utilities: Private Fork
+<div align="center">
+<img src="preview.png" align="center" width="160px" />
+<h3>Extra Utilities</h3>
+<p>Private-use maintenance fork of guiYMOUR's Extra Utilities mod for Mindustry V8.</p>
 
-This is a private maintenance fork of guiYMOUR's Extra Utilities mod for Mindustry.
-It is not an official release channel and does not ship prebuilt jars here. Build it
-from source before installing it.
+<a href="LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0-C96329?style=flat&labelColor=1C2C2E"></a>
+<a href="mod.hjson"><img src="https://img.shields.io/badge/Mindustry-V8%20157%2B-C96329?style=flat&labelColor=1C2C2E"></a>
+</div>
 
-[中文](README_cn.md)
+---
 
-## Compatibility
+This checkout is a private maintenance fork of Extra Utilities, originally by
+guiYMOUR and contributors. It exists to keep a source-built local copy usable on
+current Mindustry V8 builds, with old broken paths removed and selected runtime
+issues fixed.
 
-- Mindustry V8, build 157.1 or newer.
-- `minGameVersion` is set to `157`.
-- Java mod build, packaged with Gradle.
+It is not an official continuation, not a public release channel, and not a
+Workshop distribution. The visible mod title defaults to `Extra Utilities`; fork
+branding and random menu title decoration are available only through settings.
+
+## Scope
+
+- **Mindustry V8 support**: targets build 157.1+ with `minGameVersion = 157`.
+- **Source-built installation**: the desktop jar is built locally with Gradle.
+- **Campaign stability**: missing or renamed content is guarded so unrelated
+  research nodes do not crash the tech tree.
+- **Runtime cleanup**: selected hot paths cache atlas/content lookups and avoid
+  avoidable per-frame or per-update allocations.
+- **Content pruning**: removed or disabled legacy EUI, rogue-like, Tower Defense,
+  and stale campaign wiring that no longer belongs in this private build.
 
 ## Build
 
@@ -18,46 +35,64 @@ from source before installing it.
 ./gradlew jar
 ```
 
-The desktop jar is written to `build/libs/extra-utilities-desktop.jar`.
+The desktop jar is written to:
 
-Android packaging still depends on a local Android SDK setup. Use it only if your
-environment already has the required Android build tools configured.
+```text
+build/libs/extra-utilities-desktop.jar
+```
 
-## Fork Changes
+To install it locally on Linux:
 
-### Fixes
+```sh
+cp build/libs/extra-utilities-desktop.jar ~/.local/share/Mindustry/mods/extra-utilities-desktop.jar
+```
 
-- Restored build-menu visibility for researched vanilla and modded blocks.
-- Hardened tech-tree registration so missing parents or removed content do not
-  break unrelated unlocks.
-- Fixed vanilla Serpulo tier-2 block progression so those blocks can be
-  researched normally.
-- Added safer projectile region lookup so bullets do not fall back to missing
-  sprites when a valid asset exists.
-- Added sound and cursor fallbacks so missing optional assets do not crash load.
-- Guarded fragile unit, weapon, and turret shooting paths that could crash on
-  Mindustry V8.
-- Removed the obsolete `BulletType.backMove` code path that crashes on build
-  153+ and newer V8 builds.
-- Cleaned up dev-only junk and stale local files from the packaged mod.
+Android packaging is not part of the maintained path here. It may still work if
+the local Android SDK and Gradle setup are compatible, but this fork is validated
+primarily as a desktop Mindustry mod.
 
-### Removed
+## Settings
 
-- EUI and rogue-like UI/gameplay hooks.
-- Tower Defense planet and sector presets.
-- Tower Defense maps, scripts, sector art, and related campaign wiring.
-- April Fools content mutation.
-- Old unused bundle snapshots and local build artifacts.
+The fork keeps compatibility switches explicit:
 
-### Adjusted
+| Setting | Default | Purpose |
+| --- | --- | --- |
+| `eu-private-fork-title` | off | Uses private-fork title styling instead of the plain `Extra Utilities` title. |
+| `eu-random-menu-subtitle` | off | Restores the random menu subtitle decoration. |
+| `eu-show-progression-crafters` | on | Shows progression helper crafters. |
+| `eu-show-vanilla-resource-helpers` | off | Shows helper blocks that simplify vanilla resource flow. |
+| `eu-show-legacy-content` | off | Shows older miscellaneous content kept for local compatibility. |
+| `eu-reset-core-to-V7` | off | Legacy planet-rule compatibility. Requires restart. |
+| `eu-reset-core-to-all` | off | Ignores item planet restrictions for compatibility testing. Requires restart. |
 
-- Updated Arc and Mindustry dependencies to `v157.1`.
-- Changed visible mod metadata to make this private fork explicit.
-- Disabled the legacy V7 planet-rule reset by default.
-- Kept upstream content attribution while separating this fork from the original
-  public release and workshop channels.
+Most runtime and content-visibility settings require a full game restart because
+Mindustry loads mod content once during startup.
 
-## Attribution
+## Maintenance Notes
 
-Original mod by guiYMOUR and contributors. This fork only maintains a private,
-source-built variant with compatibility fixes and content removals.
+This fork has accumulated practical fixes for current local play:
+
+- V8 content rename handling, including Cratered Battleground.
+- Safer research gating for optional or removed content.
+- Build-menu visibility fixes for selected researched vanilla and modded blocks.
+- Projectile, sound, cursor, unit, and turret crash guards.
+- Removal of obsolete `BulletType.backMove` usage on newer V8 builds.
+- Render/update fast paths for selected Java and JS content.
+
+The goal is boring reliability, not a new content direction. When behavior needs
+to differ from upstream, this checkout should prefer small, reversible changes
+that keep the mod playable on the current Mindustry runtime.
+
+## License And Disclaimer
+
+The original project is licensed under the GNU General Public License v3.0. This
+fork keeps that license; see [LICENSE](LICENSE).
+
+This repository is for private use and local maintenance. If you distribute a
+modified build, follow GPL-3.0 obligations, preserve upstream attribution, mark
+your changes clearly, and provide the corresponding source under the same
+license. No warranty is provided.
+
+Original Extra Utilities authorship belongs to guiYMOUR and contributors. This
+private fork is maintained separately for local compatibility and should not be
+presented as an official upstream release.

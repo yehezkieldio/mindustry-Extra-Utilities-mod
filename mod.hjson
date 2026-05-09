@@ -1,8 +1,8 @@
-displayName: "Extra Utilities: Private Fork"
+displayName: "Extra Utilities"
 name:"extra-utilities"
 author: "guiY; private fork maintained by yehezkieldio"
 main: "ExtraUtilities.ExtraUtilitiesMod"
-description: "Private maintenance fork for Mindustry V8 build 157.1+. Build from source; no prebuilt release is provided."
+description: "Private-use maintenance fork of Extra Utilities for Mindustry V8 build 157.1+. Source build only."
 version: "1.2.3.2-fork.1"
 java: true
 minGameVersion: 157

@@ -72,5 +72,7 @@ if(!onlyPlugIn) {
     require("tree");
 }
 //根据游戏设置的语言改模组介绍和名字
-lib.mod.meta.displayName = lib.getMessage('mod', 'displayName');
+if(Core.settings.getBool("eu-private-fork-title", false)){
+    lib.mod.meta.displayName = lib.getMessage('mod', 'displayName');
+}
 lib.mod.meta.description = lib.getMessage('mod', 'description');
