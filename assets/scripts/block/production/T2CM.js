@@ -42,9 +42,8 @@ T2CM.consumeItem(Items.titanium);
 T2CM.consumeLiquid(Liquids.water, 0.6);
 T2CM.requirements = ItemStack.with(
     Items.lead, 90,
-    Items.graphite, 50,
-    Items.silicon, 70,
-    items.crispSteel, 60
+    Items.graphite, 110,
+    Items.silicon, 70
 );
 T2CM.itemCapacity = 14;
 T2CM.buildVisibility = progressionCrafterVisibility;

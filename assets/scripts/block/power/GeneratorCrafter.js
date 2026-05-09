@@ -8,6 +8,7 @@ const input = Items.coal;
 const output = Items.pyratite;
 const inputLiquid = Liquids.slag;
 const amount = 0.125;
+const legacyContentVisibility = Core.settings.getBool("eu-show-legacy-content", false) ? BuildVisibility.shown : BuildVisibility.hidden;
 const GC = extend(ConsumeGenerator, "GC", {
     setStats(){
         this.super$setStats();
@@ -90,7 +91,7 @@ GC.requirements = ItemStack.with(
     Items.graphite, 55,
     Items.silicon, 60
 );
-GC.buildVisibility = BuildVisibility.shown;
+GC.buildVisibility = legacyContentVisibility;
 GC.category = Category.crafting;
 GC.itemCapacity = 10;
 GC.powerProduction = 3.1;

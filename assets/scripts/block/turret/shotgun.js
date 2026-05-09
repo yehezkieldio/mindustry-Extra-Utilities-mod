@@ -1,4 +1,5 @@
 const lib = require("blib");
+const legacyContentVisibility = Core.settings.getBool("eu-show-legacy-content", false) ? BuildVisibility.shown : BuildVisibility.hidden;
 
 const mh = extend(BasicBulletType,{});
 mh.lifetime = 33;
@@ -73,7 +74,7 @@ shotgun.requirements = ItemStack.with(
     Items.graphite, 60,
     Items.titanium, 40,
 );
-shotgun.buildVisibility = BuildVisibility.shown;
+shotgun.buildVisibility = legacyContentVisibility;
 shotgun.category = Category.turret;
 
 exports.shotgun = shotgun;

@@ -49,8 +49,7 @@ lib.Coolant(T2lan, 0.4, 2);
 T2lan.requirements = ItemStack.with(
     Items.silicon, 180 + (hardMod ? 40 : 0),
     Items.graphite, 180 + (hardMod ? 40 : 0),
-    Items.plastanium, 90 + (hardMod ? 50 : 0),
-    items.crispSteel, 140 + (hardMod ? 80 : 0)
+    Items.plastanium, 160 + (hardMod ? 90 : 0)
 );
 T2lan.buildVisibility = BuildVisibility.shown;
 T2lan.category = Category.turret;

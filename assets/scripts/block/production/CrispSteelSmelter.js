@@ -19,7 +19,7 @@ crispSteelSmelter.requirements = ItemStack.with(
     Items.titanium, 95,
 );
 crispSteelSmelter.itemCapacity = 10;
-crispSteelSmelter.buildVisibility = BuildVisibility.shown;
+crispSteelSmelter.buildVisibility = BuildVisibility.hidden;
 crispSteelSmelter.category = Category.crafting;
 
 exports.crispSteelSmelter = crispSteelSmelter;

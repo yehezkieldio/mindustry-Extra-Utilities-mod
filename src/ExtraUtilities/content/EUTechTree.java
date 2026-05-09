@@ -21,13 +21,14 @@ public class EUTechTree {
     public static void load() {
         boolean showProgressionCrafters = Vars.headless || Vars.ui == null || Core.settings.getBool("eu-show-progression-crafters", true);
         boolean showVanillaResourceHelpers = Vars.headless || Vars.ui == null || Core.settings.getBool("eu-show-vanilla-resource-helpers", false);
+        boolean showLegacyContent = Vars.headless || Vars.ui == null || Core.settings.getBool("eu-show-legacy-content", false);
         //S
         addToNode(plastaniumConveyor, () -> node(stackHelper));
         addToNode(phaseConveyor, () -> node(miniItemNode, () -> node(itemNode)));
         addToNode(phaseConduit, () -> node(miniLiquidNode, () -> node(liquidNode)));
         addToNode(thermalGenerator, () -> node(heatPower, () -> node(windPower, () -> node(waterPower))));
         if(showProgressionCrafters){
-            addToNode(sporePress, () -> node(T2sporePress));
+            if(showLegacyContent) addToNode(sporePress, () -> node(T2sporePress));
             addToNode(blastMixer, () -> node(T2blast));
         }
         addToNode(surgeSmelter, ()-> node(LA, () -> node(LG)));

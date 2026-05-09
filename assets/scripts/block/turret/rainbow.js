@@ -120,8 +120,7 @@ rainbow.requirements = ItemStack.with(
     Items.silicon, 300,
     Items.metaglass, 200,
     Items.thorium, 200,
-    Items.surgeAlloy, 80 + (hardMod ? 40 : 0),
-    items.crispSteel, 105 + (hardMod ? 35 : 0)
+    Items.surgeAlloy, 120 + (hardMod ? 60 : 0)
 );
 rainbow.buildVisibility = BuildVisibility.shown;
 rainbow.category = Category.turret;

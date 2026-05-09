@@ -52,9 +52,7 @@ lib.Coolant(hurricane, 0.2);
 hurricane.requirements = ItemStack.with(
     Items.copper, 100,
     Items.lead, 140,
-    Items.silicon, 110,
-    //Items.graphite, 30,
-    items.crispSteel, 90 + (hardMod ? 60 : 0)
+    Items.silicon, 150 + (hardMod ? 60 : 0)
 );
 hurricane.buildVisibility = BuildVisibility.shown;
 hurricane.category = Category.turret;

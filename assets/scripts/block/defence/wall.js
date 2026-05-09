@@ -3,6 +3,7 @@ const lib = require("blib");
 const items = require("game/items");
 const bullets = require("other/bullets");
 const ReleaseShieldWall = lib.getClass("ExtraUtilities.worlds.blocks.turret.wall.ReleaseShieldWall");
+const legacyContentVisibility = Core.settings.getBool("eu-show-legacy-content", false) ? BuildVisibility.shown : BuildVisibility.hidden;
 //全能墙的伤害吸收概率
 const absorbDamageChance = 0.1;
 //吸收时的颜色
@@ -22,7 +23,7 @@ clWall.requirements = ItemStack.with(
     Items.copper, 5,
     Items.lead, 6
 );
-clWall.buildVisibility = BuildVisibility.shown;
+clWall.buildVisibility = legacyContentVisibility;
 clWall.category = Category.defense;
 exports.clWall = clWall;
 //大
@@ -37,7 +38,7 @@ clWallL.requirements = ItemStack.with(
     Items.copper, 20,
     Items.lead, 24
 );
-clWallL.buildVisibility = BuildVisibility.shown;
+clWallL.buildVisibility = legacyContentVisibility;
 clWallL.category = Category.defense;
 exports.clWallL = clWallL;
 

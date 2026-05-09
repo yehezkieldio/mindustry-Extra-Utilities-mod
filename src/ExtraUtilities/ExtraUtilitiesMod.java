@@ -84,6 +84,20 @@ public class ExtraUtilitiesMod extends Mod{
     public static String toText(String str){
         return Core.bundle.format(str);
     }
+
+    private static void settingsSection(SettingsMenuDialog.SettingsTable table, String key){
+        table.table(Styles.grayPanel, t -> {
+            t.left();
+            t.add(Core.bundle.get(key)).color(Pal.accent).pad(6f, 10f, 6f, 10f).left().growX();
+        }).growX().padTop(8f).padBottom(3f);
+        table.row();
+    }
+
+    private static void settingsButton(SettingsMenuDialog.SettingsTable table, String key, Runnable clicked){
+        table.button(Core.bundle.get(key), clicked).margin(10f).width(260f).pad(4f);
+        table.row();
+    }
+
     public static Block getJsNameBlock(String n){
         Block b = content.block(name(n));
 
@@ -400,17 +414,7 @@ public class ExtraUtilitiesMod extends Mod{
                 dialog.buttons.button("OK", exit).center().size(150, 50);
 
                 ui.settings.addCategory(toText("EU-SET"), name("fireWork"), settingsTable -> {
-//                    settingsTable.sliderPref("min-zoom", 10, 0, 60, (i) -> {
-//                        if(!Vars.headless) Vars.renderer.minZoom = i / 10f;
-//                        return Vars.renderer.minZoom + "x";
-//                    });
-//                    settingsTable.sliderPref("max-zoom", 10, 5, 50, (i) -> {
-//                        if(!Vars.headless) Vars.renderer.maxZoom = i;
-//                        return Vars.renderer.maxZoom + "x";
-//                    });
-
-
-                    //auto- listening
+                    settingsSection(settingsTable, "setting.eu-section-view");
                     settingsTable.pref(new SettingsMenuDialog.SettingsTable.Setting("min-zoom"){
                         final int def = 10;
                         final float min = 1f, max = 50f, step = 1f;
@@ -473,11 +477,22 @@ public class ExtraUtilitiesMod extends Mod{
                         }
                     });
 
+                    settingsSection(settingsTable, "setting.eu-section-interface");
                     settingsTable.checkPref("use-eu-cursor", true);
                     settingsTable.checkPref("eu-show-version", true);
-                    settingsTable.checkPref("eu-WTMF-open", false);
+                    if(!onlyPlugIn) {
+                        settingsTable.checkPref("eu-show-miner-point", true);
+                        settingsTable.checkPref("eu-show-rust-range", true);
+                        settingsTable.checkPref("eu-show-hole-acc-disk", true);
+                    }
+
+                    settingsSection(settingsTable, "setting.eu-section-content");
                     settingsTable.checkPref("eu-show-progression-crafters", true);
                     settingsTable.checkPref("eu-show-vanilla-resource-helpers", false);
+                    settingsTable.checkPref("eu-show-legacy-content", false);
+
+                    settingsSection(settingsTable, "setting.eu-section-runtime");
+                    settingsTable.checkPref("eu-WTMF-open", false);
 
                     settingsTable.pref(new SettingsMenuDialog.SettingsTable.CheckSetting("eu-plug-in-mode", false, null) {
                         @Override
@@ -499,10 +514,10 @@ public class ExtraUtilitiesMod extends Mod{
                     if(!onlyPlugIn) {
                         settingsTable.checkPref("eu-reset-core-to-V7", false);
                         settingsTable.checkPref("eu-reset-core-to-all", false);
-                        settingsTable.checkPref("eu-show-miner-point", true);
-                        settingsTable.checkPref("eu-show-hole-acc-disk", true);
-                        settingsTable.checkPref("eu-show-rust-range", true);
+                        settingsTable.checkPref("eu-override-unit", false);
+                        settingsTable.checkPref("eu-override-unit-missile", true);
 
+                        settingsSection(settingsTable, "setting.eu-section-info");
                         settingsTable.checkPref("eu-first-load", true);
                         if(!EUVerUnChange((String) settings.get("eu-version", ""))){
                             settings.put("eu-first-load", true);
@@ -511,20 +526,14 @@ public class ExtraUtilitiesMod extends Mod{
                         settingsTable.pref(new SettingsMenuDialog.SettingsTable.Setting(Core.bundle.get("eu-show-me-now")) {
                             @Override
                             public void add(SettingsMenuDialog.SettingsTable table) {
-                                table.button(name, ExtraUtilitiesMod::toShow).margin(14).width(200f).pad(6);
-                                table.row();
+                                settingsButton(table, "eu-show-me-now", ExtraUtilitiesMod::toShow);
                             }
                         });
-
-                        settingsTable.checkPref("eu-override-unit", false);
-
-                        settingsTable.checkPref("eu-override-unit-missile", true);
 
                         settingsTable.pref(new SettingsMenuDialog.SettingsTable.Setting(Core.bundle.get("eu-show-donor-and-develop")) {
                             @Override
                             public void add(SettingsMenuDialog.SettingsTable table) {
-                                table.button(name, ddItemsList::toShow).margin(14).width(200f).pad(6);
-                                table.row();
+                                settingsButton(table, "eu-show-donor-and-develop", ddItemsList::toShow);
                             }
                         });
                     }
@@ -560,6 +569,7 @@ public class ExtraUtilitiesMod extends Mod{
             settings.defaults("eu-show-version", true);
             settings.defaults("eu-show-progression-crafters", true);
             settings.defaults("eu-show-vanilla-resource-helpers", false);
+            settings.defaults("eu-show-legacy-content", false);
             settings.defaults("eu-override-unit-missile", true);
             settings.defaults("eu-reset-core-to-V7", false);
             settings.defaults("eu-reset-core-to-all", false);

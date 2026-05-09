@@ -314,7 +314,7 @@ public class EUBlocks {
         }};
 
         miniItemNode = new PhaseNode("mini-i-node"){{
-            requirements(Category.distribution, with(Items.silicon, 20, Items.graphite, 25, EUItems.crispSteel, 30));
+            requirements(Category.distribution, with(Items.silicon, 50, Items.graphite, 25));
             envEnabled |= Env.space;
             transportTime = 4f;
 
@@ -325,7 +325,7 @@ public class EUBlocks {
         }};
 
         miniLiquidNode = new PhaseNode("mini-l-node"){{
-            requirements(Category.liquid, with(Items.metaglass, 20, Items.graphite, 25, EUItems.crispSteel, 30));
+            requirements(Category.liquid, with(Items.metaglass, 50, Items.graphite, 25));
             envEnabled |= Env.space;
 
             canOverdrive = false;
@@ -421,7 +421,7 @@ public class EUBlocks {
 
 
         siliconFurnace = new GenericCrafter("silicon-furnace"){{
-            requirements(Category.crafting, with(Items.silicon, 130, EUItems.crispSteel, 100, Items.lead, 160, Items.thorium, 80));
+            requirements(Category.crafting, with(Items.silicon, 180, Items.lead, 210, Items.thorium, 80));
             size = 4;
             itemCapacity = 35;
             squareSprite = false;
@@ -500,7 +500,7 @@ public class EUBlocks {
         }};
 
         T2blast = new GenericCrafter("T2-blast"){{
-            requirements(Category.crafting, with(Items.lead, 200, EUItems.crispSteel, 150, Items.silicon, 160, Items.thorium, 90));
+            requirements(Category.crafting, with(Items.lead, 260, Items.graphite, 90, Items.silicon, 160, Items.thorium, 90));
             hasItems = true;
             hasLiquids = true;
             itemCapacity = 12;
@@ -522,7 +522,7 @@ public class EUBlocks {
             consumePower(50f/60);
         }};
         T2sporePress = new GenericCrafter("T2-spore-press"){{
-            requirements(Category.crafting, with(Items.plastanium, 60, Items.silicon, 120, EUItems.crispSteel, 45));
+            requirements(Category.crafting, with(Items.plastanium, 60, Items.silicon, 150, Items.graphite, 45));
             liquidCapacity = 60f;
             craftTime = 30f;
             outputLiquid = new LiquidStack(Liquids.oil, 1);
@@ -923,7 +923,7 @@ public class EUBlocks {
             canOverdrive = false;
         }};
         windPower = new SpaceGenerator("windPower"){{
-            requirements(Category.power, with(Items.graphite, 300, Items.silicon, 200, Items.titanium, 100, EUItems.crispSteel, 80, Items.plastanium, 55));
+            requirements(Category.power, with(Items.graphite, 340, Items.silicon, 200, Items.titanium, 140, Items.plastanium, 55));
             space = 2;
             size = 3;
             if(hardMod) powerProduction = 4.5f/60f;
@@ -947,7 +947,7 @@ public class EUBlocks {
             canOverdrive = false;
         }};
         waterPower = new SpaceGenerator("waterPower"){{
-            requirements(Category.power, with(Items.graphite, 300, Items.silicon, 250, Items.surgeAlloy, 150, Items.phaseFabric, 120, EUItems.crispSteel, 150));
+            requirements(Category.power, with(Items.graphite, 375, Items.silicon, 250, Items.surgeAlloy, 150, Items.phaseFabric, 120, Items.titanium, 75));
             size = 3;
             attribute = Attribute.water;
             attributeColor = Color.blue;
@@ -1883,7 +1883,7 @@ public class EUBlocks {
         };
 
         antiaircraft = new ItemTurret("antiaircraft"){{
-            requirements(Category.turret, with(Items.silicon, 500, Items.graphite, 600, EUItems.crispSteel, 250, Items.thorium, 350));
+            requirements(Category.turret, with(Items.silicon, 500, Items.graphite, 725, Items.titanium, 125, Items.thorium, 350));
             size = 3;
             range = 45 * 8;
 
@@ -2253,7 +2253,7 @@ public class EUBlocks {
             ammo(Items.thorium, bullets1, Items.carbide, bullets2, Items.surgeAlloy, bullets3, EUItems.lightninAlloy, bullets4);
         }};
         celebration = new MultiBulletTurret("celebration"){{
-            requirements(Category.turret, with(Items.silicon, 180, Items.titanium, 170, Items.thorium, 100, EUItems.crispSteel, 110));
+            requirements(Category.turret, with(Items.silicon, 180, Items.titanium, 250, Items.thorium, 100, Items.graphite, 30));
             drawer = new DrawTurret("reinforced-");
             shoot = new ShootSpread(2, 4);
             inaccuracy = 3;
@@ -2550,7 +2550,7 @@ public class EUBlocks {
 
         sancta = new ItemTurret("sancta"){{
             //int amount = 2000 + (hardMod ? 500 : 0);
-            int amount = 3000;
+            int amount = 2200;
             requirements(Category.turret, with(EUItems.lightninAlloy, amount, Items.phaseFabric, amount, Items.surgeAlloy, amount));
             size = 7;
             BulletType normal = new ScarletDevil(EUItems.lightninAlloy.color){{
@@ -3892,8 +3892,8 @@ public class EUBlocks {
         BuildVisibility visibility = Core.settings.getBool("eu-show-progression-crafters", true) ? BuildVisibility.shown : BuildVisibility.hidden;
         siliconFurnace.buildVisibility = visibility;
         T2blast.buildVisibility = visibility;
-        T2sporePress.buildVisibility = visibility;
         T2oxide.buildVisibility = visibility;
+        T2sporePress.buildVisibility = Core.settings.getBool("eu-show-legacy-content", false) ? BuildVisibility.shown : BuildVisibility.hidden;
     }
 
     private static void applyVanillaResourceHelperVisibility(){

@@ -40,7 +40,7 @@ const bullets = lib.getClass("ExtraUtilities.content.EUBulletTypes");
 const IM = new ItemTurret("IM");
 IM.ammo(
     Items.graphite, bullets.b1,
-    items.crispSteel, bullets.b2,
+    Items.titanium, bullets.b2,
     Items.pyratite, bullets.b3,
     Items.surgeAlloy, bullets.b4,
 );
@@ -59,7 +59,7 @@ Object.assign(IM, {
 IM.requirements = ItemStack.with(
     Items.copper, 100,
     Items.graphite, 70,
-    items.crispSteel, 60
+    Items.titanium, 60
 );
 IM.coolant = IM.consumeCoolant(0.15);
 IM.buildVisibility = BuildVisibility.shown;

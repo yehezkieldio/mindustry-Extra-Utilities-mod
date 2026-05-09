@@ -43,10 +43,9 @@ T2CSm.consumeItems(ItemStack.with(
 T2CSm.requirements = ItemStack.with(
     Items.silicon, 55,
     Items.lead, 105,
-    Items.graphite, 60,
-    items.crispSteel, 40,
+    Items.graphite, 100,
 );
-T2CSm.buildVisibility = progressionCrafterVisibility;
+T2CSm.buildVisibility = BuildVisibility.hidden;
 T2CSm.category = Category.crafting;
 
 //导出，为上科技树准备

@@ -20,8 +20,7 @@ minisp.shoot = new ShootAlternate(5);
 minisp.requirements = ItemStack.with(
     Items.copper, 300,
     Items.graphite, 175,
-    Items.silicon, 200,
-    items.crispSteel, 325
+    Items.silicon, 300
 );
 minisp.buildVisibility = BuildVisibility.shown;
 minisp.category = Category.turret;

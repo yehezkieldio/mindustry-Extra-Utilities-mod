@@ -39,6 +39,7 @@
 // exports.core = core;
 
 const items = require("game/items");
+const legacyContentVisibility = Core.settings.getBool("eu-show-legacy-content", false) ? BuildVisibility.shown : BuildVisibility.hidden;
 
 const chest = extend(StorageBlock, "chest", {});
 chest.size= 1;
@@ -50,7 +51,7 @@ chest.requirements = ItemStack.with(
     Items.titanium, 15,
     Items.lead, 30
 );
-chest.buildVisibility = BuildVisibility.shown;
+chest.buildVisibility = legacyContentVisibility;
 chest.category = Category.effect;
 exports.chest = chest;
 
@@ -64,7 +65,7 @@ cargo.buildCostMultiplier = 0.8;
 cargo.requirements = ItemStack.with(
     Items.thorium, 150,
     Items.plastanium, 90,
-    items.crispSteel, 200
+    Items.titanium, 200
 );
 cargo.buildVisibility = BuildVisibility.shown;
 cargo.category = Category.effect;

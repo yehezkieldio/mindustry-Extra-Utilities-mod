@@ -2,6 +2,7 @@ const lib = require("blib");
 const hardMod = lib.hardMod;
 const items = require("game/items");
 const vanillaResourceHelperVisibility = Core.settings.getBool("eu-show-vanilla-resource-helpers", false) ? BuildVisibility.shown : BuildVisibility.hidden;
+const legacyContentVisibility = Core.settings.getBool("eu-show-legacy-content", false) ? BuildVisibility.shown : BuildVisibility.hidden;
 
 const tiDrill = extend(Drill, "tiDrill", {});
 tiDrill.requirements = ItemStack.with(
@@ -9,7 +10,7 @@ tiDrill.requirements = ItemStack.with(
     Items.graphite, 18,
     Items.titanium, 15,
 );
-tiDrill.buildVisibility = BuildVisibility.shown;
+tiDrill.buildVisibility = legacyContentVisibility;
 tiDrill.category = Category.production;
 tiDrill.drillTime = 340;
 tiDrill.size = 2;
@@ -32,11 +33,10 @@ const eff1 = new Effect(12, cons(e => {
 const shovelBuild = lib.getClass("ExtraUtilities.worlds.forJS.shovel");
 const shovel = new shovelBuild("shovel");
 shovel.requirements = ItemStack.with(
-    items.crispSteel, 80,
     Items.silicon, 130,
-    Items.titanium, 80,
+    Items.titanium, 120,
 );
-shovel.buildVisibility = BuildVisibility.shown;
+shovel.buildVisibility = legacyContentVisibility;
 shovel.category = Category.production;
 shovel.drillTime = 36 + (hardMod ? 9 : 0);
 shovel.size = 3;

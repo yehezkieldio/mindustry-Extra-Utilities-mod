@@ -75,11 +75,11 @@ public class EUBulletTypes {
         aimTo = true;
     }};
 
-    public static BulletType b2 = new mixBoom(EUItems.crispSteel.color){{
+    public static BulletType b2 = new mixBoom(Items.titanium.color){{
         fragBullet = new mixExps(){{
             lifetime = 20;
             speed = 3f;
-            trailColor = color = EUItems.crispSteel.color;
+            trailColor = color = Items.titanium.color;
             damage = 0;
             splashDamage = 28;
             splashDamageRadius = 4.1f * 8;
@@ -89,7 +89,7 @@ public class EUBulletTypes {
             hitEffect = despawnEffect = new ExplosionEffect(){{
                 lifetime = 30f;
                 waveRad = splashDamageRadius;
-                waveColor = sparkColor = smokeColor = EUItems.crispSteel.color;
+                waveColor = sparkColor = smokeColor = Items.titanium.color;
                 smokeSize = 2;
                 smokeSizeBase = 0;
                 smokes = 4;

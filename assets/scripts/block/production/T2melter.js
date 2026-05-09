@@ -22,9 +22,8 @@ T2melter.consumePower(1.5);
 T2melter.consumeItem(Items.scrap, 2);
 T2melter.requirements = ItemStack.with(
     Items.lead, 60,
-    items.crispSteel, 40,
     Items.silicon, 30,
-    Items.graphite, 40
+    Items.graphite, 80
 );
 T2melter.itemCapacity = 10;
 T2melter.boostScale = 0.55;

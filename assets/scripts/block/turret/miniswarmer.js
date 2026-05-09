@@ -1,5 +1,6 @@
 //
 const lib = require("blib");
+const legacyContentVisibility = Core.settings.getBool("eu-show-legacy-content", false) ? BuildVisibility.shown : BuildVisibility.hidden;
 
 const swMin = extend(ItemTurret, "mini-swarmer", {});
 
@@ -25,7 +26,7 @@ swMin.requirements = ItemStack.with(
     Items.titanium, 55,
     Items.silicon, 60
 );
-swMin.buildVisibility = BuildVisibility.shown;
+swMin.buildVisibility = legacyContentVisibility;
 swMin.category = Category.turret;
 swMin.researchCostMultiplier = 0.5;
 

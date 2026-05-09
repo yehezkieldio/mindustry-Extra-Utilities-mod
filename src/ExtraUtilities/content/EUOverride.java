@@ -430,14 +430,6 @@ public class EUOverride {
                 createFrags(b, b.x, b.y);
             }
         };
-        ((ItemTurret)Blocks.fuse).ammoTypes.put(EUItems.crispSteel, new ShrapnelBulletType(){{
-            length = 100;
-            damage = 66;
-            width = 17f;
-            reloadMultiplier = 2f;
-            ammoMultiplier = 6;
-            toColor = Color.blue.cpy().mul(EUItems.crispSteel.color);
-        }});
         ((ItemTurret)Blocks.fuse).ammoTypes.put(EUItems.lightninAlloy, sp);
         ItemTurret T2fuse = itemTurret(name("T2-fuse"));
         ItemTurret T3fuse = itemTurret(name("T3-fuse"));
@@ -482,7 +474,7 @@ public class EUOverride {
     }
 
     public static void overrideItem(){
-        serpuloItems.addAll(EUItems.crispSteel, EUItems.lightninAlloy);
+        serpuloItems.add(EUItems.lightninAlloy);
         erekirItems.add(EUItems.lightninAlloy);
     }
 

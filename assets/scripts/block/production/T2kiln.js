@@ -1,5 +1,6 @@
 const items = require("game/items");
 const progressionCrafterVisibility = Core.settings.getBool("eu-show-progression-crafters", true) ? BuildVisibility.shown : BuildVisibility.hidden;
+const legacyContentVisibility = Core.settings.getBool("eu-show-legacy-content", false) ? BuildVisibility.shown : BuildVisibility.hidden;
 
 const T2kiln = extend(AttributeCrafter, "T2kiln", {});
 T2kiln.craftEffect = Fx.smeltsmoke;
@@ -19,12 +20,11 @@ T2kiln.requirements = ItemStack.with(
     Items.silicon, 60,
     Items.copper, 120,
     Items.lead, 100,
-    Items.graphite, 80,
-    items.crispSteel, 60
+    Items.graphite, 100
 );
 T2kiln.itemCapacity = 18;
 T2kiln.boostScale = 0.4;
-T2kiln.buildVisibility = progressionCrafterVisibility;
+T2kiln.buildVisibility = legacyContentVisibility;
 T2kiln.category = Category.crafting;
 
 exports.T2kiln = T2kiln;

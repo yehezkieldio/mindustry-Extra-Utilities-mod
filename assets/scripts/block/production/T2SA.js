@@ -13,14 +13,13 @@ T2SA.drawer = new DrawMulti(new DrawRegion("-bottom"), new DrawDefault(), new Dr
 T2SA.consumePower(6);
 T2SA.consumeItems(ItemStack.with(
     Items.copper, 5,
-    items.crispSteel, 5,
+    Items.lead, 5,
     Items.silicon, 4,
     Items.pyratite, 1
 ));
 T2SA.requirements = ItemStack.with(
     Items.silicon, 100,
-    Items.lead, 120,
-    items.crispSteel, 60,
+    Items.lead, 180,
     Items.thorium, 80,
     Items.surgeAlloy, 8
 );

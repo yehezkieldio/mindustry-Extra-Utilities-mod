@@ -3,11 +3,15 @@
 const lib = require('blib');
 const showProgressionCrafters = Core.settings.getBool("eu-show-progression-crafters", true);
 const showVanillaResourceHelpers = Core.settings.getBool("eu-show-vanilla-resource-helpers", false);
+const showLegacyContent = Core.settings.getBool("eu-show-legacy-content", false);
 const addProgressionCrafterResearch = (content, config) => {
     if(showProgressionCrafters) lib.addToResearch(content, config);
 };
 const addVanillaResourceHelperResearch = (content, config) => {
     if(showVanillaResourceHelpers) lib.addToResearch(content, config);
+};
+const addLegacyResearch = (content, config) => {
+    if(showLegacyContent) lib.addToResearch(content, config);
 };
 const items = require('game/items');
 
@@ -62,8 +66,6 @@ const { T2CM } = require('block/production/T2CM');
 const { GC } = require("block/power/GeneratorCrafter");
 const { pu } = require("block/production/T2pulverize");
 //const { crusher } = require("block/production/crusher");
-const { crispSteelSmelter } = require('block/production/CrispSteelSmelter');
-const { T2CSm } = require("block/production/T2CrispSteelSmelter");
 //const { LA } = require('block/production/LA');
 const { ai } = require('block/production/AdjustableIncinerator');
 //const { DCF } = require('block/effect/DCF');
@@ -98,18 +100,18 @@ lib.addToResearch(T3duo, { parent: T2duo.name, });
 lib.addToResearch(T2scatter, { parent: 'scatter', });
 lib.addToResearch(T2scorch, { parent: 'scorch', });
 lib.addToResearch(IM, { parent: 'hail', });
-lib.addToResearch(shotgun, { parent: 'duo',
+addLegacyResearch(shotgun, { parent: 'duo',
     objectives: sectorComplete("craters", "cratered-battleground")
 });
-lib.addToResearch(sakura, { parent: shotgun.name, });
-lib.addToResearch(rainbow, { parent: shotgun.name, });
+addLegacyResearch(sakura, { parent: shotgun.name, });
+addLegacyResearch(rainbow, { parent: shotgun.name, });
 lib.addToResearch(hurricane, { parent: 'arc', });
 lib.addToResearch(ms, { parent: hurricane.name, });
 // lib.addToResearch(sunburst, { parent: hurricane.name, });
 lib.addToResearch(T2lan, { parent: 'lancer', });
 lib.addToResearch(stinger, { parent: T2lan.name, });
 lib.addToResearch(swT2, { parent: 'swarmer', });
-lib.addToResearch(swMin, { parent: 'duo', });
+addLegacyResearch(swMin, { parent: 'duo', });
 lib.addToResearch(T2rip, { parent: 'ripple', });
 lib.addToResearch(T3rip, { parent: T2rip.name, });
 lib.addToResearch(T2fuse, { parent: 'fuse', });
@@ -178,17 +180,15 @@ lib.addToResearch(conduit, { parent: 'pulse-conduit', });
     )
 });
 lib.addToResearch(IN, { parent: T2IB.name, });*/
-addProgressionCrafterResearch(T2kiln, { parent: 'kiln', });
+addLegacyResearch(T2kiln, { parent: 'kiln', });
 addProgressionCrafterResearch(T2melter, { parent: 'melter', });
-addProgressionCrafterResearch(T2PC, { parent: 'plastanium-compressor', });
+addLegacyResearch(T2PC, { parent: 'plastanium-compressor', });
 addProgressionCrafterResearch(T2PF, { parent: 'phase-weaver', });
 addProgressionCrafterResearch(T2SA, { parent: 'surge-smelter', });
 addProgressionCrafterResearch(T2CM, { parent: 'cryofluid-mixer', });
-lib.addToResearch(GC, { parent: 'pyratite-mixer', });
+addLegacyResearch(GC, { parent: 'pyratite-mixer', });
 addVanillaResourceHelperResearch(pu, { parent: 'pulverizer', });
 //lib.addToResearch(crusher, { parent: 'pulverizer', });
-lib.addToResearch(crispSteelSmelter, { parent: 'kiln', });
-addProgressionCrafterResearch(T2CSm, { parent: crispSteelSmelter.name, });
 //lib.addToResearch(LA, { parent: T2SA.name, });
 lib.addToResearch(ai, { parent: 'incinerator', });
 /*lib.addToResearch(DCF, { parent: 'force-projector',
@@ -196,9 +196,9 @@ lib.addToResearch(ai, { parent: 'incinerator', });
         new Objectives.SectorComplete(SectorPresets.nuclearComplex),
     )
 });*/
-lib.addToResearch(tiDrill, { parent: 'pneumatic-drill', });
+addLegacyResearch(tiDrill, { parent: 'pneumatic-drill', });
 //lib.addToResearch(drill, { parent: 'blast-drill', });
-lib.addToResearch(shovel, { parent: 'pneumatic-drill', });
+addLegacyResearch(shovel, { parent: 'pneumatic-drill', });
 //lib.addToResearch(testDrill, { parent: 'laser-drill', });
 addVanillaResourceHelperResearch(slagE, { parent: 'water-extractor', });
 addVanillaResourceHelperResearch(T2WE, { parent: 'water-extractor', });
@@ -211,7 +211,7 @@ addVanillaResourceHelperResearch(dustExtractor, { parent: 'pneumatic-drill', });
         new Objectives.SectorComplete(SectorPresets.extractionOutpost),
     )
 });*/
-lib.addToResearch(chest, { parent: 'router', });
+addLegacyResearch(chest, { parent: 'router', });
 lib.addToResearch(cargo, { parent: 'vault', });
 lib.addToResearch(und, { parent: 'unloader', });
 lib.addToResearch(lu, { parent: 'liquid-tank', });
@@ -219,15 +219,14 @@ lib.addToResearch(speeder, { parent: 'force-projector', });
 /*lib.addToResearch(cure, { parent: 'mend-projector', });
 lib.addToResearch(unitA, { parent: 'overdrive-projector', });
 lib.addToResearch(lighthouse, { parent: 'illuminator', });*/
-lib.addToResearch(clWall, { parent: 'copper-wall-large', });
-lib.addToResearch(clWallL, { parent: clWall.name, });
+addLegacyResearch(clWall, { parent: 'copper-wall-large', });
+addLegacyResearch(clWallL, { parent: clWall.name, });
 // lib.addToResearch(aws, { parent: 'surge-wall-large', });
 // lib.addToResearch(awl, { parent: aws.name, });
 // lib.addToResearch(rws, { parent: aws.name, });
 //lib.addToResearch(rws, { parent: 'surge-wall-large', });
 //lib.addToResearch(rwl, { parent: rws.name, });
 
-lib.addToResearch(items.crispSteel, { parent: 'titanium', });
 lib.addToResearch(items.lightninAlloy, { parent: 'surge-alloy', });
 
 /*lib.addToResearch(start, {

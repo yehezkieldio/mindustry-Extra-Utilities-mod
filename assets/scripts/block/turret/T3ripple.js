@@ -33,9 +33,8 @@ T3rip.ammoTypes.put(Items.surgeAlloy, bullets.artillerySurge);
 T3rip.requirements = ItemStack.with(
     Items.copper, 500,
     Items.graphite, 300,
-    items.crispSteel, 250,
     Items.thorium, 200,
-    Items.silicon, 350 + (hardMod ? 150 : 0),
+    Items.silicon, 500 + (hardMod ? 150 : 0),
 );
 T3rip.buildVisibility = BuildVisibility.shown;
 T3rip.category = Category.turret;

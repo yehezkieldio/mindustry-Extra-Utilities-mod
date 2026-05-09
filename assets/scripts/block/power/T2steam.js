@@ -31,8 +31,7 @@ T2ST.requirements = ItemStack.with(
     Items.copper, 80,
     Items.graphite, 60,
     Items.lead, 75,
-    items.crispSteel, 55,
-    Items.silicon, 60
+    Items.silicon, 115
 );
 T2ST.buildVisibility = BuildVisibility.shown;
 T2ST.category = Category.power;
