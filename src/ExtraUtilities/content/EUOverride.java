@@ -99,7 +99,10 @@ public class EUOverride {
         Blocks.basalt.attributes.set(EUAttribute.stone, 0.2f);
         Blocks.shale.attributes.set(EUAttribute.stone, 0.1f);
         Blocks.pebbles.attributes.set(EUAttribute.stone, 0.25f);
-        Blocks.craters.attributes.set(EUAttribute.stone, 0.15f);
+        Block crateredBattleground = Vars.content.block("cratered-battleground");
+        if(crateredBattleground == null) crateredBattleground = Vars.content.block("crateredBattleground");
+        if(crateredBattleground == null) crateredBattleground = Vars.content.block("craters");
+        if(crateredBattleground != null) crateredBattleground.attributes.set(EUAttribute.stone, 0.15f);
         //E
         Blocks.yellowStone.attributes.set(EUAttribute.stone, 0.25f);
         Blocks.carbonStone.attributes.set(EUAttribute.stone, 0.2f);
