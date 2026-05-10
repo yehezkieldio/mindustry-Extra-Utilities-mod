@@ -132,7 +132,7 @@ lib.addToResearch(RG, { parent: 'foreshadow',
         new Objectives.SectorComplete(SectorPresets.nuclearComplex),
     )
 });
-lib.addToResearch(prism, { parent: rainbow.name,
+addLegacyResearch(prism, { parent: rainbow.name,
     objectives: Seq.with(
         new Objectives.SectorComplete(SectorPresets.nuclearComplex),
     )

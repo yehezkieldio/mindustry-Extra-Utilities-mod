@@ -58,6 +58,10 @@ jar {
 
     from("assets/") {
         include "**"
+        exclude "sprites-override/ui/logo-old.png"
+        exclude "sprites-override/ui/logo2nd.png"
+        exclude "sprites-override/ui/logo-1.png"
+        exclude "sprites-override/ui/logo-2.png"
     }
 }
 
