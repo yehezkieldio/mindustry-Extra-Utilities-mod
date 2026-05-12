@@ -52,7 +52,7 @@ T2scorch.requirements = ItemStack.with(
     Items.graphite, 50,
     Items.titanium, 70
 );
-T2scorch.buildVisibility = BuildVisibility.shown;
+T2scorch.buildVisibility = lib.selectedTurretVisibility;
 T2scorch.category = Category.turret;
 
 exports.T2scorch = T2scorch;

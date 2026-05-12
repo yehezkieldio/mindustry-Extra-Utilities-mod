@@ -62,7 +62,7 @@ IM.requirements = ItemStack.with(
     Items.titanium, 60
 );
 IM.coolant = IM.consumeCoolant(0.15);
-IM.buildVisibility = BuildVisibility.shown;
+IM.buildVisibility = lib.selectedTurretVisibility;
 IM.category = Category.turret;
 
 exports.IM = IM;

@@ -145,7 +145,7 @@ ai.requirements = ItemStack.with(
     Items.surgeAlloy, 9
 );
 ai.health = 110;
-ai.buildVisibility = BuildVisibility.shown;
+ai.buildVisibility = lib.defaultHiddenVisibility;
 ai.category = Category.crafting;
 ai.configurable = true;
 ai.consumePower(0.5);

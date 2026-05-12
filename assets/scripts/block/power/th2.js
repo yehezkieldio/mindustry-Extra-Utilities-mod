@@ -1,3 +1,5 @@
+const lib = require("blib");
+
 const th2 = extend(NuclearReactor, "Th2", {});
 th2.ambientSound = Sounds.loopHum;
 th2.ambientSoundVolume = 0.24;
@@ -21,7 +23,7 @@ th2.requirements = ItemStack.with(
     
 );
 th2.buildCostMultiplier = 0.85;
-th2.buildVisibility = BuildVisibility.shown;
+th2.buildVisibility = lib.defaultHiddenVisibility;
 th2.category = Category.power;
 
 exports.th2 = th2;

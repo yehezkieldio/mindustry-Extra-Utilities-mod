@@ -22,7 +22,7 @@ T3fuse.requirements = ItemStack.with(
     Items.silicon, 270 + (hardMod ? 130 : 0),
     items.lightninAlloy, 100 + (hardMod ? 50 : 0)
 );
-T3fuse.buildVisibility = BuildVisibility.shown;
+T3fuse.buildVisibility = lib.selectedTurretVisibility;
 T3fuse.category = Category.turret;
 
 exports.T3fuse = T3fuse;

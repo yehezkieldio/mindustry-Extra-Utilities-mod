@@ -495,6 +495,7 @@ public class ExtraUtilitiesMod extends Mod{
                     settingsTable.checkPref("eu-show-progression-crafters", true);
                     settingsTable.checkPref("eu-show-vanilla-resource-helpers", false);
                     settingsTable.checkPref("eu-show-legacy-content", false);
+                    settingsTable.checkPref("eu-hide-selected-turrets", true);
 
                     settingsSection(settingsTable, "setting.eu-section-runtime");
                     settingsTable.checkPref("eu-WTMF-open", false);
@@ -577,9 +578,14 @@ public class ExtraUtilitiesMod extends Mod{
             settings.defaults("eu-show-progression-crafters", true);
             settings.defaults("eu-show-vanilla-resource-helpers", false);
             settings.defaults("eu-show-legacy-content", false);
+            settings.defaults("eu-hide-selected-turrets", true);
             settings.defaults("eu-override-unit-missile", true);
             settings.defaults("eu-reset-core-to-V7", false);
             settings.defaults("eu-reset-core-to-all", false);
+            if(!settings.getBool("eu-hide-selected-turrets-defaulted", false)){
+                settings.put("eu-hide-selected-turrets", true);
+                settings.put("eu-hide-selected-turrets-defaulted", true);
+            }
             if(!settings.getBool("eu-reset-core-to-V7-migrated", false)){
                 settings.put("eu-reset-core-to-V7", false);
                 settings.put("eu-reset-core-to-V7-migrated", true);

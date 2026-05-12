@@ -192,7 +192,7 @@ storm.requirements = ItemStack.with(
     Items.surgeAlloy, 270 + (hardMod ? 80 : 0),
     items.lightninAlloy, 300
 );
-storm.buildVisibility = BuildVisibility.shown;
+storm.buildVisibility = lib.selectedTurretVisibility;
 storm.category = Category.turret;
 
 exports.ms = storm;

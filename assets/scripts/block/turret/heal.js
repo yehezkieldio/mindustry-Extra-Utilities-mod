@@ -281,7 +281,7 @@ heal.requirements = ItemStack.with(
     Items.thorium, 150,
     Items.surgeAlloy, 100
 );
-heal.buildVisibility = BuildVisibility.shown;
+heal.buildVisibility = lib.defaultHiddenVisibility;
 heal.category = Category.turret;
 
 exports.heal = heal;

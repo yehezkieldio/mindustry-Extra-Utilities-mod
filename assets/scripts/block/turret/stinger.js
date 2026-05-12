@@ -91,7 +91,7 @@ stinger.requirements = ItemStack.with(
     Items.plastanium, 150 + (hardMod ? 80 : 0),
     Items.surgeAlloy, 110 + (hardMod ? 50 : 0)
 );
-stinger.buildVisibility = BuildVisibility.shown;
+stinger.buildVisibility = lib.selectedTurretVisibility;
 stinger.category = Category.turret;
 
 exports.stinger = stinger;

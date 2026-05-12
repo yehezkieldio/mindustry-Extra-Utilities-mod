@@ -4,6 +4,7 @@ const lib = require('blib');
 const showProgressionCrafters = Core.settings.getBool("eu-show-progression-crafters", true);
 const showVanillaResourceHelpers = Core.settings.getBool("eu-show-vanilla-resource-helpers", false);
 const showLegacyContent = Core.settings.getBool("eu-show-legacy-content", false);
+const showSelectedContent = !Core.settings.getBool("eu-hide-selected-turrets", true);
 const addProgressionCrafterResearch = (content, config) => {
     if(showProgressionCrafters) lib.addToResearch(content, config);
 };
@@ -12,6 +13,9 @@ const addVanillaResourceHelperResearch = (content, config) => {
 };
 const addLegacyResearch = (content, config) => {
     if(showLegacyContent) lib.addToResearch(content, config);
+};
+const addSelectedTurretResearch = (content, config) => {
+    if(showSelectedContent) lib.addToResearch(content, config);
 };
 const items = require('game/items');
 
@@ -95,28 +99,28 @@ const sectorComplete = function(){
 };
 
 /*-----------------------------------------------------------------------*/
-lib.addToResearch(T2duo, { parent: 'duo', });
-lib.addToResearch(T3duo, { parent: T2duo.name, });
-lib.addToResearch(T2scatter, { parent: 'scatter', });
-lib.addToResearch(T2scorch, { parent: 'scorch', });
-lib.addToResearch(IM, { parent: 'hail', });
+addSelectedTurretResearch(T2duo, { parent: 'duo', });
+addSelectedTurretResearch(T3duo, { parent: T2duo.name, });
+addSelectedTurretResearch(T2scatter, { parent: 'scatter', });
+addSelectedTurretResearch(T2scorch, { parent: 'scorch', });
+addSelectedTurretResearch(IM, { parent: 'hail', });
 addLegacyResearch(shotgun, { parent: 'duo',
     objectives: sectorComplete("crateredBattleground", "cratered-battleground", "craters")
 });
 addLegacyResearch(sakura, { parent: shotgun.name, });
 addLegacyResearch(rainbow, { parent: shotgun.name, });
-lib.addToResearch(hurricane, { parent: 'arc', });
-lib.addToResearch(ms, { parent: hurricane.name, });
+addSelectedTurretResearch(hurricane, { parent: 'arc', });
+addSelectedTurretResearch(ms, { parent: hurricane.name, });
 // lib.addToResearch(sunburst, { parent: hurricane.name, });
-lib.addToResearch(T2lan, { parent: 'lancer', });
-lib.addToResearch(stinger, { parent: T2lan.name, });
+addSelectedTurretResearch(T2lan, { parent: 'lancer', });
+addSelectedTurretResearch(stinger, { parent: T2lan.name, });
 lib.addToResearch(swT2, { parent: 'swarmer', });
 addLegacyResearch(swMin, { parent: 'duo', });
 lib.addToResearch(T2rip, { parent: 'ripple', });
 lib.addToResearch(T3rip, { parent: T2rip.name, });
-lib.addToResearch(T2fuse, { parent: 'fuse', });
-lib.addToResearch(T3fuse, { parent: T2fuse.name, });
-lib.addToResearch(minisp, { parent: 'swarmer', });
+addSelectedTurretResearch(T2fuse, { parent: 'fuse', });
+addSelectedTurretResearch(T3fuse, { parent: T2fuse.name, });
+addSelectedTurretResearch(minisp, { parent: 'swarmer', });
 /*lib.addToResearch(antiaircraft, { parent: 'scatter',
     objectives: Seq.with(
         new Objectives.SectorComplete(SectorPresets.overgrowth),
@@ -146,27 +150,27 @@ lib.addToResearch(TRS, { parent: 'duo',
         new Objectives.SectorComplete(SectorPresets.stainedMountains),
     )
 });*/
-lib.addToResearch(arNode, { parent: 'power-node', });
+addSelectedTurretResearch(arNode, { parent: 'power-node', });
 lib.addToResearch(png, { parent: 'power-node-large', });
 lib.addToResearch(T2ST, { parent: 'steam-generator', });
 // lib.addToResearch(T2ther, { parent: 'thermal-generator', });
-lib.addToResearch(th2, { parent: 'thorium-reactor', });
+addSelectedTurretResearch(th2, { parent: 'thorium-reactor', });
 // lib.addToResearch(LG, { parent: 'impact-reactor', });
 //
 // lib.addToResearch(conduit, { parent: 'plated-conduit', });
 // lib.addToResearch(LB, { parent: 'phase-conduit', });
 lib.addToResearch(driver, { parent: 'phase-conduit', });
-lib.addToResearch(T2IB, { parent: 'bridge-conveyor',
+addSelectedTurretResearch(T2IB, { parent: 'bridge-conveyor',
     objectives: sectorComplete("crateredBattleground", "cratered-battleground", "craters")
 });
 lib.addToResearch(alloyDuct, { parent: 'armored-conveyor', });
 //lib.addToResearch(stackBridge, { parent: 'plastanium-conveyor', });
 lib.addToResearch(ppc, { parent: 'plastanium-conveyor', });
-lib.addToResearch(invertedJunction, { parent: 'junction', });
+addSelectedTurretResearch(invertedJunction, { parent: 'junction', });
 lib.addToResearch(TJ, { parent: 'junction',
     objectives: sectorComplete("crateredBattleground", "cratered-battleground", "craters")
 });
-lib.addToResearch(TIJ, { parent: TJ.name, });
+addSelectedTurretResearch(TIJ, { parent: TJ.name, });
 lib.addToResearch(TR, { parent: 'router',
     objectives: sectorComplete("crateredBattleground", "cratered-battleground", "craters")
 });
@@ -190,7 +194,7 @@ addLegacyResearch(GC, { parent: 'pyratite-mixer', });
 addVanillaResourceHelperResearch(pu, { parent: 'pulverizer', });
 //lib.addToResearch(crusher, { parent: 'pulverizer', });
 //lib.addToResearch(LA, { parent: T2SA.name, });
-lib.addToResearch(ai, { parent: 'incinerator', });
+addSelectedTurretResearch(ai, { parent: 'incinerator', });
 /*lib.addToResearch(DCF, { parent: 'force-projector',
     objectives: Seq.with(
         new Objectives.SectorComplete(SectorPresets.nuclearComplex),
@@ -215,7 +219,7 @@ addLegacyResearch(chest, { parent: 'router', });
 lib.addToResearch(cargo, { parent: 'vault', });
 lib.addToResearch(und, { parent: 'unloader', });
 lib.addToResearch(lu, { parent: 'liquid-tank', });
-lib.addToResearch(speeder, { parent: 'force-projector', });
+addSelectedTurretResearch(speeder, { parent: 'force-projector', });
 /*lib.addToResearch(cure, { parent: 'mend-projector', });
 lib.addToResearch(unitA, { parent: 'overdrive-projector', });
 lib.addToResearch(lighthouse, { parent: 'illuminator', });*/

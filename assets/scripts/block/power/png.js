@@ -10,7 +10,7 @@ arNode.requirements = ItemStack.with(
     Items.metaglass, 2,
     Items.plastanium, 1
 );
-arNode.buildVisibility = BuildVisibility.shown;
+arNode.buildVisibility = lib.defaultHiddenVisibility;
 arNode.category = Category.power;
 exports.arNode = arNode;
 

@@ -1,3 +1,5 @@
+const lib = require("blib");
+
 const speeder = new OverdriveProjector("speeder");
 Object.assign(speeder, {
     range : 4.85*8,
@@ -12,7 +14,7 @@ speeder.requirements = ItemStack.with(
     Items.silicon, 30,
     Items.titanium, 30
 );
-speeder.buildVisibility = BuildVisibility.shown;
+speeder.buildVisibility = lib.defaultHiddenVisibility;
 speeder.category = Category.effect;
 
 exports.speeder = speeder;

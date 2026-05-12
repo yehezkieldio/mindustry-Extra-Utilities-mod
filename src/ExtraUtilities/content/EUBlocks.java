@@ -118,7 +118,7 @@ public class EUBlocks {
         //other&sandbox
             aparajito, aparajitoLarge,
             buffrerdMemoryBank, clock, tableClock,
-            turretSpeeder, mendTurret, coreKeeper, quantumDomain, breaker, waterBomb,
+            turretSpeeder, mendTurret, coreKeeper, quantumDomain, breaker, breaker2, waterBomb,
             randomer, blockFiller, fireWork, allNode, ADC, guiYsDomain;
     public static class LiquidUnitPlan extends UnitFactory.UnitPlan{
         public LiquidStack[] liquid;
@@ -3663,6 +3663,13 @@ public class EUBlocks {
             placeableLiquid = true;
             floating = true;
         }};
+        breaker2 = new Breaker("breaker2"){{
+            requirements(Category.effect, with(EUItems.lightninAlloy, 30 + (hardMod ? 15 : 0), Items.silicon, 20));
+            placeableLiquid = true;
+            floating = true;
+            maxsize = 3;
+            baseRegionName = name("breaker");
+        }};
         waterBomb = new WaterBomb("water-bomb"){{
             requirements(Category.effect, with(EUItems.lightninAlloy, 20, Items.thorium, 30, Items.surgeAlloy, 20));
             //alwaysUnlocked = true;
@@ -3793,6 +3800,7 @@ public class EUBlocks {
 
         applyProgressionCrafterVisibility();
         applyVanillaResourceHelperVisibility();
+        applySelectedTurretVisibility();
 
         EUGet.donorItems.addAll(T2sporePress, phasicDrill, penitent, javelin, shootingStar, waterBomb, buffrerdMemoryBank);
         EUGet.donorMap.get(0).addAll(T2sporePress, phasicDrill);
@@ -3903,5 +3911,23 @@ public class EUBlocks {
         ekSeparator.buildVisibility = visibility;
         stoneCrusher.buildVisibility = visibility;
         stoneMelting.buildVisibility = visibility;
+    }
+
+    private static void applySelectedTurretVisibility(){
+        BuildVisibility visibility = Core.settings.getBool("eu-hide-selected-turrets", true) ? BuildVisibility.hidden : BuildVisibility.shown;
+        stoneExtractor.buildVisibility = visibility;
+        phasicDrill.buildVisibility = visibility;
+        quantumExplosion.buildVisibility = visibility;
+        miniItemNode.buildVisibility = visibility;
+        thermalReactor.buildVisibility = visibility;
+        heatPower.buildVisibility = visibility;
+        windPower.buildVisibility = visibility;
+        waterPower.buildVisibility = visibility;
+        mendTurret.buildVisibility = visibility;
+        arbiter.buildVisibility = visibility;
+        cobweb.buildVisibility = visibility;
+        rust.buildVisibility = visibility;
+        celebration.buildVisibility = visibility;
+        celebrationMk2.buildVisibility = visibility;
     }
 }

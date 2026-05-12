@@ -36,7 +36,7 @@ T3duo.requirements = ItemStack.with(
     Items.graphite, 40
 );
 T3duo.recoils = 2;
-T3duo.buildVisibility = BuildVisibility.shown;
+T3duo.buildVisibility = lib.selectedTurretVisibility;
 T3duo.category = Category.turret;
 T3duo.researchCostMultiplier = 0.5;
 

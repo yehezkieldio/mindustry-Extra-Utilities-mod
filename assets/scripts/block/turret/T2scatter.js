@@ -30,7 +30,7 @@ T2scatter.requirements = ItemStack.with(
     Items.lead, 80,
     Items.graphite, 40
 );
-T2scatter.buildVisibility = BuildVisibility.shown;
+T2scatter.buildVisibility = lib.selectedTurretVisibility;
 T2scatter.category = Category.turret;
 
 exports.T2scatter = T2scatter;

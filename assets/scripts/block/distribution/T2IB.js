@@ -46,7 +46,7 @@ T2IB.speed = 20;
 T2IB.displayedSpeed = 15;
 T2IB.health = 85;
 T2IB.bufferCapacity = 25;
-T2IB.buildVisibility = BuildVisibility.shown;
+T2IB.buildVisibility = lib.defaultHiddenVisibility;
 T2IB.category = Category.distribution;
 exports.T2IB = T2IB;
 
@@ -56,7 +56,7 @@ invertedJunction.requirements = ItemStack.with(
 );
 invertedJunction.placeSprite = "junction";
 invertedJunction.sync = true;
-invertedJunction.buildVisibility = BuildVisibility.shown;
+invertedJunction.buildVisibility = lib.defaultHiddenVisibility;
 invertedJunction.category = Category.distribution;
 invertedJunction.speed = 26;
 invertedJunction.capacity = 6;
@@ -84,7 +84,7 @@ const TIJ = new InvertedJunction("titanium-inverted-junction");
 TIJ.placeSprite = lib.aModName + "-TJ";
 TIJ.sync = true;
 TIJ.requirements = TJ.requirements;
-TIJ.buildVisibility = BuildVisibility.shown;
+TIJ.buildVisibility = lib.defaultHiddenVisibility;
 TIJ.category = Category.distribution;
 TIJ.speed = TJ.speed;
 TIJ.displayedSpeed = TJ.displayedSpeed;
@@ -145,4 +145,3 @@ exports.T2LB = T2LB;
 // TLR.buildVisibility = BuildVisibility.shown;
 // TLR.category = Category.liquid;
 // exports.TLR = TLR;
-

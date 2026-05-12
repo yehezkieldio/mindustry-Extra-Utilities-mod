@@ -17,6 +17,7 @@ import mindustry.world.meta.BlockGroup;
 import static mindustry.Vars.*;
 
 public class StackHelper extends Block {
+    public float cooldown = 0f;
 
     public StackHelper(String name) {
         super(name);
@@ -50,7 +51,9 @@ public class StackHelper extends Block {
         public void updateTile() {
             for(int i = 0; i < 4; i++){
                 Building b = nearby(i);
-                if(b instanceof StackConveyorBuild && b.block instanceof StackConveyor && b.team == team && ((StackConveyorBuild)b).state == 1) ((StackConveyorBuild)b).cooldown = 0;
+                if(b instanceof StackConveyorBuild && b.block instanceof StackConveyor && b.team == team && ((StackConveyorBuild)b).state > 0){
+                    ((StackConveyorBuild)b).cooldown = Math.min(((StackConveyorBuild)b).cooldown, cooldown);
+                }
             }
         }
 

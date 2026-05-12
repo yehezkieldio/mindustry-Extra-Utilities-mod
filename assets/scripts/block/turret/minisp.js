@@ -22,7 +22,7 @@ minisp.requirements = ItemStack.with(
     Items.graphite, 175,
     Items.silicon, 300
 );
-minisp.buildVisibility = BuildVisibility.shown;
+minisp.buildVisibility = lib.selectedTurretVisibility;
 minisp.category = Category.turret;
 
 exports.minisp = minisp;

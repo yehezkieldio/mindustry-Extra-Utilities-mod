@@ -51,7 +51,7 @@ T2lan.requirements = ItemStack.with(
     Items.graphite, 180 + (hardMod ? 40 : 0),
     Items.plastanium, 160 + (hardMod ? 90 : 0)
 );
-T2lan.buildVisibility = BuildVisibility.shown;
+T2lan.buildVisibility = lib.selectedTurretVisibility;
 T2lan.category = Category.turret;
 
 exports.T2lan = T2lan;

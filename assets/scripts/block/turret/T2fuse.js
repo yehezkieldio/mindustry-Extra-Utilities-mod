@@ -23,7 +23,7 @@ T2fuse.requirements = ItemStack.with(
     Items.thorium, 150,
     Items.surgeAlloy, 80 + (hardMod ? 40 : 0),
 );
-T2fuse.buildVisibility = BuildVisibility.shown;
+T2fuse.buildVisibility = lib.selectedTurretVisibility;
 T2fuse.category = Category.turret;
 
 exports.T2fuse = T2fuse;

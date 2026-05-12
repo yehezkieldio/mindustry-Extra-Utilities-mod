@@ -20,6 +20,8 @@ exports.Fx = exports.getClass("ExtraUtilities.content.EUFx");
 const EU = exports.getClass("ExtraUtilities.ExtraUtilitiesMod");
 const isAps = EU.isAps();
 exports.hardMod = false;
+exports.selectedTurretVisibility = Core.settings.getBool("eu-hide-selected-turrets", true) ? BuildVisibility.hidden : BuildVisibility.shown;
+exports.defaultHiddenVisibility = exports.selectedTurretVisibility;
 //exports.Blocks = exports.getClass("ExtraUtilities.content.EUBlocks");
 
 exports.setPlanet = function(p, s){

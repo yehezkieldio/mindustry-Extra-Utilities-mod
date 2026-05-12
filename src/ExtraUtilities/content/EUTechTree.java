@@ -22,11 +22,12 @@ public class EUTechTree {
         boolean showProgressionCrafters = Vars.headless || Vars.ui == null || Core.settings.getBool("eu-show-progression-crafters", true);
         boolean showVanillaResourceHelpers = Vars.headless || Vars.ui == null || Core.settings.getBool("eu-show-vanilla-resource-helpers", false);
         boolean showLegacyContent = Vars.headless || Vars.ui == null || Core.settings.getBool("eu-show-legacy-content", false);
+        boolean showSelectedContent = Vars.headless || Vars.ui == null || !Core.settings.getBool("eu-hide-selected-turrets", true);
         //S
         addToNode(plastaniumConveyor, () -> node(stackHelper));
-        addToNode(phaseConveyor, () -> node(miniItemNode, () -> node(itemNode)));
+        if(showSelectedContent) addToNode(phaseConveyor, () -> node(miniItemNode, () -> node(itemNode)));
         addToNode(phaseConduit, () -> node(miniLiquidNode, () -> node(liquidNode)));
-        addToNode(thermalGenerator, () -> node(heatPower, () -> node(windPower, () -> node(waterPower))));
+        if(showSelectedContent) addToNode(thermalGenerator, () -> node(heatPower, () -> node(windPower, () -> node(waterPower))));
         if(showProgressionCrafters){
             if(showLegacyContent) addToNode(sporePress, () -> node(T2sporePress));
             addToNode(blastMixer, () -> node(T2blast));
@@ -34,7 +35,7 @@ public class EUTechTree {
         addToNode(surgeSmelter, ()-> node(LA, () -> node(LG)));
         if(showProgressionCrafters) addToNode(siliconSmelter, () -> node(siliconFurnace));
         addToNode(pyrolysisGenerator, () -> node(liquidConsumeGenerator));
-        addToNode(thermalGenerator, () -> node(thermalReactor));
+        if(showSelectedContent) addToNode(thermalGenerator, () -> node(thermalReactor));
         addToNode(tetrativeReconstructor, () -> node(imaginaryReconstructor, () -> {
             node(suzerain, Seq.with(new Research(UnitTypes.reign)), () -> {});
             node(nebula, Seq.with(new Research(UnitTypes.corvus)), () -> {});
@@ -49,24 +50,24 @@ public class EUTechTree {
         addToNode(segment, () -> node(dissipation));
         if(Vars.content.block(name("shotgun")) != null)
             addToNode(Vars.content.block(name("shotgun")), () -> node(onyxBlaster));
-        if(Vars.content.block(name("magstorm")) != null){
+        if(showSelectedContent && Vars.content.block(name("magstorm")) != null){
             addToNode(Vars.content.block(name("magstorm")), () -> node(arbiter));
         }
         addToNode(cyclone, () -> {
             node(turretResupplyPoint);
-            node(celebration, () -> node(celebrationMk2));
+            if(showSelectedContent) node(celebration, () -> node(celebrationMk2));
             node(antiaircraft);
         });
         addToNode(swarmer, () -> node(blackhole));
         addToNode(foreshadow, () -> node(sancta));
-        addToNode(parallax, () -> node(cobweb, () -> node(rust)));
+        if(showSelectedContent) addToNode(parallax, () -> node(cobweb, () -> node(rust)));
 
         addToNode(mendProjector, () -> {
-            node(mendTurret);
+            if(showSelectedContent) node(mendTurret);
             node(coreKeeper);
         });
         addToNode(forceProjector, () -> node(quantumDomain));
-        addToNode(surgeWall, () -> node(breaker));
+        addToNode(surgeWall, () -> node(breaker, () -> node(breaker2)));
 
         addToNode(memoryCell, () -> node(buffrerdMemoryBank));
         addToNode(message, () -> node(clock));
@@ -125,12 +126,12 @@ public class EUTechTree {
         if(showVanillaResourceHelpers) addToNode(slagIncinerator, () -> node(ekSeparator));
 
         if(showVanillaResourceHelpers) addToNode(mechanicalDrill, () -> node(adaptiveMiner, () -> node(adaptiveMinerII)));
-        addToNode(pneumaticDrill, () -> node(stoneExtractor));
+        if(showSelectedContent) addToNode(pneumaticDrill, () -> node(stoneExtractor));
         if(showVanillaResourceHelpers){
             addToNode(pulverizer, () -> node(stoneCrusher));
             addToNode(slagHeater, () -> node(stoneMelting));
         }
-        addToNode(blastDrill, () -> node(phasicDrill, () -> node(quantumExplosion)));
+        if(showSelectedContent) addToNode(blastDrill, () -> node(phasicDrill, () -> node(quantumExplosion)));
 
     }
 

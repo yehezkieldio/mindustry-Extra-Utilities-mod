@@ -54,7 +54,7 @@ hurricane.requirements = ItemStack.with(
     Items.lead, 140,
     Items.silicon, 150 + (hardMod ? 60 : 0)
 );
-hurricane.buildVisibility = BuildVisibility.shown;
+hurricane.buildVisibility = lib.selectedTurretVisibility;
 hurricane.category = Category.turret;
 
 exports.hurricane = hurricane;

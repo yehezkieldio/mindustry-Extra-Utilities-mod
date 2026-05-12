@@ -20,7 +20,7 @@ T2duo.requirements = ItemStack.with(
     Items.copper, 70
 );
 T2duo.recoils = 2;
-T2duo.buildVisibility = BuildVisibility.shown;
+T2duo.buildVisibility = lib.selectedTurretVisibility;
 T2duo.category = Category.turret;
 T2duo.researchCostMultiplier = 0.1;
 
