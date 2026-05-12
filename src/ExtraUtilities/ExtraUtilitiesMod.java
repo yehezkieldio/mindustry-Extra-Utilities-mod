@@ -522,6 +522,7 @@ public class ExtraUtilitiesMod extends Mod{
                         settingsTable.checkPref("eu-reset-core-to-all", false);
                         settingsTable.checkPref("eu-override-unit", false);
                         settingsTable.checkPref("eu-override-unit-missile", true);
+                        settingsTable.checkPref("eu-cheat-fast-unit-build", false);
 
                         settingsSection(settingsTable, "setting.eu-section-info");
                         settingsTable.checkPref("eu-first-load", true);
@@ -582,6 +583,7 @@ public class ExtraUtilitiesMod extends Mod{
             settings.defaults("eu-override-unit-missile", true);
             settings.defaults("eu-reset-core-to-V7", false);
             settings.defaults("eu-reset-core-to-all", false);
+            settings.defaults("eu-cheat-fast-unit-build", false);
             if(!settings.getBool("eu-hide-selected-turrets-defaulted", false)){
                 settings.put("eu-hide-selected-turrets", true);
                 settings.put("eu-hide-selected-turrets-defaulted", true);

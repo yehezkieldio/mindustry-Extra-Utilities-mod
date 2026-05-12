@@ -3359,6 +3359,7 @@ public class EUBlocks {
         finalF = new DerivativeUnitFactory("finalF"){{
             requirements(Category.units, with(EUItems.lightninAlloy, 4000, Items.silicon, 6000, Items.thorium, 4000, Items.phaseFabric, 3000, Items.surgeAlloy, 3000));
             size = 5;
+            buildCostMultiplier = Core.settings.getBool("eu-cheat-fast-unit-build", false) ? 0.001f : buildCostMultiplier;
             consumePower(40);
             consume(new BetterConsumeLiquidsDynamic((e) -> ((UnitFactoryBuild)e).currentPlan != -1 ? ((LiquidUnitPlan)plans.get(Math.min(((UnitFactoryBuild)e).currentPlan, plans.size - 1))).liquid : LiquidStack.empty, new Liquid[]{Liquids.cryofluid, Liquids.slag, Liquids.water, Liquids.cyanogen}));
             config(Integer.class, (UnitFactoryBuild tile, Integer i) -> {
@@ -3460,8 +3461,9 @@ public class EUBlocks {
 
                                 LiquidStack[][] cpl = ekOnly(is) ? le : ls;
 
-                                if(i < 5) plans.add(new LiquidUnitPlan(u, time * 6, os, cpl[i - 1]));
-                                else plans.add(new LiquidUnitPlan(u, time * 2, is, cpl[i - 1]));
+                                float timeMultiplier = Core.settings.getBool("eu-cheat-fast-unit-build", false) ? 0.05f : 1f;
+                                if(i < 5) plans.add(new LiquidUnitPlan(u, time * 6 * timeMultiplier, os, cpl[i - 1]));
+                                else plans.add(new LiquidUnitPlan(u, time * 2 * timeMultiplier, is, cpl[i - 1]));
                             }
                         }
                     }
